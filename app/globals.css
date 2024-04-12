@@ -13,3 +13,9 @@
   width: 0;
   background: transparent;
 }
+
+@layer utilities {
+  .border-red {
+    @apply border border-red-500;
+  }
+}

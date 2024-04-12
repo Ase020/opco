@@ -1,6 +1,5 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import AddIcon from "@mui/icons-material/Add";
 import {
   Table,
   TableBody,
@@ -12,11 +11,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import DialogCard from "./DialogCard";
+
 export function TableCard() {
   return (
     <Table>
       <TableHeader className="bg-red-200 font-bold">
         <TableRow>
+          <TableHead className="text-nowrap">ROW ID</TableHead>
           <TableHead className="text-nowrap">PSP ID</TableHead>
           <TableHead className="text-nowrap">BANK ID</TableHead>
           <TableHead className="text-nowrap">REPORTING DATE</TableHead>
@@ -35,7 +37,7 @@ export function TableCard() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Array.from({ length: 14 }).map((_, i) => (
+        {Array.from({ length: 12 }).map((_, i) => (
           <TableRow key={crypto.randomUUID()}>
             <TableCell>{i + 1}</TableCell>
             <TableCell>0800002</TableCell>
@@ -45,6 +47,7 @@ export function TableCard() {
             <TableCell>DBT07</TableCell>
             <TableCell>African Wildlife Foundation</TableCell>
             <TableCell>-</TableCell>
+            <TableCell>DBT05</TableCell>
             <TableCell>451552482.00</TableCell>
             <TableCell>451552482.00</TableCell>
             <TableCell>45155248.20</TableCell>
@@ -63,15 +66,8 @@ export function TableCard() {
       <TableFooter>
         <TableRow>
           <TableCell colSpan={3}>
-            <button
-              type="button"
-              className="border border-red-400 flex items-center gap-2 px-2 py-1"
-            >
-              <span className="">Add</span>
-              <AddIcon />
-            </button>
+            <DialogCard />
           </TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
         </TableRow>
       </TableFooter>
     </Table>
