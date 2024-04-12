@@ -18,7 +18,7 @@ const DialogCard = () => {
       </DialogTrigger>{" "}
       <DialogContent className=" max-w-5xl">
         <DialogHeader className="">
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogTitle className="mb-4">Add Trust Account Details</DialogTitle>
           <DialogDescription className="">
             <EditForm />
           </DialogDescription>
