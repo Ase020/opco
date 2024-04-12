@@ -1,3 +1,6 @@
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import AddIcon from "@mui/icons-material/Add";
 import {
   Table,
   TableBody,
@@ -8,51 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
 
 export function TableCard() {
   return (
@@ -72,12 +30,14 @@ export function TableCard() {
           <TableHead className="text-nowrap">INTEREST EARNED</TableHead>
           <TableHead className="text-nowrap">CLOSING BAL</TableHead>
           <TableHead className="text-nowrap">INT UTILIZED</TableHead>
+          <TableHead className="text-nowrap">EDIT</TableHead>
+          <TableHead className="text-nowrap">DELETE</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell>1</TableCell>
+        {Array.from({ length: 14 }).map((_, i) => (
+          <TableRow key={crypto.randomUUID()}>
+            <TableCell>{i + 1}</TableCell>
             <TableCell>0800002</TableCell>
             <TableCell>0000001</TableCell>
             <TableCell>01/12/2021</TableCell>
@@ -90,13 +50,27 @@ export function TableCard() {
             <TableCell>45155248.20</TableCell>
             <TableCell>496707730.20</TableCell>
             <TableCell>-</TableCell>
+            <TableCell className="text-center">
+              <ModeEditIcon fontSize="small" />
+            </TableCell>
+            <TableCell className="text-center">
+              <DeleteForeverIcon fontSize="small" />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
 
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={4}>Total</TableCell>
+          <TableCell colSpan={3}>
+            <button
+              type="button"
+              className="border border-red-400 flex items-center gap-2 px-2 py-1"
+            >
+              <span className="">Add</span>
+              <AddIcon />
+            </button>
+          </TableCell>
           <TableCell className="text-right">$2,500.00</TableCell>
         </TableRow>
       </TableFooter>
