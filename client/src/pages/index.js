@@ -1,4 +1,5 @@
 export { default as Home } from "./Home";
+export { default as Layout } from "./Layout";
 export { default as MobilePSP } from "./MobilePSP";
 export { default as PSPCybersecurity } from "./PSPCybersecurity";
 export { default as PSPIncidentFraud } from "./PSPIncidentFraud";
