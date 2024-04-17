@@ -1,1 +1,10 @@
+export { default as AddTrustAccDetailsModal } from "./modals/AddTrustAccDetailsModal";
+export { default as AddMobilePSPModal } from "./modals/AddMobilePSPModal";
+export { default as AddPSPCybersecurityModal } from "./modals/AddPSPCybersecurityModal";
+export { default as AddPSPIncidentFraudModal } from "./modals/AddPSPIncidentFraudModal";
+export { default as AddScheduleOfDirectorsModal } from "./modals/AddScheduleOfDirectorsModal";
+export { default as AddScheduleOfSeniorMgtModal } from "./modals/AddScheduleOfSeniorMgtModal";
+export { default as AddScheduleOfShareholdersModal } from "./modals/AddScheduleOfShareholdersModal";
+export { default as AddScheduleOfTrusteesModal } from "./modals/AddScheduleOfTrusteesModal";
+export { default as AddTrustAccPlacementModal } from "./modals/AddTrustAccPlacementModal";
 export { default as Navbar } from "./Navbar";

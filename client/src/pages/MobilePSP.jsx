@@ -1,11 +1,18 @@
+import { useState } from "react";
 import { mobilePSP } from ".";
+import { AddMobilePSPModal } from "../components";
 
 const MobilePSP = () => {
+  let [isOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
   return (
-    <div className="max-w-[1440px] w-full mx-auto py-10 border border-red-500 overflow-hidden">
+    <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
         <h2 className="text-3xl text-center">
-          PSP Incidents of fraud theft robbery
+          Mobile PSP Counterfeit Currency Frauds
         </h2>
 
         <div className="overflow-x-auto">
@@ -73,7 +80,17 @@ const MobilePSP = () => {
             </tbody>
           </table>
         </div>
+
+        <button
+          type="button"
+          onClick={openModal}
+          className="border px-5 py-1 w-fit ml-8 rounded-md transition-all hover:bg-gray-400 hover:text-white duration-300"
+        >
+          Add
+        </button>
       </div>
+
+      <AddMobilePSPModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };
