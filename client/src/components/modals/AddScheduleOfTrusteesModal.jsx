@@ -48,7 +48,7 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a Trust Account
+                    Add a Trustee
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -70,22 +70,6 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="bankId"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          BANK ID
-                        </label>
-                        <input
-                          type="text"
-                          name="bankId"
-                          id="bankId"
-                          placeholder="0000001"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
                           htmlFor="reportingDate"
                           className="text-nowrap font-semibold text-sm"
                         >
@@ -101,149 +85,241 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="bankAcc"
+                          htmlFor="trustCo"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          BANK ACCOUNT
-                        </label>
-                        <input
-                          type="number"
-                          name="bankAcc"
-                          id="bankAcc"
-                          placeholder="440003475411"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="trustCode"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          TRUST ACC TYPE CODE
+                          TRUST CO NAME
                         </label>
                         <input
                           type="text"
-                          name="trustCode"
-                          id="trustCode"
-                          placeholder="DBT01"
+                          name="trustCo"
+                          id="trustCo"
+                          placeholder=""
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="orgName"
+                          htmlFor="director"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          ORG RECEIVING DONATION
+                          DIRECTOR OF TRUST CO
                         </label>
                         <input
                           type="text"
-                          name="orgName"
-                          id="orgName"
-                          placeholder="Amref Health Africa"
+                          name="director"
+                          id="director"
+                          placeholder="John Doe"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="sectorCode"
+                          htmlFor="trustee"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SECTOR CODE
+                          TRUSTEE
                         </label>
                         <input
                           type="text"
-                          name="sectorCode"
-                          id="sectorCode"
-                          placeholder="Sector Code"
+                          name="trustee"
+                          id="trustee"
+                          placeholder="John Doe"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustAcc"
+                          htmlFor="trusteeGender"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUST ACC INT UTILIZED
+                          TRUSTEE&apos;S GENDER
+                        </label>
+                        <select
+                          name="trusteeGender"
+                          id="trusteeGender"
+                          className="outline-none border p-1.5 rounded"
+                        >
+                          <option value="female">Female</option>
+                          <option value="male">Male</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dob"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DOB
+                        </label>
+                        <input
+                          type="date"
+                          name="dob"
+                          id="dob"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="nationality"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          NATIONALITY
                         </label>
                         <input
                           type="text"
-                          name="trustAcc"
-                          id="trustAcc"
-                          placeholder="DBT04"
+                          name="nationality"
+                          id="nationality"
+                          placeholder="KE"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="openingBal"
+                          htmlFor="residence"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          OPENING BALANCE
+                          COUNTRY OF RESIDENCE
                         </label>
                         <input
-                          type="number"
-                          name="openingBal"
-                          id="openingBal"
-                          placeholder="120,540,482.00"
-                          min={0}
+                          type="text"
+                          name="residence"
+                          id="residence"
+                          placeholder="KE"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="principalAmt"
+                          htmlFor="passport"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PRINCIPAL AMOUNT
+                          ID/PASSPORT NUMBER
                         </label>
                         <input
-                          type="number"
-                          name="principalAmt"
-                          id="principalAmt"
-                          placeholder="120,540,482.00"
+                          type="text"
+                          name="passport"
+                          id="passport"
+                          placeholder="12345678"
                           className="outline-none border p-1.5 rounded"
-                          min={0}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="interestEarned"
+                          htmlFor="kraPin"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INTEREST EARNED
+                          KRA PIN NUMBER
                         </label>
                         <input
-                          type="number"
-                          name="interestEarned"
-                          id="interestEarned"
-                          placeholder="12,054,048.20"
+                          type="text"
+                          name="kraPin"
+                          id="kraPin"
+                          placeholder="A123456789Z"
                           className="outline-none border p-1.5 rounded"
-                          min={0}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="interestUtilized"
+                          htmlFor="contact"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INTEREST UTILIZED
+                          CONTACT
+                        </label>
+                        <input
+                          type="text"
+                          name="contact"
+                          id="contact"
+                          placeholder="254712345678"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="academic"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          ACADEMIC/PROF QUALIFICATIONS
+                        </label>
+                        <input
+                          type="text"
+                          name="academic"
+                          id="academic"
+                          placeholder="ELAC04"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="otherTrusteeships"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          OTHER TRUSTEESHIPS
+                        </label>
+                        <textarea
+                          type="text"
+                          name="otherTrusteeships"
+                          id="otherTrusteeships"
+                          placeholder="ELAC04"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="disclosure"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DISCLOSURE & TRANSPARENCY DETAILS
+                        </label>
+                        <textarea
+                          type="text"
+                          name="disclosure"
+                          id="disclosure"
+                          placeholder="ELAC04"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="shareholderName"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHAREHOLDER NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="shareholderName"
+                          id="shareholderName"
+                          placeholder="Gabana Holdings"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="sharePercentage"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHARES PERCENTAGE
                         </label>
                         <input
                           type="number"
-                          name="interestUtilized"
-                          id="interestUtilized"
-                          placeholder="10,840,000"
+                          name="sharePercentage"
+                          id="sharePercentage"
+                          placeholder="32"
                           className="outline-none border p-1.5 rounded"
-                          min={0}
                         />
                       </div>
                     </div>

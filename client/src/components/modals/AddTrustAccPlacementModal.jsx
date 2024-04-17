@@ -48,7 +48,7 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a Trust Account
+                    Add a Trust Placement
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -70,22 +70,6 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="bankId"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          BANK ID
-                        </label>
-                        <input
-                          type="text"
-                          name="bankId"
-                          id="bankId"
-                          placeholder="0000001"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
                           htmlFor="reportingDate"
                           className="text-nowrap font-semibold text-sm"
                         >
@@ -101,149 +85,64 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="bankAcc"
+                          htmlFor="trustplacement"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          BANK ACCOUNT
+                          TRUST FUND PLACEMENT
+                        </label>
+                        <input
+                          type="TEXT"
+                          name="trustplacement"
+                          id="trustplacement"
+                          placeholder="TFP02"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="maturityDate"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          INV MATURITY DATE
+                        </label>
+                        <input
+                          type="date"
+                          name="maturityDate"
+                          id="maturityDate"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="invAmount"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          INV AMOUNT
                         </label>
                         <input
                           type="number"
-                          name="bankAcc"
-                          id="bankAcc"
-                          placeholder="440003475411"
+                          name="invAmount"
+                          id="invAmount"
+                          placeholder=""
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustCode"
+                          htmlFor="intAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUST ACC TYPE CODE
-                        </label>
-                        <input
-                          type="text"
-                          name="trustCode"
-                          id="trustCode"
-                          placeholder="DBT01"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="orgName"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ORG RECEIVING DONATION
-                        </label>
-                        <input
-                          type="text"
-                          name="orgName"
-                          id="orgName"
-                          placeholder="Amref Health Africa"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="sectorCode"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          SECTOR CODE
-                        </label>
-                        <input
-                          type="text"
-                          name="sectorCode"
-                          id="sectorCode"
-                          placeholder="Sector Code"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="trustAcc"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          TRUST ACC INT UTILIZED
-                        </label>
-                        <input
-                          type="text"
-                          name="trustAcc"
-                          id="trustAcc"
-                          placeholder="DBT04"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="openingBal"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          OPENING BALANCE
+                          INTEREST AMOUNT PER CAT
                         </label>
                         <input
                           type="number"
-                          name="openingBal"
-                          id="openingBal"
-                          placeholder="120,540,482.00"
-                          min={0}
+                          name="intAmount"
+                          id="intAmount"
+                          placeholder=""
                           className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="principalAmt"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          PRINCIPAL AMOUNT
-                        </label>
-                        <input
-                          type="number"
-                          name="principalAmt"
-                          id="principalAmt"
-                          placeholder="120,540,482.00"
-                          className="outline-none border p-1.5 rounded"
-                          min={0}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="interestEarned"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          INTEREST EARNED
-                        </label>
-                        <input
-                          type="number"
-                          name="interestEarned"
-                          id="interestEarned"
-                          placeholder="12,054,048.20"
-                          className="outline-none border p-1.5 rounded"
-                          min={0}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="interestUtilized"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          INTEREST UTILIZED
-                        </label>
-                        <input
-                          type="number"
-                          name="interestUtilized"
-                          id="interestUtilized"
-                          placeholder="10,840,000"
-                          className="outline-none border p-1.5 rounded"
-                          min={0}
                         />
                       </div>
                     </div>

@@ -234,7 +234,7 @@ export default function AddScheduleOfDirectorsModal({ isOpen, setIsOpen }) {
                           htmlFor="academic"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          ACADEMIC/PROFESSIONAL QUALIFICATIONS
+                          ACADEMIC/PROF QUALIFICATIONS
                         </label>
                         <input
                           type="text"
