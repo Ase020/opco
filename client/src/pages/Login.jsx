@@ -1,6 +1,6 @@
 const Login = () => {
   return (
-    <section className="max-w-[1440px] mx-auto border flex flex-col items-center justify-center gap-8 py-10">
+    <section className="max-w-[1440px] mx-auto flex flex-col items-center justify-center gap-8 py-10">
       <h2 className="text-4xl font-semibold">Login to Access Data</h2>
 
       <form
