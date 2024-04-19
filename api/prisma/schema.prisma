@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,5 +13,23 @@ model User {
   username  String   @unique
   password  String
   createdAt DateTime @default(now())
-  isAdmin   Boolean  @default(false)
+  isAdmin   Boolean? @default(false)
+  verified  Boolean? @default(false)
+}
+
+model TrustAcc {
+  rowId                      String  @id @default(auto()) @map("_id") @db.ObjectId
+  pspId                      String
+  bankId                     String
+  reportingDate              String
+  bankAccNumber              String
+  trustAccDrTypeCode         String
+  orgReceivingDonation       String
+  sectorCode                 String?
+  trustAccIntUtilizedDetails String
+  openingBal                 Float
+  principalAmount            Float
+  interestEarned             Float
+  closingBal                 Float
+  trustAccInterestUtilized   String?
 }
