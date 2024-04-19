@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Home,
   Layout,
+  Login,
   MobilePSP,
   PSPCybersecurity,
   PSPIncidentFraud,
@@ -10,6 +11,7 @@ import {
   PSPScheduleOfSeniorMgt,
   PSPScheduleOfShareholders,
   PSPScheduleOfTrustees,
+  Signup,
   TrustAccountDetails,
   TrustAccountPlacement,
 } from "./pages";
@@ -23,6 +25,14 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
         },
         {
           path: "/mobile-psp-counterfeit-currency-frauds",
