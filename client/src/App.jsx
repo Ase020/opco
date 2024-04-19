@@ -11,6 +11,7 @@ import {
   PSPScheduleOfSeniorMgt,
   PSPScheduleOfShareholders,
   PSPScheduleOfTrustees,
+  RequireAuthLayout,
   Signup,
   TrustAccountDetails,
   TrustAccountPlacement,
@@ -23,10 +24,6 @@ function App() {
       element: <Layout />,
       children: [
         {
-          path: "/",
-          element: <Home />,
-        },
-        {
           path: "/login",
           element: <Login />,
         },
@@ -34,6 +31,16 @@ function App() {
           path: "/signup",
           element: <Signup />,
         },
+        {
+          path: "/",
+          element: <Home />,
+        },
+      ],
+    },
+    {
+      path: "/",
+      element: <RequireAuthLayout />,
+      children: [
         {
           path: "/mobile-psp-counterfeit-currency-frauds",
           element: <MobilePSP />,

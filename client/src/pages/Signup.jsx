@@ -1,10 +1,40 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import apiRequest from "../lib/apiRequest";
+
 const Signup = () => {
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setErr("");
+    setLoading(true);
+    const formData = new FormData(e.target);
+    const userData = Object.fromEntries(formData);
+
+    try {
+      const response = await apiRequest.post("/auth/signup", userData);
+
+      console.log("User Data: ", response.data);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error: ", error);
+      setErr(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="max-w-[1440px] mx-auto flex flex-col items-center justify-center gap-8 py-10">
       <h2 className="text-4xl font-semibold">Sign Up to Access Data</h2>
 
       <form
-        action=""
+        onSubmit={handleSubmit}
         className="flex flex-col gap-6 p-6 rounded-xl shadow-md border max-w-96 w-full"
       >
         <div className="flex flex-col gap-4">
@@ -50,13 +80,13 @@ const Signup = () => {
         </div>
 
         <div className="flex flex-col gap-4">
-          <label htmlFor="password" className="font-semibold">
+          <label htmlFor="confirmPassword" className="font-semibold">
             Confirm Password:
           </label>
           <input
             type="password"
-            name="password"
-            id="password"
+            name="confirmPassword"
+            id="confirmPassword"
             className="border p-2 outline-none rounded-lg"
             placeholder="***************"
             required
@@ -67,8 +97,10 @@ const Signup = () => {
           type="submit"
           className="border w-fit mx-auto py-1.5 px-6 rounded-lg transition-all duration-500 ease-in hover:bg-black hover:text-white"
         >
-          Signup
+          {loading ? "Signing up..." : "Signup"}
         </button>
+
+        <p className="mx-auto italic font-medium text-red-500">{err}</p>
       </form>
     </section>
   );
