@@ -1,5 +1,6 @@
 import express from "express";
 
+import { verifyToken } from "../middleware/verifyToken.js";
 import {
   createTrustAccount,
   deleteTrustAccount,
@@ -10,10 +11,10 @@ import {
 
 const trustAccountRouter = express.Router();
 
-trustAccountRouter.get("/", getTrustAccounts);
-trustAccountRouter.get("/:rowId", getTrustAccount);
-trustAccountRouter.post("/", createTrustAccount);
-trustAccountRouter.put("/:rowId", updateTrustAccount);
-trustAccountRouter.delete("/:rowId", deleteTrustAccount);
+trustAccountRouter.get("/", verifyToken, getTrustAccounts);
+trustAccountRouter.get("/:rowId", verifyToken, getTrustAccount);
+trustAccountRouter.post("/", verifyToken, createTrustAccount);
+trustAccountRouter.put("/:rowId", verifyToken, updateTrustAccount);
+trustAccountRouter.delete("/:rowId", verifyToken, deleteTrustAccount);
 
 export default trustAccountRouter;
