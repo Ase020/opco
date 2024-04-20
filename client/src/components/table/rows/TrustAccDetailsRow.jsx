@@ -1,6 +1,5 @@
-// import apiRequest from "../../lib/apiRequest";
 import { useState } from "react";
-import { EditTrustAccDetailsModal } from "..";
+import EditTrustAccDetailsModal from "../../modals/edit/EditTrustAccDetailsModal";
 
 /* eslint-disable react/prop-types */
 const TrustAccDetailsRow = ({ trustAcc }) => {
@@ -9,11 +8,6 @@ const TrustAccDetailsRow = ({ trustAcc }) => {
   function openModal() {
     setIsOpen(true);
   }
-  const handleEdit = async (rowId) => {
-    openModal();
-    console.log("RowId: ", rowId);
-    // const response = await apiRequest(`/trust-accounts/${rowId}`)
-  };
 
   const handleDelete = (rowId) => {
     console.log("RowId: ", rowId);
@@ -42,7 +36,7 @@ const TrustAccDetailsRow = ({ trustAcc }) => {
         <button
           type="button"
           className="bg-gray-400 border-none px-2.5 rounded text-white"
-          onClick={() => handleEdit(trustAcc.rowId)}
+          onClick={openModal}
         >
           Edit
         </button>

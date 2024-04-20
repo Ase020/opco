@@ -25,10 +25,14 @@ export default function EditTrustAccDetailsModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post("/trust-accounts", data);
+      const response = await apiRequest.put(
+        `/trust-accounts/${trustAcc.rowId}`,
+        data
+      );
       console.log("Trust Acc Details: ", response.data);
       setLoading(false);
       setIsOpen(false);
+      // console.log("Edit Data: ", data);
     } catch (error) {
       setErr(error.response.data.message);
       setLoading(false);
@@ -115,6 +119,7 @@ export default function EditTrustAccDetailsModal({
                           name="reportingDate"
                           id="reportingDate"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -272,7 +277,7 @@ export default function EditTrustAccDetailsModal({
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>

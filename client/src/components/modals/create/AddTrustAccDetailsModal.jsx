@@ -111,6 +111,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           name="reportingDate"
                           id="reportingDate"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 

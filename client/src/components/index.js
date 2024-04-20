@@ -12,6 +12,5 @@ export { default as EditTrustAccDetailsModal } from "./modals/edit/EditTrustAccD
 
 export { default as Navbar } from "./Navbar";
 
-export { default as TrustAccDetailsHeader } from "./table-headers/TrustAccDetailsHeader";
-
-export { default as TrustAccDetailsRow } from "./table-rows/TrustAccDetailsRow";
+export { default as TrustAccDetailsHeader } from "./table/headers/TrustAccDetailsHeader";
+export { default as TrustAccDetailsRow } from "./table/rows/TrustAccDetailsRow";

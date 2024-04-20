@@ -75,12 +75,11 @@ export const updateTrustAccount = async (req, res) => {
     bankAccNumber,
     trustAccDrTypeCode,
     orgReceivingDonation,
-    sectorCode,
+    sectorCode = "",
     trustAccIntUtilizedDetails,
     openingBal,
     principalAmount,
     interestEarned,
-    closingBal,
     trustAccInterestUtilized,
   } = req.body;
 
@@ -96,11 +95,11 @@ export const updateTrustAccount = async (req, res) => {
         orgReceivingDonation,
         sectorCode,
         trustAccIntUtilizedDetails,
-        openingBal,
-        principalAmount,
-        interestEarned,
-        closingBal,
-        trustAccInterestUtilized,
+        openingBal: parseFloat(openingBal),
+        principalAmount: parseFloat(principalAmount),
+        interestEarned: parseFloat(interestEarned),
+        closingBal: parseFloat(principalAmount) + parseFloat(interestEarned),
+        trustAccInterestUtilized: parseFloat(trustAccInterestUtilized),
       },
     });
 
