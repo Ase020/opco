@@ -18,6 +18,7 @@ import {
 } from "./pages";
 import {
   fraudIncidentsLoader,
+  mobilePSPLoader,
   trustAccDetailsLoader,
   trustAccPlacementsLoader,
 } from "./lib/loaders";
@@ -49,6 +50,7 @@ function App() {
         {
           path: "/mobile-psp-counterfeit-currency-frauds",
           element: <MobilePSP />,
+          loader: mobilePSPLoader,
         },
         {
           path: "/psp-cybersecurity-incident-record",

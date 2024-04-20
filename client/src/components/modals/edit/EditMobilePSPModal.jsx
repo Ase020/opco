@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+
 import apiRequest from "../../../lib/apiRequest";
 
-export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
+export default function EditMobilePSPModal({ isOpen, setIsOpen, trustAcc }) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -20,11 +21,11 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post(
-        "/mobile-psp-counterfeit-currency-frauds",
+      const response = await apiRequest.put(
+        `/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`,
         data
       );
-      console.log("Counterfeit Currency Fraud: ", response.data);
+      console.log("Counterfeit Currency Frauds: ", response.data);
       setLoading(false);
       setIsOpen(false);
     } catch (error) {
@@ -65,7 +66,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Mobile PSP Counterfeit Currency Fraud{" "}
+                    Edit Counterfeit Currency Fraud
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -80,7 +81,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="pspId"
                           id="pspId"
-                          placeholder="0800002"
+                          defaultValue={trustAcc.pspId}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -114,7 +115,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           name="subCountyCode"
                           id="subCountyCode"
                           required
-                          placeholder="121"
+                          defaultValue={trustAcc.subCountyCode}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -130,7 +131,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="agentId"
                           id="agentId"
-                          placeholder="90200"
+                          defaultValue={trustAcc.agentId}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -147,7 +148,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="denominationCode"
                           id="denominationCode"
-                          defaultValue="KES1000"
+                          defaultValue={trustAcc.denominationCode}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -163,7 +164,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="serialNumber"
                           id="serialNumber"
-                          placeholder="AB0029977"
+                          defaultValue={trustAcc.serialNumber}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -180,7 +181,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="depositorsName"
                           id="depositorsName"
-                          placeholder="John Doe"
+                          defaultValue={trustAcc.depositorsName}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -198,7 +199,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           name="tellersName"
                           id="tellersName"
                           required
-                          placeholder="Jane Doe"
+                          defaultValue={trustAcc.tellersName}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -248,7 +249,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           id="numberOfPieces"
                           className="outline-none border p-1.5 rounded"
                           min={1}
-                          defaultValue={1}
+                          defaultValue={trustAcc.numberOfPieces}
                         />
                       </div>
 
@@ -264,6 +265,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           name="remarks"
                           id="remarks"
                           min={0}
+                          defaultValue={trustAcc.remarks}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -273,10 +275,11 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>
+
                   {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>

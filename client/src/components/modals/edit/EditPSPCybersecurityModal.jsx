@@ -1,9 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+
 import apiRequest from "../../../lib/apiRequest";
 
-export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
+export default function EditPSPCybersecurityModal({
+  isOpen,
+  setIsOpen,
+  trustAcc,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -20,13 +25,14 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post(
-        "/mobile-psp-counterfeit-currency-frauds",
+      const response = await apiRequest.put(
+        `/trust-accounts/${trustAcc.rowId}`,
         data
       );
-      console.log("Counterfeit Currency Fraud: ", response.data);
+      console.log("Trust Acc Details: ", response.data);
       setLoading(false);
       setIsOpen(false);
+      // console.log("Edit Data: ", data);
     } catch (error) {
       setErr(error.response.data.message);
       setLoading(false);
@@ -65,7 +71,7 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Mobile PSP Counterfeit Currency Fraud{" "}
+                    Edit Trust Account
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -80,9 +86,24 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="pspId"
                           id="pspId"
-                          placeholder="0800002"
-                          required
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.pspId}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="bankId"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          BANK ID
+                        </label>
+                        <input
+                          type="text"
+                          name="bankId"
+                          id="bankId"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.bankId}
                         />
                       </div>
 
@@ -97,174 +118,157 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
+                          className="outline-none border p-1.5 rounded"
                           required
-                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="subCountyCode"
+                          htmlFor="bankAccNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SUB COUNTY CODE
-                        </label>
-                        <input
-                          type="text"
-                          name="subCountyCode"
-                          id="subCountyCode"
-                          required
-                          placeholder="121"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="agentId"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          AGENT ID
-                        </label>
-                        <input
-                          type="text"
-                          name="agentId"
-                          id="agentId"
-                          placeholder="90200"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="denominationCode"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DENOMINATION CODE
-                        </label>
-                        <input
-                          type="text"
-                          name="denominationCode"
-                          id="denominationCode"
-                          defaultValue="KES1000"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="serialNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          SERIAL NO
-                        </label>
-                        <input
-                          type="text"
-                          name="serialNumber"
-                          id="serialNumber"
-                          placeholder="AB0029977"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="depositorsName"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DEPOSITOR&apos;S NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="depositorsName"
-                          id="depositorsName"
-                          placeholder="John Doe"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="tellersName"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          TELLER&apos;S NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="tellersName"
-                          id="tellersName"
-                          required
-                          placeholder="Jane Doe"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateConfiscated"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE CONFISCATED
-                        </label>
-                        <input
-                          type="date"
-                          name="dateConfiscated"
-                          id="dateConfiscated"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateSubmittedToCBK"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE SUBMITTED
-                        </label>
-                        <input
-                          type="date"
-                          name="dateSubmittedToCBK"
-                          id="dateSubmittedToCBK"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="numberOfPieces"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          PIECES
+                          BANK ACCOUNT
                         </label>
                         <input
                           type="number"
-                          name="numberOfPieces"
-                          id="numberOfPieces"
+                          name="bankAccNumber"
+                          id="bankAccNumber"
                           className="outline-none border p-1.5 rounded"
-                          min={1}
-                          defaultValue={1}
+                          defaultValue={trustAcc.bankAccNumber}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="remarks"
+                          htmlFor="trustAccDrTypeCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          REMARKS
+                          TRUST ACC TYPE CODE
                         </label>
-                        <textarea
+                        <input
+                          type="text"
+                          name="trustAccDrTypeCode"
+                          id="trustAccDrTypeCode"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.trustAccDrTypeCode}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="orgReceivingDonation"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          ORG RECEIVING DONATION
+                        </label>
+                        <input
+                          type="text"
+                          name="orgReceivingDonation"
+                          id="orgReceivingDonation"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.orgReceivingDonation}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="sectorCode"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SECTOR CODE
+                        </label>
+                        <input
+                          type="text"
+                          name="sectorCode"
+                          id="sectorCode"
+                          placeholder="Sector Code"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.sectorCode}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="trustAccIntUtilizedDetails"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          TRUST ACC INT UTILIZED
+                        </label>
+                        <input
+                          type="text"
+                          name="trustAccIntUtilizedDetails"
+                          id="trustAccIntUtilizedDetails"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.trustAccIntUtilizedDetails}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="openingBal"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          OPENING BALANCE
+                        </label>
+                        <input
                           type="number"
-                          name="remarks"
-                          id="remarks"
+                          name="openingBal"
+                          id="openingBal"
                           min={0}
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.openingBal}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="principalAmount"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          PRINCIPAL AMOUNT
+                        </label>
+                        <input
+                          type="number"
+                          name="principalAmount"
+                          id="principalAmount"
+                          className="outline-none border p-1.5 rounded"
+                          min={0}
+                          defaultValue={trustAcc.principalAmount}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="interestEarned"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          INTEREST EARNED
+                        </label>
+                        <input
+                          type="number"
+                          name="interestEarned"
+                          id="interestEarned"
+                          className="outline-none border p-1.5 rounded"
+                          min={0}
+                          defaultValue={trustAcc.interestEarned}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="trustAccInterestUtilized"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          INTEREST UTILIZED
+                        </label>
+                        <input
+                          type="number"
+                          name="trustAccInterestUtilized"
+                          id="trustAccInterestUtilized"
+                          className="outline-none border p-1.5 rounded"
+                          min={0}
+                          defaultValue={trustAcc.trustAccInterestUtilized}
                         />
                       </div>
                     </div>
@@ -273,10 +277,11 @@ export default function AddMobilePSPModal({ isOpen, setIsOpen }) {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>
+
                   {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>

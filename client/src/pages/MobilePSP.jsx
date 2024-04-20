@@ -1,8 +1,14 @@
-import { useState } from "react";
-import { mobilePSP } from ".";
-import { AddMobilePSPModal, MobilePSPHeader } from "../components";
+import { Suspense, useState } from "react";
+import {
+  AddMobilePSPModal,
+  MobilePSPHeader,
+  MobilePSPRow,
+} from "../components";
+import { Await, useLoaderData } from "react-router-dom";
 
 const MobilePSP = () => {
+  const mobilePSPs = useLoaderData();
+
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -20,44 +26,30 @@ const MobilePSP = () => {
             <MobilePSPHeader />
 
             <tbody>
-              {mobilePSP.map((row) => (
-                <tr
-                  key={row.ROW_ID}
-                  className="even:bg-[#f2f2f2] hover:bg-[#ddd]"
+              <Suspense
+                fallback={
+                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                    <td className="border py-2 px-1">Loading...</td>
+                  </tr>
+                }
+              >
+                <Await
+                  resolve={mobilePSPs.mobilePSPResponse}
+                  errorElement={
+                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                      <td className="border py-2 px-1">
+                        Error loading counterfeit currency frauds!
+                      </td>
+                    </tr>
+                  }
                 >
-                  <td className="border py-2 px-1">{row.ROW_ID}</td>
-                  <td className="border py-2 px-1">{row.PSP_ID}</td>
-                  <td className="border py-2 px-1">{row.REPORTING_DATE}</td>
-                  <td className="border py-2 px-1">{row.SUB_COUNTY_CODE}</td>
-                  <td className="border py-2 px-1">{row.AGENT_ID}</td>
-                  <td className="border py-2 px-1">{row.DENOMINATION_CODE}</td>
-                  <td className="border py-2 px-1">{row.SERIAL_NO}</td>
-                  <td className="border py-2 px-1">{row.DEPOSITOR}</td>
-                  <td className="border py-2 px-1">{row.TELLER}</td>
-                  <td className="border py-2">{row.DATE_CONFISCATED}</td>
-                  <td className="border py-2">{row.DATE_SUBMITTED}</td>
-                  <td className="border py-2">{row.REMARKS}</td>
-                  <td className="border py-2">{row.PIECES}</td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-gray-400 border-none px-2.5 rounded text-white"
-                    >
-                      Edit
-                    </button>
-                  </td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-red-400 border-none px-2.5 rounded text-white"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                  {(mobilePSPResponse) =>
+                    mobilePSPResponse.data.map((trustAcc) => (
+                      <MobilePSPRow key={trustAcc.rowId} trustAcc={trustAcc} />
+                    ))
+                  }
+                </Await>
+              </Suspense>
             </tbody>
           </table>
         </div>

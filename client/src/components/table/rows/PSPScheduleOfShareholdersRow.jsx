@@ -3,7 +3,7 @@ import DeleteModal from "../../modals/delete/DeleteModal";
 import EditFraudIncidentsModal from "../../modals/edit/EditFraudIncidentsModal";
 
 /* eslint-disable react/prop-types */
-const PSPIncidentFraudRow = ({ trustAcc }) => {
+const PSPScheduleOfShareholdersRow = ({ trustAcc }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -67,4 +67,4 @@ const PSPIncidentFraudRow = ({ trustAcc }) => {
   );
 };
 
-export default PSPIncidentFraudRow;
+export default PSPScheduleOfShareholdersRow;

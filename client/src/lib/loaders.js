@@ -27,3 +27,13 @@ export const fraudIncidentsLoader = async () => {
     fraudIncidentsResponse: fraudIncidentsPromise,
   });
 };
+
+export const mobilePSPLoader = async () => {
+  const mobilePSPPromise = apiRequest(
+    "/mobile-psp-counterfeit-currency-frauds"
+  );
+
+  return defer({
+    mobilePSPResponse: mobilePSPPromise,
+  });
+};

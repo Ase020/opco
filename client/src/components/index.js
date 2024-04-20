@@ -11,6 +11,12 @@ export { default as AddTrustAccPlacementModal } from "./modals/create/AddTrustAc
 export { default as EditFraudIncidentsModal } from "./modals/edit/EditFraudIncidentsModal";
 export { default as EditTrustAccDetailsModal } from "./modals/edit/EditTrustAccDetailsModal";
 export { default as EditTrustAccPlacementsModal } from "./modals/edit/EditTrustAccPlacementsModal";
+export { default as EditMobilePSPModal } from "./modals/edit/EditMobilePSPModal";
+export { default as EditPSPCybersecurityModal } from "./modals/edit/EditPSPCybersecurityModal";
+export { default as EditPSPScheduleOfSeniorMgtModal } from "./modals/edit/EditPSPScheduleOfSeniorMgtModal";
+export { default as EditPSPScheduleOfDirectorsModal } from "./modals/edit/EditPSPScheduleOfDirectorsModal";
+export { default as EditPSPScheduleOfShareholdersModal } from "./modals/edit/EditPSPScheduleOfShareholdersModal";
+export { default as EditPSPScheduleOfTrusteesModal } from "./modals/edit/EditPSPScheduleOfTrusteesModal";
 
 export { default as DeleteModal } from "./modals/delete/DeleteModal";
 
@@ -29,3 +35,9 @@ export { default as PSPScheduleOfTrusteesHeader } from "./table/headers/PSPSched
 export { default as TrustAccDetailsRow } from "./table/rows/TrustAccDetailsRow";
 export { default as TrustAccPlacementsRow } from "./table/rows/TrustAccPlacementsRow";
 export { default as PSPIncidentFraudRow } from "./table/rows/PSPIncidentFraudRow";
+export { default as MobilePSPRow } from "./table/rows/MobilePSPRow";
+export { default as PSPScheduleOfDirectorsRow } from "./table/rows/PSPScheduleOfDirectorsRow";
+export { default as PSPScheduleOfSeniorMgtRow } from "./table/rows/PSPScheduleOfSeniorMgtRow";
+export { default as PSPScheduleOfShareholdersRow } from "./table/rows/PSPScheduleOfShareholdersRow";
+export { default as PSPScheduleOfTrusteesRow } from "./table/rows/PSPScheduleOfTrusteesRow";
+export { default as PSPCybersecurityRow } from "./table/rows/PSPCybersecurityRow";
