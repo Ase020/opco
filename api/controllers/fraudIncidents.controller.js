@@ -41,7 +41,7 @@ export const getFraudIncident = async (req, res) => {
 
     res.status(200).json(fraudIncident);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch Fraud Incident!" });
+    res.status(500).json({ message: "Failed to fetch Fraud Incident!", error });
   }
 };
 
@@ -149,7 +149,9 @@ export const updateFraudIncident = async (req, res) => {
 
     res.status(202).json(updatedFraudIncident);
   } catch (error) {
-    res.status(500).json({ message: "Failed to update a Fraud Incident!" });
+    res
+      .status(500)
+      .json({ message: "Failed to update a Fraud Incident!", error });
   }
 };
 
@@ -171,6 +173,8 @@ export const deleteFraudIncident = async (req, res) => {
 
     res.status(204).json({ message: "Fraud Incident deleted successfully!" });
   } catch (error) {
-    res.status(500).json({ message: "Failed to delete Fraud Incident!" });
+    res
+      .status(500)
+      .json({ message: "Failed to delete Fraud Incident!", error });
   }
 };

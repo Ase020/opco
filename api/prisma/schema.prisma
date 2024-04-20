@@ -75,3 +75,19 @@ enum RecoveryStatus {
   Complete
   Incomplete
 }
+
+model CounterfeitCurrencyFraud {
+  rowId              String @id @default(auto()) @map("_id") @db.ObjectId
+  pspId              String
+  reportingDate      String
+  subCountyCode      String
+  agentId            String
+  denominationCode   String
+  serialNumber       String
+  depositorsName     String
+  tellersName        String
+  dateConfiscated    String
+  dateSubmittedToCBK String
+  remarks            String
+  numberOfPieces     Int
+}
