@@ -1,7 +1,15 @@
+import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
 
 export const getTrustAccounts = async (req, res) => {
+  const token = req.cookies?.token;
   try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const userTokenUserType = decodedToken.userType;
+
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+      return res.status(500).json({ message: "Not Authorized!" });
+
     const trustAccounts = await prisma.trustAcc.findMany();
 
     res.status(200).json(trustAccounts);
