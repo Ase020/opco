@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
 
+// Get all Trust Account Details
 export const getTrustAccounts = async (req, res) => {
   const token = req.cookies?.token;
   try {
@@ -18,10 +19,18 @@ export const getTrustAccounts = async (req, res) => {
   }
 };
 
+// Get a Trust Account Details
 export const getTrustAccount = async (req, res) => {
   const rowId = req.params.rowId;
+  const token = req.cookies?.token;
 
   try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const userTokenUserType = decodedToken.userType;
+
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+      return res.status(500).json({ message: "Not Authorized!" });
+
     const trustAccount = await prisma.trustAcc.findUnique({
       where: { rowId },
     });
@@ -32,6 +41,7 @@ export const getTrustAccount = async (req, res) => {
   }
 };
 
+// Create a Trust Account Details
 export const createTrustAccount = async (req, res) => {
   const {
     pspId,
@@ -48,8 +58,15 @@ export const createTrustAccount = async (req, res) => {
     trustAccInterestUtilized,
   } = req.body;
   // const tokenUserId = req.userId;
+  const token = req.cookies?.token;
 
   try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const userTokenUserType = decodedToken.userType;
+
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+      return res.status(500).json({ message: "Not Authorized!" });
+
     const newTrustAcc = await prisma.trustAcc.create({
       data: {
         pspId,
@@ -74,6 +91,7 @@ export const createTrustAccount = async (req, res) => {
   }
 };
 
+// Update a Trust Account Details
 export const updateTrustAccount = async (req, res) => {
   const rowId = req.params.rowId;
   const {
@@ -91,7 +109,15 @@ export const updateTrustAccount = async (req, res) => {
     trustAccInterestUtilized,
   } = req.body;
 
+  const token = req.cookies?.token;
+
   try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const userTokenUserType = decodedToken.userType;
+
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+      return res.status(500).json({ message: "Not Authorized!" });
+
     const updatedTrustAcc = await prisma.trustAcc.update({
       where: { rowId },
       data: {
@@ -119,10 +145,18 @@ export const updateTrustAccount = async (req, res) => {
   }
 };
 
+// Delete a Trust Account Detail
 export const deleteTrustAccount = async (req, res) => {
   const rowId = req.params.rowId;
+  const token = req.cookies?.token;
 
   try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const userTokenUserType = decodedToken.userType;
+
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+      return res.status(500).json({ message: "Not Authorized!" });
+
     await prisma.trustAcc.delete({
       where: { rowId },
     });

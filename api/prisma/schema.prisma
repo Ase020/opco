@@ -42,3 +42,13 @@ model TrustAcc {
   closingBal                 Float
   trustAccInterestUtilized   Float?  @default(0)
 }
+
+model TrustAccPlacement {
+  rowId                    String @id @default(auto()) @map("_id") @db.ObjectId
+  pspId                    String
+  reportingDate            String
+  trustFundPlacement       String
+  trustFundInvMaturityDate String
+  catTrustFundInvestedAmt  Float  @default(0)
+  interestAmtPerCat        Float  @default(0)
+}
