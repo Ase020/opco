@@ -20,9 +20,7 @@ const TrustAccountPlacement = () => {
 
         <div className="overflow-x-auto">
           <table className="border-collapse w-full mb-10">
-            <thead className="">
-              <TrustAccPlacementsHeader />
-            </thead>
+            <TrustAccPlacementsHeader />
 
             <tbody>
               <Suspense

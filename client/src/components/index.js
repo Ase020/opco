@@ -17,6 +17,13 @@ export { default as Navbar } from "./Navbar";
 
 export { default as TrustAccDetailsHeader } from "./table/headers/TrustAccDetailsHeader";
 export { default as TrustAccPlacementsHeader } from "./table/headers/TrustAccPlacementsHeader";
+export { default as MobilePSPHeader } from "./table/headers/MobilePSPHeader";
+export { default as PSPCybersecurityHeader } from "./table/headers/PSPCybersecurityHeader";
+export { default as PSPIncidentFraudHeader } from "./table/headers/PSPIncidentFraudHeader";
+export { default as PSPScheduleOfDirectorsHeader } from "./table/headers/PSPScheduleOfDirectorsHeader";
+export { default as PSPScheduleOfSeniorMgtHeader } from "./table/headers/PSPScheduleOfDirectorsHeader";
+export { default as PSPScheduleOfShareholdersHeader } from "./table/headers/PSPScheduleOfShareholdersHeader";
+export { default as PSPScheduleOfTrusteesHeader } from "./table/headers/PSPScheduleOfTrusteesHeader";
 
 export { default as TrustAccDetailsRow } from "./table/rows/TrustAccDetailsRow";
 export { default as TrustAccPlacementsRow } from "./table/rows/TrustAccPlacementsRow";

@@ -22,9 +22,7 @@ const TrustAccountDetails = () => {
 
         <div className="overflow-x-auto">
           <table className="border-collapse w-full mb-10">
-            <thead className="">
-              <TrustAccDetailsHeader />
-            </thead>
+            <TrustAccDetailsHeader />
 
             <tbody>
               <Suspense
