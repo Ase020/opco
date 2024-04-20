@@ -13,8 +13,17 @@ model User {
   username  String   @unique
   password  String
   createdAt DateTime @default(now())
-  isAdmin   Boolean? @default(false)
+  userType  UserType
   verified  Boolean? @default(false)
+}
+
+enum UserType {
+  trust
+  security
+  cyber
+  legal
+  am
+  superAdmin
 }
 
 model TrustAcc {
@@ -24,12 +33,12 @@ model TrustAcc {
   reportingDate              String
   bankAccNumber              String
   trustAccDrTypeCode         String
-  orgReceivingDonation       String
+  orgReceivingDonation       String  @unique
   sectorCode                 String?
   trustAccIntUtilizedDetails String
   openingBal                 Float
   principalAmount            Float
   interestEarned             Float
   closingBal                 Float
-  trustAccInterestUtilized   String?
+  trustAccInterestUtilized   Float?  @default(0)
 }

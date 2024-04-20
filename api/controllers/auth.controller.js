@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
 
 export const signup = async (req, res) => {
-  const { email, password, username } = req.body;
+  const { email, password, username, userType } = req.body;
 
   try {
     // hash password
@@ -14,6 +14,7 @@ export const signup = async (req, res) => {
       data: {
         email,
         username,
+        userType,
         password: hashedPassword,
       },
     });

@@ -25,12 +25,39 @@ export const getTrustAccount = async (req, res) => {
 };
 
 export const createTrustAccount = async (req, res) => {
-  const body = req.body;
+  const {
+    pspId,
+    bankId,
+    reportingDate,
+    bankAccNumber,
+    trustAccDrTypeCode,
+    orgReceivingDonation,
+    sectorCode = "",
+    trustAccIntUtilizedDetails,
+    openingBal,
+    principalAmount,
+    interestEarned,
+    trustAccInterestUtilized,
+  } = req.body;
   // const tokenUserId = req.userId;
 
   try {
     const newTrustAcc = await prisma.trustAcc.create({
-      data: body,
+      data: {
+        pspId,
+        bankId,
+        reportingDate,
+        bankAccNumber,
+        trustAccDrTypeCode,
+        orgReceivingDonation,
+        sectorCode,
+        trustAccIntUtilizedDetails,
+        openingBal: parseFloat(openingBal),
+        principalAmount: parseFloat(principalAmount),
+        interestEarned: parseFloat(interestEarned),
+        closingBal: parseFloat(principalAmount) + parseFloat(interestEarned),
+        trustAccInterestUtilized: parseFloat(trustAccInterestUtilized),
+      },
     });
 
     res.status(201).json(newTrustAcc);

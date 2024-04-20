@@ -66,6 +66,25 @@ const Signup = () => {
         </div>
 
         <div className="flex flex-col gap-4">
+          <label htmlFor="userType" className="font-semibold">
+            UserType:
+          </label>
+
+          <select
+            name="userType"
+            id="userType"
+            className="border p-2 outline-none rounded-lg"
+            required
+          >
+            <option value="trust">Trust</option>
+            <option value="security">Security</option>
+            <option value="cyber">Cybersecurity</option>
+            <option value="am">Airtel Money</option>
+            <option value="superAdmin">Super Admin</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-4">
           <label htmlFor="password" className="font-semibold">
             Password:
           </label>

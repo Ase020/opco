@@ -1,19 +1,34 @@
 /* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+
+import apiRequest from "../../lib/apiRequest";
 
 export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
   function closeModal() {
     setIsOpen(false);
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setErr("");
+    setLoading(true);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    e.preventDefault();
-    setIsOpen(false);
 
-    console.log("Close", data);
+    try {
+      const response = await apiRequest.post("/trust-accounts", data);
+      console.log("Trust Acc Details: ", response.data);
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error) {
+      setErr(error.response.data.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,15 +69,15 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="psp"
+                          htmlFor="pspId"
                           className="text-nowrap font-semibold text-sm"
                         >
                           PSP ID
                         </label>
                         <input
                           type="text"
-                          name="psp"
-                          id="psp"
+                          name="pspId"
+                          id="pspId"
                           placeholder="0800002"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -101,15 +116,15 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="bankAcc"
+                          htmlFor="bankAccNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
                           BANK ACCOUNT
                         </label>
                         <input
                           type="number"
-                          name="bankAcc"
-                          id="bankAcc"
+                          name="bankAccNumber"
+                          id="bankAccNumber"
                           placeholder="440003475411"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -117,15 +132,15 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustCode"
+                          htmlFor="trustAccDrTypeCode"
                           className="text-nowrap font-semibold text-sm"
                         >
                           TRUST ACC TYPE CODE
                         </label>
                         <input
                           type="text"
-                          name="trustCode"
-                          id="trustCode"
+                          name="trustAccDrTypeCode"
+                          id="trustAccDrTypeCode"
                           placeholder="DBT01"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -133,15 +148,15 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="orgName"
+                          htmlFor="orgReceivingDonation"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ORG RECEIVING DONATION
                         </label>
                         <input
                           type="text"
-                          name="orgName"
-                          id="orgName"
+                          name="orgReceivingDonation"
+                          id="orgReceivingDonation"
                           placeholder="Amref Health Africa"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -160,20 +175,21 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           id="sectorCode"
                           placeholder="Sector Code"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue=""
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustAcc"
+                          htmlFor="trustAccIntUtilizedDetails"
                           className="text-nowrap font-semibold text-sm"
                         >
                           TRUST ACC INT UTILIZED
                         </label>
                         <input
                           type="text"
-                          name="trustAcc"
-                          id="trustAcc"
+                          name="trustAccIntUtilizedDetails"
+                          id="trustAccIntUtilizedDetails"
                           placeholder="DBT04"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -198,15 +214,15 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="principalAmt"
+                          htmlFor="principalAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
                           PRINCIPAL AMOUNT
                         </label>
                         <input
                           type="number"
-                          name="principalAmt"
-                          id="principalAmt"
+                          name="principalAmount"
+                          id="principalAmount"
                           placeholder="120,540,482.00"
                           className="outline-none border p-1.5 rounded"
                           min={0}
@@ -232,18 +248,19 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="interestUtilized"
+                          htmlFor="trustAccInterestUtilized"
                           className="text-nowrap font-semibold text-sm"
                         >
                           INTEREST UTILIZED
                         </label>
                         <input
                           type="number"
-                          name="interestUtilized"
-                          id="interestUtilized"
+                          name="trustAccInterestUtilized"
+                          id="trustAccInterestUtilized"
                           placeholder="10,840,000"
                           className="outline-none border p-1.5 rounded"
                           min={0}
+                          defaultValue={0}
                         />
                       </div>
                     </div>
@@ -252,10 +269,12 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        Save
+                        {loading ? "Saving..." : "Save"}
                       </button>
                     </div>
                   </form>
+
+                  {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
