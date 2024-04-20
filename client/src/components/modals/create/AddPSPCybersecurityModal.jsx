@@ -1,19 +1,37 @@
 /* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+
+import apiRequest from "../../../lib/apiRequest";
 
 export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
   function closeModal() {
     setIsOpen(false);
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setErr("");
+    setLoading(true);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    e.preventDefault();
-    setIsOpen(false);
 
-    console.log("Close", data);
+    try {
+      const response = await apiRequest.post(
+        "/psp-cybersecurity-incident-record",
+        data
+      );
+      console.log("Counterfeit Currency Fraud: ", response.data);
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error) {
+      setErr(error.response.data.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,16 +72,17 @@ export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="psp"
+                          htmlFor="pspId"
                           className="text-nowrap font-semibold text-sm"
                         >
                           PSP ID
                         </label>
                         <input
                           type="text"
-                          name="psp"
-                          id="psp"
+                          name="pspId"
+                          id="pspId"
                           placeholder="0800002"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -79,37 +98,40 @@ export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="incidentNo"
+                          htmlFor="incidentNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
                           INCIDENT NUMBER
                         </label>
                         <input
                           type="text"
-                          name="incidentNo"
-                          id="incidentNo"
+                          name="incidentNumber"
+                          id="incidentNumber"
                           placeholder="785"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="attackerLocation"
+                          htmlFor="locationOfAttacker"
                           className="text-nowrap font-semibold text-sm"
                         >
                           LOCATION OF ATTACKER
                         </label>
                         <input
                           type="text"
-                          name="attackerLocation"
-                          id="attackerLocation"
+                          name="locationOfAttacker"
+                          id="locationOfAttacker"
+                          required
                           placeholder="Nigeria"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -126,6 +148,7 @@ export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="incidentMode"
                           id="incidentMode"
+                          required
                           placeholder="ICDT01"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -133,15 +156,16 @@ export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="incidentDate"
+                          htmlFor="datetimeOfIncident"
                           className="text-nowrap font-semibold text-sm"
                         >
                           INCIDENT DATE
                         </label>
                         <input
-                          type="date"
-                          name="incidentDate"
-                          id="incidentDate"
+                          type="datetime-local"
+                          name="datetimeOfIncident"
+                          id="datetimeOfIncident"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -158,67 +182,72 @@ export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
                           name="lossType"
                           id="lossType"
                           placeholder="FIN"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="details"
+                          htmlFor="detailsOfIncident"
                           className="text-nowrap font-semibold text-sm"
                         >
                           DETAILS OF THE INCIDENT
                         </label>
                         <textarea
                           type="text"
-                          name="details"
-                          id="details"
+                          name="detailsOfIncident"
+                          id="detailsOfIncident"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="actionTaken"
+                          htmlFor="actionTakenToManageIncident"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ACTION TAKEN TO MANAGE
                         </label>
-                        <input
+                        <textarea
                           type="text"
-                          name="actionTaken"
-                          id="actionTaken"
-                          placeholder="120,540,482.00"
+                          name="actionTakenToManageIncident"
+                          id="actionTakenToManageIncident"
+                          required
+                          placeholder="Powering off network routers"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="incidentResDate"
+                          htmlFor="datetimeOfIncidentResolution"
                           className="text-nowrap font-semibold text-sm"
                         >
                           INCIDENT RESOLUTION DATE
                         </label>
                         <input
-                          type="date"
-                          name="incidentResDate"
-                          id="incidentResDate"
+                          type="datetime-local"
+                          name="datetimeOfIncidentResolution"
+                          id="datetimeOfIncidentResolution"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="mitigationAction"
+                          htmlFor="actionTakenToMitigateIncident"
                           className="text-nowrap font-semibold text-sm"
                         >
                           MITIGATION ACTION
                         </label>
                         <textarea
                           type="text"
-                          name="mitigationAction"
-                          id="mitigationAction"
+                          name="actionTakenToMitigateIncident"
+                          id="actionTakenToMitigateIncident"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -237,6 +266,7 @@ export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
                           placeholder="1,540,482"
                           className="outline-none border p-1.5 rounded"
                           min={0}
+                          required
                         />
                       </div>
 
@@ -254,6 +284,7 @@ export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
                           placeholder="54,048"
                           className="outline-none border p-1.5 rounded"
                           min={0}
+                          required
                         />
                       </div>
                     </div>
@@ -262,10 +293,11 @@ export default function AddPSPCybersecurityModal({ isOpen, setIsOpen }) {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        Save
+                        {loading ? "Saving..." : "Save"}
                       </button>
                     </div>
                   </form>
+                  {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

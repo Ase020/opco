@@ -2,7 +2,7 @@ const PSPScheduleOfTrusteesHeader = () => {
   return (
     <thead className="">
       <tr className="text-white">
-        <th className="border p-4 bg-[#04AA6D]">ROW_ID</th>
+        {/* <th className="border p-4 bg-[#04AA6D]">ROW_ID</th> */}
         <th className="border p-4 bg-[#04AA6D]">PSP_ID</th>
         <th className="border p-4 bg-[#04AA6D]">REPORTING_DATE</th>
         <th className="border p-4 bg-[#04AA6D]">TRUST_CO_NAME</th>

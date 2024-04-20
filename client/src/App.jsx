@@ -17,6 +17,7 @@ import {
   TrustAccountPlacement,
 } from "./pages";
 import {
+  cybersecurityIncidentLoader,
   fraudIncidentsLoader,
   mobilePSPLoader,
   trustAccDetailsLoader,
@@ -55,6 +56,7 @@ function App() {
         {
           path: "/psp-cybersecurity-incident-record",
           element: <PSPCybersecurity />,
+          loader: cybersecurityIncidentLoader,
         },
         {
           path: "/psp-incidents-of-fraud-theft-robbery",

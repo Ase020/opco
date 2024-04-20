@@ -8,6 +8,7 @@ import trustAccountRouter from "./routes/trustAccountRouter.route.js";
 import trustAccPlacementRouter from "./routes/trustAccPlacementRouter.route.js";
 import fraudIncidentRouter from "./routes/fraudIncident.route.js";
 import conterfeitCurrencyFraudRouter from "./routes/conterfeitCurrencyFraud.route.js";
+import cybersecurityIncidentRouter from "./routes/cybersecurityIncident.route.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(
   "/api/mobile-psp-counterfeit-currency-frauds",
   conterfeitCurrencyFraudRouter
 );
+app.use("/api/psp-cybersecurity-incident-record", cybersecurityIncidentRouter);
 
 app.listen(8800, () => {
   console.log("Server running!");

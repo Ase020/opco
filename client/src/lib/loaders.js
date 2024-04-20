@@ -37,3 +37,13 @@ export const mobilePSPLoader = async () => {
     mobilePSPResponse: mobilePSPPromise,
   });
 };
+
+export const cybersecurityIncidentLoader = async () => {
+  const cybersecurityIncidentPromise = apiRequest(
+    "/psp-cybersecurity-incident-record"
+  );
+
+  return defer({
+    cybersecurityIncidentResponse: cybersecurityIncidentPromise,
+  });
+};

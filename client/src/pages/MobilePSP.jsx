@@ -1,10 +1,10 @@
 import { Suspense, useState } from "react";
+import { Await, useLoaderData } from "react-router-dom";
 import {
   AddMobilePSPModal,
   MobilePSPHeader,
   MobilePSPRow,
 } from "../components";
-import { Await, useLoaderData } from "react-router-dom";
 
 const MobilePSP = () => {
   const mobilePSPs = useLoaderData();

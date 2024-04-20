@@ -91,3 +91,20 @@ model CounterfeitCurrencyFraud {
   remarks            String
   numberOfPieces     Int
 }
+
+model CybersecurityIncident {
+  rowId                         String   @id @default(auto()) @map("_id") @db.ObjectId
+  pspId                         String
+  reportingDate                 String
+  incidentNumber                String   @unique
+  locationOfAttacker            String
+  incidentMode                  String
+  datetimeOfIncident            DateTime @default(now())
+  lossType                      String
+  detailsOfIncident             String
+  actionTakenToManageIncident   String
+  datetimeOfIncidentResolution  DateTime @default(now())
+  actionTakenToMitigateIncident String
+  amountInvolved                Float
+  amountLost                    Float
+}
