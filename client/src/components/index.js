@@ -10,6 +10,8 @@ export { default as AddTrustAccPlacementModal } from "./modals/create/AddTrustAc
 
 export { default as EditTrustAccDetailsModal } from "./modals/edit/EditTrustAccDetailsModal";
 
+export { default as DeleteModal } from "./modals/delete/DeleteModal";
+
 export { default as Navbar } from "./Navbar";
 
 export { default as TrustAccDetailsHeader } from "./table/headers/TrustAccDetailsHeader";

@@ -1,17 +1,19 @@
 import { useState } from "react";
 import EditTrustAccDetailsModal from "../../modals/edit/EditTrustAccDetailsModal";
+import DeleteModal from "../../modals/delete/DeleteModal";
 
 /* eslint-disable react/prop-types */
 const TrustAccDetailsRow = ({ trustAcc }) => {
   let [isOpen, setIsOpen] = useState(false);
+  let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
 
-  const handleDelete = (rowId) => {
-    console.log("RowId: ", rowId);
-  };
+  function openDeleteModalModal() {
+    setIsDeleteModalOpen(true);
+  }
 
   return (
     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
@@ -46,13 +48,19 @@ const TrustAccDetailsRow = ({ trustAcc }) => {
         <button
           type="button"
           className="bg-red-400 border-none px-2.5 rounded text-white"
-          onClick={() => handleDelete(trustAcc.rowId)}
+          onClick={openDeleteModalModal}
         >
           Delete
         </button>
         <EditTrustAccDetailsModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
+          trustAcc={trustAcc}
+        />
+
+        <DeleteModal
+          isDeleteModalOpen={isDeleteModalOpen}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
           trustAcc={trustAcc}
         />
       </td>
