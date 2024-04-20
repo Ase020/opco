@@ -52,3 +52,26 @@ model TrustAccPlacement {
   catTrustFundInvestedAmt  Float  @default(0)
   interestAmtPerCat        Float  @default(0)
 }
+
+model FraudIncident {
+  rowId             String         @id @default(auto()) @map("_id") @db.ObjectId
+  pspId             String
+  reportingDate     String
+  subCountyCode     String
+  subFraudCode      String
+  fraudCategoryFlag String
+  victimCategory    String
+  victimInfo        String
+  dateOfOccurence   String
+  numberOfIncidents Int
+  amountInvolved    Float          @default(0)
+  amountLost        Float          @default(0)
+  amountRecovered   Float          @default(0)
+  actionTaken       String
+  recoveryDetails   RecoveryStatus
+}
+
+enum RecoveryStatus {
+  Complete
+  Incomplete
+}
