@@ -35,7 +35,7 @@ const TrustAccountPlacement = () => {
                   errorElement={
                     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
                       <td className="border py-2 px-1">
-                        Error loading trust accounts!
+                        Error loading trust account placements!
                       </td>
                     </tr>
                   }

@@ -16,7 +16,11 @@ import {
   TrustAccountDetails,
   TrustAccountPlacement,
 } from "./pages";
-import { trustAccDetailsLoader, trustAccPlacementsLoader } from "./lib/loaders";
+import {
+  fraudIncidentsLoader,
+  trustAccDetailsLoader,
+  trustAccPlacementsLoader,
+} from "./lib/loaders";
 
 function App() {
   const router = createBrowserRouter([
@@ -53,6 +57,7 @@ function App() {
         {
           path: "/psp-incidents-of-fraud-theft-robbery",
           element: <PSPIncidentFraud />,
+          loader: fraudIncidentsLoader,
         },
         {
           path: "/psp-schedule-of-directors",

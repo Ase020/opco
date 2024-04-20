@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { pSPIncidents } from ".";
+import { Suspense, useState } from "react";
 import {
   AddPSPIncidentFraudModal,
   PSPIncidentFraudHeader,
+  PSPIncidentFraudRow,
 } from "../components";
+import { Await, useLoaderData } from "react-router-dom";
 
 const PSPIncidentFraud = () => {
+  const fraudIncidents = useLoaderData();
+
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -24,48 +27,33 @@ const PSPIncidentFraud = () => {
             <PSPIncidentFraudHeader />
 
             <tbody>
-              {pSPIncidents.map((row) => (
-                <tr
-                  key={row.ROW_ID}
-                  className="even:bg-[#f2f2f2] hover:bg-[#ddd]"
+              <Suspense
+                fallback={
+                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                    <td className="border py-2 px-1">Loading...</td>
+                  </tr>
+                }
+              >
+                <Await
+                  resolve={fraudIncidents.fraudIncidentsResponse}
+                  errorElement={
+                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                      <td className="border py-2 px-1">
+                        Error loading fraud incidents!
+                      </td>
+                    </tr>
+                  }
                 >
-                  <td className="border py-2 px-1">{row.ROW_ID}</td>
-                  <td className="border py-2 px-1">{row.PSP_ID}</td>
-                  <td className="border py-2 px-1">{row.REPORTING_DATE}</td>
-                  <td className="border py-2 px-1">{row.SUB_COUNTY_CODE}</td>
-                  <td className="border py-2 px-1">{row.SUB_FRAUD_CODE}</td>
-                  <td className="border py-2 px-1">
-                    {row.FRAUD_CATEGORY_FLAG}
-                  </td>
-                  <td className="border py-2 px-1">{row.VICTIM_CATEGORY}</td>
-                  <td className="border py-2 px-1">{row.VICTIM_INFORMATION}</td>
-                  <td className="border py-2 px-1">{row.DATE_OF_OCCURRENCE}</td>
-                  <td className="border py-2">{row.NUMBER_OF_INCIDENCES}</td>
-                  <td className="border py-2">{row.AMOUNT_INVOLVED}</td>
-                  <td className="border py-2">{row.AMOUNT_LOST}</td>
-                  <td className="border py-2">{row.AMOUNT_RECOVERED}</td>
-                  <td className="border py-2">{row.ACTION_TAKEN}</td>
-                  <td className="border py-2">{row.RECOVERY_DETAILS}</td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-gray-400 border-none px-2.5 rounded text-white"
-                    >
-                      Edit
-                    </button>
-                  </td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-red-400 border-none px-2.5 rounded text-white"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                  {(fraudIncidentsResponse) =>
+                    fraudIncidentsResponse.data.map((incident) => (
+                      <PSPIncidentFraudRow
+                        key={incident.rowId}
+                        trustAcc={incident}
+                      />
+                    ))
+                  }
+                </Await>
+              </Suspense>
             </tbody>
           </table>
         </div>

@@ -4,7 +4,11 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../lib/apiRequest";
 
-export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
+export default function EditFraudIncidentsModal({
+  isOpen,
+  setIsOpen,
+  trustAcc,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -21,8 +25,8 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post(
-        "/psp-incidents-of-fraud-theft-robbery",
+      const response = await apiRequest.put(
+        `/psp-incidents-of-fraud-theft-robbery/${trustAcc.rowId}`,
         data
       );
       console.log("Fraud Incident: ", response.data);
@@ -66,7 +70,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a PSP Incident of fraud, theft, or robbery
+                    Edit Fraud Incident
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -81,7 +85,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="pspId"
                           id="pspId"
-                          placeholder="0800002"
+                          defaultValue={trustAcc.pspId}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -114,7 +118,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="subCountyCode"
                           id="subCountyCode"
-                          placeholder="141"
+                          defaultValue={trustAcc.subCountyCode}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -131,7 +135,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="subFraudCode"
                           id="subFraudCode"
-                          placeholder="CYBCRI"
+                          defaultValue={trustAcc.subFraudCode}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -149,6 +153,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           name="fraudCategoryFlag"
                           id="fraudCategoryFlag"
                           placeholder="FCT01"
+                          defaultValue={trustAcc.fraudCategoryFlag}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -165,7 +170,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="victimCategory"
                           id="victimCategory"
-                          placeholder="VCB"
+                          defaultValue={trustAcc.victimCategory}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -182,7 +187,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="victimInfo"
                           id="victimInfo"
-                          placeholder="VICT03"
+                          defaultValue={trustAcc.victimInfo}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -215,7 +220,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           type="number"
                           name="numberOfIncidents"
                           id="numberOfIncidents"
-                          defaultValue={1}
+                          defaultValue={trustAcc.numberOfIncidents}
                           min={1}
                           className="outline-none border p-1.5 rounded"
                           required
@@ -235,7 +240,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           id="amountInvolved"
                           placeholder="1,000,482"
                           min={10}
-                          defaultValue={10}
+                          defaultValue={trustAcc.amountInvolved}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -253,6 +258,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           id="amountLost"
                           placeholder="1,000,482"
                           min={0}
+                          defaultValue={trustAcc.amountLost}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -271,7 +277,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           id="amountRecovered"
                           placeholder="0"
                           min={0}
-                          defaultValue={0}
+                          defaultValue={trustAcc.amountRecovered}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -288,6 +294,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="actionTaken"
                           id="actionTaken"
+                          defaultValue={trustAcc.actionTaken}
                           className="outline-none border p-1.5 rounded"
                           required
                         />
@@ -305,6 +312,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                           name="recoveryDetails"
                           id="recoveryDetails"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.recoveryDetails}
                           required
                         >
                           <option value="Incomplete">Incomplete</option>
@@ -317,7 +325,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>

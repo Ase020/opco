@@ -17,3 +17,13 @@ export const trustAccPlacementsLoader = async () => {
     trustAccPlacementsResponse: trustAccPlacementsPromise,
   });
 };
+
+export const fraudIncidentsLoader = async () => {
+  const fraudIncidentsPromise = apiRequest(
+    "/psp-incidents-of-fraud-theft-robbery"
+  );
+
+  return defer({
+    fraudIncidentsResponse: fraudIncidentsPromise,
+  });
+};
