@@ -2,9 +2,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../lib/apiRequest";
+import apiRequest from "../../../lib/apiRequest";
 
-export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
+export default function EditTrustAccDetailsModal({
+  isOpen,
+  setIsOpen,
+  trustAcc,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -63,7 +67,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a Trust Account
+                    Edit Trust Account
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -78,8 +82,8 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="pspId"
                           id="pspId"
-                          placeholder="0800002"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.pspId}
                         />
                       </div>
 
@@ -94,8 +98,8 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="bankId"
                           id="bankId"
-                          placeholder="0000001"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.bankId}
                         />
                       </div>
 
@@ -125,8 +129,8 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="number"
                           name="bankAccNumber"
                           id="bankAccNumber"
-                          placeholder="440003475411"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.bankAccNumber}
                         />
                       </div>
 
@@ -141,8 +145,8 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="trustAccDrTypeCode"
                           id="trustAccDrTypeCode"
-                          placeholder="DBT01"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.trustAccDrTypeCode}
                         />
                       </div>
 
@@ -157,8 +161,8 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="orgReceivingDonation"
                           id="orgReceivingDonation"
-                          placeholder="Amref Health Africa"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.orgReceivingDonation}
                         />
                       </div>
 
@@ -175,7 +179,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           id="sectorCode"
                           placeholder="Sector Code"
                           className="outline-none border p-1.5 rounded"
-                          defaultValue=""
+                          defaultValue={trustAcc.sectorCode}
                         />
                       </div>
 
@@ -190,8 +194,8 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="trustAccIntUtilizedDetails"
                           id="trustAccIntUtilizedDetails"
-                          placeholder="DBT04"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.trustAccIntUtilizedDetails}
                         />
                       </div>
 
@@ -206,9 +210,9 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="number"
                           name="openingBal"
                           id="openingBal"
-                          placeholder="120,540,482.00"
                           min={0}
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.openingBal}
                         />
                       </div>
 
@@ -223,9 +227,9 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="number"
                           name="principalAmount"
                           id="principalAmount"
-                          placeholder="120,540,482.00"
                           className="outline-none border p-1.5 rounded"
                           min={0}
+                          defaultValue={trustAcc.principalAmount}
                         />
                       </div>
 
@@ -240,9 +244,9 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="number"
                           name="interestEarned"
                           id="interestEarned"
-                          placeholder="12,054,048.20"
                           className="outline-none border p-1.5 rounded"
                           min={0}
+                          defaultValue={trustAcc.interestEarned}
                         />
                       </div>
 
@@ -257,10 +261,9 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           type="number"
                           name="trustAccInterestUtilized"
                           id="trustAccInterestUtilized"
-                          placeholder="10,840,000"
                           className="outline-none border p-1.5 rounded"
                           min={0}
-                          defaultValue={0}
+                          defaultValue={trustAcc.trustAccInterestUtilized}
                         />
                       </div>
                     </div>

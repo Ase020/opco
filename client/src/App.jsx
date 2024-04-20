@@ -16,6 +16,7 @@ import {
   TrustAccountDetails,
   TrustAccountPlacement,
 } from "./pages";
+import { trustAccDetailsLoader } from "./lib/loaders";
 
 function App() {
   const router = createBrowserRouter([
@@ -72,6 +73,7 @@ function App() {
         {
           path: "/trust-account-details",
           element: <TrustAccountDetails />,
+          loader: trustAccDetailsLoader,
         },
         {
           path: "/trust-account-placement",
