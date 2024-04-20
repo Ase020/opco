@@ -9,3 +9,11 @@ export const trustAccDetailsLoader = async () => {
     trustAccDetailsResponse: trustAccDetailsPromise,
   });
 };
+
+export const trustAccPlacementsLoader = async () => {
+  const trustAccPlacementsPromise = apiRequest("/trust-account-placements");
+
+  return defer({
+    trustAccPlacementsResponse: trustAccPlacementsPromise,
+  });
+};

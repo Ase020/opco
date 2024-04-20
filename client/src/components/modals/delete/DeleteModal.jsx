@@ -6,7 +6,7 @@ import apiRequest from "../../../lib/apiRequest";
 export default function DeleteModal({
   isDeleteModalOpen,
   setIsDeleteModalOpen,
-  trustAcc,
+  endPoint,
 }) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,9 +15,9 @@ export default function DeleteModal({
     setIsDeleteModalOpen(false);
   }
 
-  async function handleDelete(rowId) {
+  async function handleDelete() {
     try {
-      await apiRequest.delete(`/trust-accounts/${rowId}`);
+      await apiRequest.delete(endPoint);
       setLoading(false);
       closeModal();
     } catch (error) {
@@ -71,7 +71,7 @@ export default function DeleteModal({
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-10 py-2 text-sm font-medium text-gray-900 hover:bg-red-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                      onClick={() => handleDelete(trustAcc.rowId)}
+                      onClick={handleDelete}
                     >
                       {loading ? "Deleting..." : "YES"}
                     </button>

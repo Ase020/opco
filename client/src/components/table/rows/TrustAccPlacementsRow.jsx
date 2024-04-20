@@ -1,9 +1,9 @@
 import { useState } from "react";
-import EditTrustAccDetailsModal from "../../modals/edit/EditTrustAccDetailsModal";
 import DeleteModal from "../../modals/delete/DeleteModal";
+import EditTrustAccPlacementsModal from "../../modals/edit/EditTrustAccPlacementsModal";
 
 /* eslint-disable react/prop-types */
-const TrustAccDetailsRow = ({ trustAcc }) => {
+const TrustAccPlacementsRow = ({ trustAcc }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -19,20 +19,11 @@ const TrustAccDetailsRow = ({ trustAcc }) => {
     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
       <td className="border py-2 px-4">{trustAcc.pspId}</td>
-      <td className="border py-2 px-4">{trustAcc.bankId}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4">{trustAcc.bankAccNumber}</td>
-      <td className="border py-2 px-4">{trustAcc.trustAccDrTypeCode}</td>
-      <td className="border py-2 px-4">{trustAcc.orgReceivingDonation}</td>
-      <td className="border py-2 px-4">{trustAcc.sectorCode}</td>
-      <td className="border py-2 px-4">
-        {trustAcc.trustAccIntUtilizedDetails}
-      </td>
-      <td className="border py-2 px-4">{trustAcc.openingBal}</td>
-      <td className="border py-2 px-4">{trustAcc.principalAmount}</td>
-      <td className="border py-2 px-4">{trustAcc.interestEarned}</td>
-      <td className="border py-2 px-4">{trustAcc.closingBal}</td>
-      <td className="border py-2 px-4">{trustAcc.trustAccInterestUtilized}</td>
+      <td className="border py-2 px-4">{trustAcc.trustFundPlacement}</td>
+      <td className="border py-2 px-4">{trustAcc.trustFundInvMaturityDate}</td>
+      <td className="border py-2 px-4">{trustAcc.catTrustFundInvestedAmt}</td>
+      <td className="border py-2 px-4">{trustAcc.interestAmtPerCat}</td>
 
       <td className="border py-2 text-center">
         <button
@@ -52,7 +43,7 @@ const TrustAccDetailsRow = ({ trustAcc }) => {
         >
           Delete
         </button>
-        <EditTrustAccDetailsModal
+        <EditTrustAccPlacementsModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -61,11 +52,11 @@ const TrustAccDetailsRow = ({ trustAcc }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/trust-accounts/${trustAcc.rowId}`}
+          endPoint={`/trust-account-placements/${trustAcc.rowId}`}
         />
       </td>
     </tr>
   );
 };
 
-export default TrustAccDetailsRow;
+export default TrustAccPlacementsRow;

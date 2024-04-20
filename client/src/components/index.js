@@ -9,10 +9,14 @@ export { default as AddScheduleOfTrusteesModal } from "./modals/create/AddSchedu
 export { default as AddTrustAccPlacementModal } from "./modals/create/AddTrustAccPlacementModal";
 
 export { default as EditTrustAccDetailsModal } from "./modals/edit/EditTrustAccDetailsModal";
+export { default as EditTrustAccPlacementsModal } from "./modals/edit/EditTrustAccPlacementsModal";
 
 export { default as DeleteModal } from "./modals/delete/DeleteModal";
 
 export { default as Navbar } from "./Navbar";
 
 export { default as TrustAccDetailsHeader } from "./table/headers/TrustAccDetailsHeader";
+export { default as TrustAccPlacementsHeader } from "./table/headers/TrustAccPlacementsHeader";
+
 export { default as TrustAccDetailsRow } from "./table/rows/TrustAccDetailsRow";
+export { default as TrustAccPlacementsRow } from "./table/rows/TrustAccPlacementsRow";

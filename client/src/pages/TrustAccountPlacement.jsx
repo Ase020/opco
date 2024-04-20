@@ -1,9 +1,14 @@
-import { useState } from "react";
-import { trustAccPlacement } from ".";
-import { AddTrustAccPlacementModal } from "../components";
+import { Suspense, useState } from "react";
+import {
+  AddTrustAccPlacementModal,
+  TrustAccPlacementsHeader,
+  TrustAccPlacementsRow,
+} from "../components";
+import { Await, useLoaderData } from "react-router-dom";
 
 const TrustAccountPlacement = () => {
   let [isOpen, setIsOpen] = useState(false);
+  const trustAccPlacements = useLoaderData();
 
   function openModal() {
     setIsOpen(true);
@@ -16,69 +21,37 @@ const TrustAccountPlacement = () => {
         <div className="overflow-x-auto">
           <table className="border-collapse w-full mb-10">
             <thead className="">
-              <tr className="text-white">
-                <th className="border p-4 bg-[#04AA6D]">ROW_ID</th>
-                <th className="border p-4 bg-[#04AA6D]">PSP_ID</th>
-                <th className="border p-4 bg-[#04AA6D]">REPORTING_DATE</th>
-                <th className="border p-4 bg-[#04AA6D]">
-                  TRUST_FUND_PLACEMENT
-                </th>
-                <th className="border p-4 bg-[#04AA6D]">
-                  TRUST_FUND_INV_MATURITY_DATE
-                </th>
-                <th className="border p-4 bg-[#04AA6D]">
-                  CAT_TRUST_FUND_INVESTED_AMT
-                </th>
-                <th className="border p-4 bg-[#04AA6D]">
-                  INTEREST_AMOUNT_PER_CATEGORY
-                </th>
-
-                <th className="border p-4 bg-[#04AA6D]">EDIT</th>
-                <th className="border p-4 bg-[#04AA6D]">DELETE</th>
-              </tr>
+              <TrustAccPlacementsHeader />
             </thead>
 
             <tbody>
-              {trustAccPlacement.map((row) => (
-                <tr
-                  key={row.ROW_ID}
-                  className="even:bg-[#f2f2f2] hover:bg-[#ddd]"
+              <Suspense
+                fallback={
+                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                    <td className="border py-2 px-1">Loading...</td>
+                  </tr>
+                }
+              >
+                <Await
+                  resolve={trustAccPlacements.trustAccPlacementsResponse}
+                  errorElement={
+                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                      <td className="border py-2 px-1">
+                        Error loading trust accounts!
+                      </td>
+                    </tr>
+                  }
                 >
-                  <td className="border py-2 px-1">{row.ROW_ID}</td>
-                  <td className="border py-2 px-1">{row.PSP_ID}</td>
-                  <td className="border py-2 px-1">{row.REPORTING_DATE}</td>
-                  <td className="border py-2 px-1">
-                    {row.TRUST_FUND_PLACEMENT}
-                  </td>
-                  <td className="border py-2 px-1">
-                    {row.TRUST_FUND_INV_MATURITY_DATE}
-                  </td>
-                  <td className="border py-2 px-1">
-                    {row.CAT_TRUST_FUND_INVESTED_AMT}
-                  </td>
-                  <td className="border py-2 px-1">
-                    {row.INTEREST_AMOUNT_PER_CATEGORY}
-                  </td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-gray-400 border-none px-2.5 rounded text-white"
-                    >
-                      Edit
-                    </button>
-                  </td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-red-400 border-none px-2.5 rounded text-white"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                  {(trustAccPlacementsResponse) =>
+                    trustAccPlacementsResponse.data.map((trustAcc) => (
+                      <TrustAccPlacementsRow
+                        key={trustAcc.rowId}
+                        trustAcc={trustAcc}
+                      />
+                    ))
+                  }
+                </Await>
+              </Suspense>
             </tbody>
           </table>
         </div>
