@@ -2,32 +2,32 @@ const PSPScheduleOfShareholdersHeader = () => {
   return (
     <thead className="">
       <tr className="text-white">
-        {/* <th className="border p-4 bg-[#04AA6D]">ROW_ID</th> */}
-        <th className="border p-4 bg-[#04AA6D]">PSP_ID</th>
-        <th className="border p-4 bg-[#04AA6D]">REPORTING_DATE</th>
-        <th className="border p-4 bg-[#04AA6D]">NAME</th>
-        <th className="border p-4 bg-[#04AA6D]">GENDER</th>
-        <th className="border p-4 bg-[#04AA6D]">SHAREHOLDER_TYPE</th>
-        <th className="border p-4 bg-[#04AA6D]">DOB/REG DATE</th>
-        <th className="border p-4 bg-[#04AA6D]">NATIONALITY OF SHAREHOLDER</th>
-        <th className="border p-4 bg-[#04AA6D]">COUNTRY OF RESIDENCE</th>
-        <th className="border p-4 bg-[#04AA6D]">COUNTRY OF INCORPORATION</th>
-        <th className="border p-4 bg-[#04AA6D]">ID/PASSPORT</th>
-        <th className="border p-4 bg-[#04AA6D]">PIN</th>
-        <th className="border p-4 bg-[#04AA6D]">CONTACT</th>
-        <th className="border p-4 bg-[#04AA6D]">
+        {/* <th className="border p-4 bg-red-400">ROW_ID</th> */}
+        <th className="border p-4 bg-red-400">PSP_ID</th>
+        <th className="border p-4 bg-red-400">REPORTING_DATE</th>
+        <th className="border p-4 bg-red-400">NAME</th>
+        <th className="border p-4 bg-red-400">GENDER</th>
+        <th className="border p-4 bg-red-400">SHAREHOLDER_TYPE</th>
+        <th className="border p-4 bg-red-400">DOB/REG DATE</th>
+        <th className="border p-4 bg-red-400">NATIONALITY OF SHAREHOLDER</th>
+        <th className="border p-4 bg-red-400">COUNTRY OF RESIDENCE</th>
+        <th className="border p-4 bg-red-400">COUNTRY OF INCORPORATION</th>
+        <th className="border p-4 bg-red-400">ID/PASSPORT</th>
+        <th className="border p-4 bg-red-400">PIN</th>
+        <th className="border p-4 bg-red-400">CONTACT</th>
+        <th className="border p-4 bg-red-400">
           ACADEMIC/PROFESSIONAL QUALIFICATIONS
         </th>
-        <th className="border p-4 bg-[#04AA6D]">
+        <th className="border p-4 bg-red-400">
           DETAILS OF PREVIOUS EMPLOYMENT
         </th>
-        <th className="border p-4 bg-[#04AA6D]">DATE ONE BECAME SHAREHOLDER</th>
-        <th className="border p-4 bg-[#04AA6D]">NUMBERS OF SHARES HELD</th>
-        <th className="border p-4 bg-[#04AA6D]">SHARE VALUE</th>
-        <th className="border p-4 bg-[#04AA6D]">PERCENTAGE OF SHARE</th>
+        <th className="border p-4 bg-red-400">DATE ONE BECAME SHAREHOLDER</th>
+        <th className="border p-4 bg-red-400">NUMBERS OF SHARES HELD</th>
+        <th className="border p-4 bg-red-400">SHARE VALUE</th>
+        <th className="border p-4 bg-red-400">PERCENTAGE OF SHARE</th>
 
-        <th className="border p-4 bg-[#04AA6D]">EDIT</th>
-        <th className="border p-4 bg-[#04AA6D]">DELETE</th>
+        <th className="border p-4 bg-red-400">EDIT</th>
+        <th className="border p-4 bg-red-400">DELETE</th>
       </tr>
     </thead>
   );

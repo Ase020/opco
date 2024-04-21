@@ -2,22 +2,22 @@ const MobilePSPHeader = () => {
   return (
     <thead className="">
       <tr className="text-white">
-        {/* <th className="border p-4 bg-[#04AA6D]">ROW_ID</th> */}
-        <th className="border p-4 bg-[#04AA6D]">PSP_ID</th>
-        <th className="border p-4 bg-[#04AA6D]">REPORTING_DATE</th>
-        <th className="border p-4 bg-[#04AA6D]">SUB_COUNTY_CODE</th>
-        <th className="border p-4 bg-[#04AA6D]">AGENT_ID</th>
-        <th className="border p-4 bg-[#04AA6D]">DENOMINATION_CODE</th>
-        <th className="border p-4 bg-[#04AA6D]">SERIAL_NO</th>
-        <th className="border p-4 bg-[#04AA6D]">DEPOSITOR</th>
-        <th className="border p-4 bg-[#04AA6D]">TELLER</th>
-        <th className="border p-4 bg-[#04AA6D]">DATE_CONFISCATED</th>
-        <th className="border p-4 bg-[#04AA6D]">DATE_SUBMITTED</th>
-        <th className="border p-4 bg-[#04AA6D]">REMARKS</th>
-        <th className="border p-4 bg-[#04AA6D]">PIECES</th>
+        {/* <th className="border p-4 bg-red-400">ROW_ID</th> */}
+        <th className="border p-4 bg-red-400">PSP_ID</th>
+        <th className="border p-4 bg-red-400">REPORTING_DATE</th>
+        <th className="border p-4 bg-red-400">SUB_COUNTY_CODE</th>
+        <th className="border p-4 bg-red-400">AGENT_ID</th>
+        <th className="border p-4 bg-red-400">DENOMINATION_CODE</th>
+        <th className="border p-4 bg-red-400">SERIAL_NO</th>
+        <th className="border p-4 bg-red-400">DEPOSITOR</th>
+        <th className="border p-4 bg-red-400">TELLER</th>
+        <th className="border p-4 bg-red-400">DATE_CONFISCATED</th>
+        <th className="border p-4 bg-red-400">DATE_SUBMITTED</th>
+        <th className="border p-4 bg-red-400">REMARKS</th>
+        <th className="border p-4 bg-red-400">PIECES</th>
 
-        <th className="border p-4 bg-[#04AA6D]">EDIT</th>
-        <th className="border p-4 bg-[#04AA6D]">DELETE</th>
+        <th className="border p-4 bg-red-400">EDIT</th>
+        <th className="border p-4 bg-red-400">DELETE</th>
       </tr>
     </thead>
   );
