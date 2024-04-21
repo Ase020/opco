@@ -9,10 +9,10 @@ const PSPScheduleOfTrusteesHeader = () => {
         <th className="border p-4 bg-[#04AA6D]">DIRECTOR_OF_TRUST_CO</th>
         <th className="border p-4 bg-[#04AA6D]">TRUSTEE</th>
         <th className="border p-4 bg-[#04AA6D]">TRUSTEE_GENDER</th>
-        <th className="border p-4 bg-[#04AA6D]">DOB</th>
+        <th className="border p-4 bg-[#04AA6D]">DATE OF BIRTH</th>
         <th className="border p-4 bg-[#04AA6D]">NATIONALITY</th>
         <th className="border p-4 bg-[#04AA6D]">COUNTRY_OF_RESIDENCE</th>
-        <th className="border p-4 bg-[#04AA6D]">ID/P</th>
+        <th className="border p-4 bg-[#04AA6D]">ID/PASSPORT</th>
         <th className="border p-4 bg-[#04AA6D]">PIN</th>
         <th className="border p-4 bg-[#04AA6D]">CONTACT</th>
         <th className="border p-4 bg-[#04AA6D]">

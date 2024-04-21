@@ -1,10 +1,11 @@
 import { Suspense, useState } from "react";
+import { Await, useLoaderData } from "react-router-dom";
+
 import {
   AddScheduleOfShareholdersModal,
   PSPScheduleOfShareholdersHeader,
   PSPScheduleOfShareholdersRow,
 } from "../components";
-import { Await, useLoaderData } from "react-router-dom";
 
 const PSPScheduleOfShareholders = () => {
   const shareholders = useLoaderData();
@@ -35,7 +36,7 @@ const PSPScheduleOfShareholders = () => {
                   errorElement={
                     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
                       <td className="border py-2 px-1">
-                        Error loading fraud incidents!
+                        Error loading shareholder data!
                       </td>
                     </tr>
                   }

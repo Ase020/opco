@@ -1,19 +1,34 @@
 /* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+
+import apiRequest from "../../../lib/apiRequest";
 
 export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
   function closeModal() {
     setIsOpen(false);
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setErr("");
+    setLoading(true);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    e.preventDefault();
-    setIsOpen(false);
 
-    console.log("Close", data);
+    try {
+      const response = await apiRequest.post("/psp-schedule-of-trustees", data);
+      console.log("Trustee: ", response.data);
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error) {
+      setErr(error.response.data.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,15 +69,16 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="psp"
+                          htmlFor="pspId"
                           className="text-nowrap font-semibold text-sm"
                         >
                           PSP ID
                         </label>
                         <input
                           type="text"
-                          name="psp"
-                          id="psp"
+                          name="pspId"
+                          id="pspId"
+                          required
                           placeholder="0800002"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -79,37 +95,40 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustCo"
+                          htmlFor="trustCompanyName"
                           className="text-nowrap font-semibold text-sm"
                         >
                           TRUST CO NAME
                         </label>
                         <input
                           type="text"
-                          name="trustCo"
-                          id="trustCo"
-                          placeholder=""
+                          name="trustCompanyName"
+                          id="trustCompanyName"
+                          required
+                          placeholder="Airtel Africa Co"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="director"
+                          htmlFor="directorsOfTrustCo"
                           className="text-nowrap font-semibold text-sm"
                         >
                           DIRECTOR OF TRUST CO
                         </label>
                         <input
                           type="text"
-                          name="director"
-                          id="director"
+                          name="directorsOfTrustCo"
+                          id="directorsOfTrustCo"
+                          required
                           placeholder="John Doe"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -117,15 +136,16 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustee"
+                          htmlFor="trusteeNames"
                           className="text-nowrap font-semibold text-sm"
                         >
                           TRUSTEE
                         </label>
                         <input
                           type="text"
-                          name="trustee"
-                          id="trustee"
+                          name="trusteeNames"
+                          id="trusteeNames"
+                          required
                           placeholder="John Doe"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -133,47 +153,50 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trusteeGender"
+                          htmlFor="trustGender"
                           className="text-nowrap font-semibold text-sm"
                         >
                           TRUSTEE&apos;S GENDER
                         </label>
                         <select
-                          name="trusteeGender"
-                          id="trusteeGender"
+                          name="trustGender"
+                          id="trustGender"
+                          required
                           className="outline-none border p-1.5 rounded"
                         >
-                          <option value="female">Female</option>
-                          <option value="male">Male</option>
+                          <option value="F">Female</option>
+                          <option value="M">Male</option>
                         </select>
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dob"
+                          htmlFor="dateOfBirth"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DOB
+                          DATE OF BIRTH
                         </label>
                         <input
                           type="date"
-                          name="dob"
-                          id="dob"
+                          name="dateOfBirth"
+                          id="dateOfBirth"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationality"
+                          htmlFor="nationalityOfTrustee"
                           className="text-nowrap font-semibold text-sm"
                         >
                           NATIONALITY
                         </label>
                         <input
                           type="text"
-                          name="nationality"
-                          id="nationality"
+                          name="nationalityOfTrustee"
+                          id="nationalityOfTrustee"
+                          required
                           placeholder="KE"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -181,15 +204,16 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="residence"
+                          htmlFor="residenceOfShareholder"
                           className="text-nowrap font-semibold text-sm"
                         >
                           COUNTRY OF RESIDENCE
                         </label>
                         <input
                           type="text"
-                          name="residence"
-                          id="residence"
+                          name="residenceOfShareholder"
+                          id="residenceOfShareholder"
+                          required
                           placeholder="KE"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -197,15 +221,16 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="passport"
+                          htmlFor="idNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ID/PASSPORT NUMBER
                         </label>
                         <input
                           type="text"
-                          name="passport"
-                          id="passport"
+                          name="idNumber"
+                          id="idNumber"
+                          required
                           placeholder="12345678"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -222,6 +247,7 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="kraPin"
                           id="kraPin"
+                          required
                           placeholder="A123456789Z"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -238,6 +264,7 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="contact"
                           id="contact"
+                          required
                           placeholder="254712345678"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -245,15 +272,16 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="academic"
+                          htmlFor="academicQualifications"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ACADEMIC/PROF QUALIFICATIONS
                         </label>
                         <input
                           type="text"
-                          name="academic"
-                          id="academic"
+                          name="academicQualifications"
+                          id="academicQualifications"
+                          required
                           placeholder="ELAC04"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -270,38 +298,37 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="otherTrusteeships"
                           id="otherTrusteeships"
-                          placeholder="ELAC04"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="disclosure"
+                          htmlFor="disclosureDetails"
                           className="text-nowrap font-semibold text-sm"
                         >
                           DISCLOSURE & TRANSPARENCY DETAILS
                         </label>
                         <textarea
                           type="text"
-                          name="disclosure"
-                          id="disclosure"
-                          placeholder="ELAC04"
+                          name="disclosureDetails"
+                          id="disclosureDetails"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareholderName"
+                          htmlFor="shareholderOfTrust"
                           className="text-nowrap font-semibold text-sm"
                         >
                           SHAREHOLDER NAME
                         </label>
                         <input
                           type="text"
-                          name="shareholderName"
-                          id="shareholderName"
+                          name="shareholderOfTrust"
+                          id="shareholderOfTrust"
+                          required
                           placeholder="Gabana Holdings"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -309,16 +336,18 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="sharePercentage"
+                          htmlFor="percentageOfShareholding"
                           className="text-nowrap font-semibold text-sm"
                         >
                           SHARES PERCENTAGE
                         </label>
                         <input
                           type="number"
-                          name="sharePercentage"
-                          id="sharePercentage"
+                          name="percentageOfShareholding"
+                          id="percentageOfShareholding"
                           placeholder="32"
+                          min={0}
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -328,10 +357,11 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        Save
+                        {loading ? "Saving..." : "Save"}
                       </button>
                     </div>
                   </form>
+                  {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

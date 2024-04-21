@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../modals/delete/DeleteModal";
-import EditFraudIncidentsModal from "../../modals/edit/EditFraudIncidentsModal";
+import EditPSPScheduleOfTrusteesModal from "../../modals/edit/EditPSPScheduleOfTrusteesModal";
 
 /* eslint-disable react/prop-types */
 const PSPScheduleOfTrusteesRow = ({ trustAcc }) => {
@@ -20,18 +20,39 @@ const PSPScheduleOfTrusteesRow = ({ trustAcc }) => {
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
       <td className="border py-2 px-4">{trustAcc.pspId}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4">{trustAcc.subCountyCode}</td>
-      <td className="border py-2 px-4">{trustAcc.subFraudCode}</td>
-      <td className="border py-2 px-4">{trustAcc.fraudCategoryFlag}</td>
-      <td className="border py-2 px-4">{trustAcc.victimCategory}</td>
-      <td className="border py-2 px-4">{trustAcc.victimInfo}</td>
-      <td className="border py-2 px-4">{trustAcc.dateOfOccurence}</td>
-      <td className="border py-2 px-4">{trustAcc.numberOfIncidents}</td>
-      <td className="border py-2 px-4">{trustAcc.amountInvolved}</td>
-      <td className="border py-2 px-4">{trustAcc.amountLost}</td>
-      <td className="border py-2 px-4">{trustAcc.amountRecovered}</td>
-      <td className="border py-2 px-4">{trustAcc.actionTaken}</td>
-      <td className="border py-2 px-4">{trustAcc.recoveryDetails}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.trustCompanyName}
+      </td>
+      <td className="border py-2 px-4 text-nowrap text-center">
+        {trustAcc.directorsOfTrustCo}
+      </td>
+      <td className="border py-2 px-4 text-nowrap text-center">
+        {trustAcc.trusteeNames}
+      </td>
+      <td className="border py-2 px-4 text-center">{trustAcc.trustGender}</td>
+      <td className="border py-2 px-4 text-center text-nowrap">
+        {trustAcc.dateOfBirth}
+      </td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.nationalityOfTrustee}
+      </td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.residenceOfShareholder}
+      </td>
+      <td className="border py-2 px-4">{trustAcc.idNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.kraPin}</td>
+      <td className="border py-2 px-4">{trustAcc.contact}</td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.academicQualifications}
+      </td>
+      <td className="border py-2 px-4">{trustAcc.otherTrusteeships}</td>
+      <td className="border py-2 px-4">{trustAcc.disclosureDetails}</td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.shareholderOfTrust}
+      </td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.percentageOfShareholding}%
+      </td>
 
       <td className="border py-2 text-center">
         <button
@@ -51,7 +72,7 @@ const PSPScheduleOfTrusteesRow = ({ trustAcc }) => {
         >
           Delete
         </button>
-        <EditFraudIncidentsModal
+        <EditPSPScheduleOfTrusteesModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -60,7 +81,7 @@ const PSPScheduleOfTrusteesRow = ({ trustAcc }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/psp-incidents-of-fraud-theft-robbery/${trustAcc.rowId}`}
+          endPoint={`/psp-schedule-of-trustees/${trustAcc.rowId}`}
         />
       </td>
     </tr>

@@ -38,7 +38,7 @@ const PSPScheduleOfSeniorMgt = () => {
                   errorElement={
                     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
                       <td className="border py-2 px-1">
-                        Error senior managers!
+                        Error senior manager data!
                       </td>
                     </tr>
                   }

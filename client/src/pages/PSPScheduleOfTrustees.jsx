@@ -1,11 +1,15 @@
-import { useState } from "react";
-import { scheduleOfTrustees } from ".";
+import { Suspense, useState } from "react";
+import { Await, useLoaderData } from "react-router-dom";
+
 import {
   AddScheduleOfTrusteesModal,
-  PSPScheduleOfDirectorsHeader,
+  PSPScheduleOfTrusteesHeader,
+  PSPScheduleOfTrusteesRow,
 } from "../components";
 
 const PSPScheduleOfTrustees = () => {
+  const trustees = useLoaderData();
+
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -18,54 +22,36 @@ const PSPScheduleOfTrustees = () => {
 
         <div className="overflow-x-auto">
           <table className="border-collapse w-full mb-10">
-            <PSPScheduleOfDirectorsHeader />
+            <PSPScheduleOfTrusteesHeader />
 
             <tbody>
-              {scheduleOfTrustees.map((row) => (
-                <tr
-                  key={row.ROW_ID}
-                  className="even:bg-[#f2f2f2] hover:bg-[#ddd]"
+              <Suspense
+                fallback={
+                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                    <td className="border py-2 px-1">Loading...</td>
+                  </tr>
+                }
+              >
+                <Await
+                  resolve={trustees.scheduleOfTrusteesResponse}
+                  errorElement={
+                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                      <td className="border py-2 px-1">
+                        Error loading trustee data!
+                      </td>
+                    </tr>
+                  }
                 >
-                  <td className="border py-2 px-1">{row.ROW_ID}</td>
-                  <td className="border py-2 px-1">{row.PSP_ID}</td>
-                  <td className="border py-2 px-1">{row.REPORTING_DATE}</td>
-                  <td className="border py-2 px-1">{row.TRUST_CO_NAME}</td>
-                  <td className="border py-2 px-1">
-                    {row.DIRECTOR_OF_TRUST_CO}
-                  </td>
-                  <td className="border py-2 px-1">{row.TRUSTEE}</td>
-                  <td className="border py-2 px-1">{row.TRUSTEE_GENDER}</td>
-                  <td className="border py-2 px-1">{row.DOB}</td>
-                  <td className="border py-2 px-1">{row.NATIONALITY}</td>
-                  <td className="border py-2">{row.COUNTRY_OF_RESIDENCE}</td>
-                  <td className="border py-2">{row.ID}</td>
-                  <td className="border py-2">{row.PIN}</td>
-                  <td className="border py-2">{row.CONTACT}</td>
-                  <td className="border py-2">{row.ACADEMIC}</td>
-                  <td className="border py-2">{row.OTHER_TRUSTEESHIPS}</td>
-                  <td className="border py-2">{row.DISCLOSURE}</td>
-                  <td className="border py-2">{row.SHAREHOLDER}</td>
-                  <td className="border py-2">{row.PERCENTAGE_OF_SHARE}</td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-gray-400 border-none px-2.5 rounded text-white"
-                    >
-                      Edit
-                    </button>
-                  </td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-red-400 border-none px-2.5 rounded text-white"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                  {(scheduleOfTrusteesResponse) =>
+                    scheduleOfTrusteesResponse.data.map((incident) => (
+                      <PSPScheduleOfTrusteesRow
+                        key={incident.rowId}
+                        trustAcc={incident}
+                      />
+                    ))
+                  }
+                </Await>
+              </Suspense>
             </tbody>
           </table>
         </div>

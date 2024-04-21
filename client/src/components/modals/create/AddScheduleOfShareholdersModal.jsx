@@ -22,7 +22,7 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
 
     try {
       const response = await apiRequest.post(
-        "/psp-schedule-of-Shareholders",
+        "/psp-schedule-of-shareholders",
         data
       );
       console.log("Shareholder: ", response.data);

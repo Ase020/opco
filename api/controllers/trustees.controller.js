@@ -11,11 +11,11 @@ export const getTrustees = async (req, res) => {
     if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
-    const trustAccounts = await prisma.trustAcc.findMany();
+    const allTrustees = await prisma.trustee.findMany();
 
-    res.status(200).json(trustAccounts);
+    res.status(200).json(allTrustees);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch Trust Accounts!", error });
+    res.status(500).json({ message: "Failed to fetch Trustees!", error });
   }
 };
 
@@ -31,13 +31,13 @@ export const getTrustee = async (req, res) => {
     if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
-    const trustAccount = await prisma.trustAcc.findUnique({
+    const oneTrustee = await prisma.trustee.findUnique({
       where: { rowId },
     });
 
-    res.status(200).json(trustAccount);
+    res.status(200).json(oneTrustee);
   } catch (error) {
-    res.status(500).json({ message: "Failed to fetch Trust Account!", error });
+    res.status(500).json({ message: "Failed to fetch Trustee!", error });
   }
 };
 
@@ -45,17 +45,22 @@ export const getTrustee = async (req, res) => {
 export const createTrustee = async (req, res) => {
   const {
     pspId,
-    bankId,
     reportingDate,
-    bankAccNumber,
-    trustAccDrTypeCode,
-    orgReceivingDonation,
-    sectorCode = "",
-    trustAccIntUtilizedDetails,
-    openingBal,
-    principalAmount,
-    interestEarned,
-    trustAccInterestUtilized,
+    trustCompanyName,
+    directorsOfTrustCo,
+    trusteeNames,
+    trustGender,
+    dateOfBirth,
+    nationalityOfTrustee,
+    residenceOfShareholder,
+    idNumber,
+    kraPin,
+    contact,
+    academicQualifications,
+    otherTrusteeships,
+    disclosureDetails,
+    shareholderOfTrust,
+    percentageOfShareholding,
   } = req.body;
   // const tokenUserId = req.userId;
   const token = req.cookies?.token;
@@ -67,27 +72,31 @@ export const createTrustee = async (req, res) => {
     if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
-    const newTrustAcc = await prisma.trustAcc.create({
+    const newTrustee = await prisma.trustee.create({
       data: {
         pspId,
-        bankId,
         reportingDate,
-        bankAccNumber,
-        trustAccDrTypeCode,
-        orgReceivingDonation,
-        sectorCode,
-        trustAccIntUtilizedDetails,
-        openingBal: parseFloat(openingBal),
-        principalAmount: parseFloat(principalAmount),
-        interestEarned: parseFloat(interestEarned),
-        closingBal: parseFloat(principalAmount) + parseFloat(interestEarned),
-        trustAccInterestUtilized: parseFloat(trustAccInterestUtilized),
+        trustCompanyName,
+        directorsOfTrustCo,
+        trusteeNames,
+        trustGender,
+        dateOfBirth,
+        nationalityOfTrustee,
+        residenceOfShareholder,
+        idNumber,
+        kraPin,
+        contact,
+        academicQualifications,
+        otherTrusteeships,
+        disclosureDetails,
+        shareholderOfTrust,
+        percentageOfShareholding: parseFloat(percentageOfShareholding),
       },
     });
 
-    res.status(201).json(newTrustAcc);
+    res.status(201).json(newTrustee);
   } catch (error) {
-    res.status(500).json({ message: "Failed to create Trust Account!", error });
+    res.status(500).json({ message: "Failed to create Trustee!", error });
   }
 };
 
@@ -96,17 +105,22 @@ export const updateTrustee = async (req, res) => {
   const rowId = req.params.rowId;
   const {
     pspId,
-    bankId,
     reportingDate,
-    bankAccNumber,
-    trustAccDrTypeCode,
-    orgReceivingDonation,
-    sectorCode = "",
-    trustAccIntUtilizedDetails,
-    openingBal,
-    principalAmount,
-    interestEarned,
-    trustAccInterestUtilized,
+    trustCompanyName,
+    directorsOfTrustCo,
+    trusteeNames,
+    trustGender,
+    dateOfBirth,
+    nationalityOfTrustee,
+    residenceOfShareholder,
+    idNumber,
+    kraPin,
+    contact,
+    academicQualifications,
+    otherTrusteeships,
+    disclosureDetails,
+    shareholderOfTrust,
+    percentageOfShareholding,
   } = req.body;
 
   const token = req.cookies?.token;
@@ -118,30 +132,34 @@ export const updateTrustee = async (req, res) => {
     if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
-    const updatedTrustAcc = await prisma.trustAcc.update({
+    const updatedTrustee = await prisma.trustee.update({
       where: { rowId },
       data: {
         pspId,
-        bankId,
         reportingDate,
-        bankAccNumber,
-        trustAccDrTypeCode,
-        orgReceivingDonation,
-        sectorCode,
-        trustAccIntUtilizedDetails,
-        openingBal: parseFloat(openingBal),
-        principalAmount: parseFloat(principalAmount),
-        interestEarned: parseFloat(interestEarned),
-        closingBal: parseFloat(principalAmount) + parseFloat(interestEarned),
-        trustAccInterestUtilized: parseFloat(trustAccInterestUtilized),
+        trustCompanyName,
+        directorsOfTrustCo,
+        trusteeNames,
+        trustGender,
+        dateOfBirth,
+        nationalityOfTrustee,
+        residenceOfShareholder,
+        idNumber,
+        kraPin,
+        contact,
+        academicQualifications,
+        otherTrusteeships,
+        disclosureDetails,
+        shareholderOfTrust,
+        percentageOfShareholding: parseFloat(percentageOfShareholding),
       },
     });
 
     res
       .status(202)
-      .json({ message: "Account updated successfully!", updatedTrustAcc });
+      .json({ message: "Trustee updated successfully!", updatedTrustee });
   } catch (error) {
-    res.status(500).json({ message: "Failed to update trust account!", error });
+    res.status(500).json({ message: "Failed to update Trustee!", error });
   }
 };
 
@@ -157,12 +175,12 @@ export const deleteTrustee = async (req, res) => {
     if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
-    await prisma.trustAcc.delete({
+    await prisma.trustee.delete({
       where: { rowId },
     });
 
-    res.status(204).json({ message: "Trust account deleted successfully!" });
+    res.status(204).json({ message: "Trustee deleted successfully!" });
   } catch (error) {
-    res.status(500).json({ message: "Failed to delete trust account!" });
+    res.status(500).json({ message: "Failed to delete Trustee!" });
   }
 };
