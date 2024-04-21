@@ -1,19 +1,37 @@
 /* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+
+import apiRequest from "../../../lib/apiRequest";
 
 export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
   function closeModal() {
     setIsOpen(false);
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setErr("");
+    setLoading(true);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    e.preventDefault();
-    setIsOpen(false);
 
-    console.log("Close", data);
+    try {
+      const response = await apiRequest.post(
+        "/psp-schedule-of-Shareholders",
+        data
+      );
+      console.log("Shareholder: ", response.data);
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error) {
+      setErr(error.response.data.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,15 +72,16 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="psp"
+                          htmlFor="pspId"
                           className="text-nowrap font-semibold text-sm"
                         >
                           PSP ID
                         </label>
                         <input
                           type="text"
-                          name="psp"
-                          id="psp"
+                          name="pspId"
+                          id="pspId"
+                          required
                           placeholder="0800002"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -79,6 +98,7 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -94,6 +114,7 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="shareholderName"
                           id="shareholderName"
+                          required
                           placeholder="Gabana Holdings"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -101,19 +122,20 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="gender"
+                          htmlFor="shareholderGender"
                           className="text-nowrap font-semibold text-sm"
                         >
                           GENDER
                         </label>
                         <select
-                          name="gender"
-                          id="gender"
+                          name="shareholderGender"
+                          id="shareholderGender"
+                          required
                           className="outline-none border p-1.5 rounded"
                         >
-                          <option value="company">Company</option>
-                          <option value="female">Female</option>
-                          <option value="male">Male</option>
+                          <option value="C">Company</option>
+                          <option value="F">Female</option>
+                          <option value="M">Male</option>
                         </select>
                       </div>
 
@@ -128,40 +150,42 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="shareholderType"
                           id="shareholderType"
-                          placeholder="ETC01"
+                          required
                           className="outline-none border p-1.5 rounded"
                         >
-                          <option value="corporate">Corporate</option>
-                          <option value="individual">Individual</option>
+                          <option value="Corporate">Corporate</option>
+                          <option value="Individual">Individual</option>
                         </select>
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dob"
+                          htmlFor="dateOfBirth"
                           className="text-nowrap font-semibold text-sm"
                         >
                           DOB/REG DATE
                         </label>
                         <input
                           type="date"
-                          name="dob"
-                          id="dob"
+                          name="dateOfBirth"
+                          id="dateOfBirth"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationality"
+                          htmlFor="nationalityOfShareholder"
                           className="text-nowrap font-semibold text-sm"
                         >
                           NATIONALITY OF SHAREHOLDER
                         </label>
                         <input
                           type="text"
-                          name="nationality"
-                          id="nationality"
+                          name="nationalityOfShareholder"
+                          id="nationalityOfShareholder"
+                          required
                           placeholder="KE"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -169,15 +193,16 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="residence"
+                          htmlFor="residenceOfShareholder"
                           className="text-nowrap font-semibold text-sm"
                         >
                           COUNTRY OF RESIDENCE
                         </label>
                         <input
                           type="text"
-                          name="residence"
-                          id="residence"
+                          name="residenceOfShareholder"
+                          id="residenceOfShareholder"
+                          required
                           placeholder="KE"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -185,15 +210,16 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="incorporation"
+                          htmlFor="countryOfIncorporation"
                           className="text-nowrap font-semibold text-sm"
                         >
                           COUNTRY OF INCORPORATION
                         </label>
                         <input
                           type="text"
-                          name="incorporation"
-                          id="incorporation"
+                          name="countryOfIncorporation"
+                          id="countryOfIncorporation"
+                          required
                           placeholder="KE"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -201,15 +227,16 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="passport"
+                          htmlFor="idNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ID/PASSPORT NUMBER
                         </label>
                         <input
                           type="text"
-                          name="passport"
-                          id="passport"
+                          name="idNumber"
+                          id="idNumber"
+                          required
                           placeholder="12345678"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -226,6 +253,7 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="kraPin"
                           id="kraPin"
+                          required
                           placeholder="A123456789Z"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -242,6 +270,7 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="contact"
                           id="contact"
+                          required
                           placeholder="254712345678"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -249,15 +278,15 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="academic"
+                          htmlFor="academicQualifications"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ACADEMIC/PROF QUALIFICATIONS
                         </label>
-                        <input
+                        <textarea
                           type="text"
-                          name="academic"
-                          id="academic"
+                          name="academicQualifications"
+                          id="academicQualifications"
                           placeholder="ELAC04"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -265,46 +294,47 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="otherDetails"
+                          htmlFor="previousEmployment"
                           className="text-nowrap font-semibold text-sm"
                         >
                           PREVIOUS EMPLOYMENT
                         </label>
                         <input
                           type="text"
-                          name="otherDetails"
-                          id="otherDetails"
-                          placeholder="ELAC04"
+                          name="previousEmployment"
+                          id="previousEmployment"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="appointmentDate"
+                          htmlFor="dateBecameShareholder"
                           className="text-nowrap font-semibold text-sm"
                         >
                           DATE OF APPOINTMENT
                         </label>
                         <input
                           type="date"
-                          name="appointmentDate"
-                          id="appointmentDate"
+                          name="dateBecameShareholder"
+                          id="dateBecameShareholder"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="sharesHeld"
+                          htmlFor="numberOfShareHeld"
                           className="text-nowrap font-semibold text-sm"
                         >
                           SHARES HELD
                         </label>
                         <input
-                          type="text"
-                          name="sharesHeld"
-                          id="sharesHeld"
+                          type="number"
+                          name="numberOfShareHeld"
+                          id="numberOfShareHeld"
+                          min={1}
                           placeholder="72"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -318,7 +348,7 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
                           SHARES VALUE
                         </label>
                         <input
-                          type="number"
+                          type="text"
                           name="shareValue"
                           id="shareValue"
                           placeholder="720000000"
@@ -328,16 +358,17 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="sharePercentage"
+                          htmlFor="percentageOfShare"
                           className="text-nowrap font-semibold text-sm"
                         >
                           SHARES PERCENTAGE
                         </label>
                         <input
                           type="number"
-                          name="sharePercentage"
-                          id="sharePercentage"
+                          name="percentageOfShare"
+                          id="percentageOfShare"
                           placeholder="32"
+                          min={0}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -347,10 +378,12 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        Save
+                        {loading ? "Saving..." : "Save"}
                       </button>
                     </div>
                   </form>
+
+                  {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

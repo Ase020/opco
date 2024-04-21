@@ -78,7 +78,7 @@ function App() {
           loader: scheduleOfSeniorMgtLoader,
         },
         {
-          path: "/psp-schedule-of-Shareholders",
+          path: "/psp-schedule-of-shareholders",
           element: <PSPScheduleOfShareholders />,
           loader: scheduleOfShareholdersLoader,
         },

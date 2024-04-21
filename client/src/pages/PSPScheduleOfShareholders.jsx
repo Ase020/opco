@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { scheduleOfShareholders } from ".";
+import { Suspense, useState } from "react";
 import {
   AddScheduleOfShareholdersModal,
   PSPScheduleOfShareholdersHeader,
+  PSPScheduleOfShareholdersRow,
 } from "../components";
+import { Await, useLoaderData } from "react-router-dom";
 
 const PSPScheduleOfShareholders = () => {
+  const shareholders = useLoaderData();
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -21,60 +23,33 @@ const PSPScheduleOfShareholders = () => {
             <PSPScheduleOfShareholdersHeader />
 
             <tbody>
-              {scheduleOfShareholders.map((row) => (
-                <tr
-                  key={row.ROW_ID}
-                  className="even:bg-[#f2f2f2] hover:bg-[#ddd]"
+              <Suspense
+                fallback={
+                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                    <td className="border py-2 px-1">Loading...</td>
+                  </tr>
+                }
+              >
+                <Await
+                  resolve={shareholders.scheduleOfShareholdersResponse}
+                  errorElement={
+                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
+                      <td className="border py-2 px-1">
+                        Error loading fraud incidents!
+                      </td>
+                    </tr>
+                  }
                 >
-                  <td className="border py-2 px-1">{row.ROW_ID}</td>
-                  <td className="border py-2 px-1">{row.PSP_ID}</td>
-                  <td className="border py-2 px-1">{row.REPORTING_DATE}</td>
-                  <td className="border py-2 px-1">{row.SHAREHOLDER_NAME}</td>
-                  <td className="border py-2 px-1">{row.SHAREHOLDER_GENDER}</td>
-                  <td className="border py-2 px-1">{row.SHAREHOLDER_TYPE}</td>
-                  <td className="border py-2 px-1">{row.DOB}</td>
-                  <td className="border py-2 px-1">
-                    {row.NATIONALITY_OF_SHAREHOLDER}
-                  </td>
-                  <td className="border py-2 px-1">
-                    {row.COUNTRY_OF_RESIDENCE}
-                  </td>
-                  <td className="border py-2">
-                    {row.COUNTRY_OF_INCORPORATION}
-                  </td>
-                  <td className="border py-2">{row.ID}</td>
-                  <td className="border py-2">{row.PIN}</td>
-                  <td className="border py-2">{row.CONTACT}</td>
-                  <td className="border py-2">{row.ACADEMIC}</td>
-                  <td className="border py-2">
-                    {row.DETAILS_OF_PREVIOUS_EMPLOYMENT}
-                  </td>
-                  <td className="border py-2">
-                    {row.DATE_ONE_BECAME_SHAREHOLDER}
-                  </td>
-                  <td className="border py-2">{row.NUMBERS_OF_SHARES_HELD}</td>
-                  <td className="border py-2">{row.SHARE_VALUE}</td>
-                  <td className="border py-2">{row.PERCENTAGE_OF_SHARE}</td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-gray-400 border-none px-2.5 rounded text-white"
-                    >
-                      Edit
-                    </button>
-                  </td>
-
-                  <td className="border py-2 text-center">
-                    <button
-                      type="button"
-                      className="bg-red-400 border-none px-2.5 rounded text-white"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                  {(scheduleOfShareholdersResponse) =>
+                    scheduleOfShareholdersResponse.data.map((incident) => (
+                      <PSPScheduleOfShareholdersRow
+                        key={incident.rowId}
+                        trustAcc={incident}
+                      />
+                    ))
+                  }
+                </Await>
+              </Suspense>
             </tbody>
           </table>
         </div>
