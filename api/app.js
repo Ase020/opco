@@ -9,6 +9,10 @@ import trustAccPlacementRouter from "./routes/trustAccPlacementRouter.route.js";
 import fraudIncidentRouter from "./routes/fraudIncident.route.js";
 import conterfeitCurrencyFraudRouter from "./routes/conterfeitCurrencyFraud.route.js";
 import cybersecurityIncidentRouter from "./routes/cybersecurityIncident.route.js";
+import shareholdersRouter from "./routes/shareholders.route.js";
+import directorsRouter from "./routes/directors.route.js";
+import trusteesRouter from "./routes/trustees.route.js";
+import seniorMgtRouter from "./routes/seniorMgt.route.js";
 
 const app = express();
 
@@ -26,6 +30,10 @@ app.use(
   conterfeitCurrencyFraudRouter
 );
 app.use("/api/psp-cybersecurity-incident-record", cybersecurityIncidentRouter);
+app.use("/api/psp-schedule-of-shareholders", shareholdersRouter);
+app.use("/api/psp-schedule-of-directors", directorsRouter);
+app.use("/api/psp-schedule-of-trustees", trusteesRouter);
+app.use("/api/psp-schedule-of-senior-management", seniorMgtRouter);
 
 app.listen(8800, () => {
   console.log("Server running!");

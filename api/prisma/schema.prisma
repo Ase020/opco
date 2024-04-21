@@ -108,3 +108,107 @@ model CybersecurityIncident {
   amountInvolved                Float
   amountLost                    Float
 }
+
+model Director {
+  rowId                  String       @id @default(auto()) @map("_id") @db.ObjectId
+  pspId                  String
+  reportingDate          String
+  directorName           String       @unique
+  directorGender         Gender
+  directorType           DirectorType
+  dateOfBirth            String
+  nationalityOfDirector  String
+  residenceOfDirector    String
+  idNumber               String       @unique
+  kraPin                 String       @unique
+  contact                String
+  academicQualifications String
+  otherDirectorships     String
+  dateOfAppointment      String
+  dateOfRetirement       String
+  reasonForRetirement    String
+  disclosureDetails      String
+}
+
+enum Gender {
+  M
+  F
+}
+
+enum DirectorType {
+  EXECUTIVE
+  NONEXECUTIVE
+}
+
+model Shareholder {
+  rowId                    String            @id @default(auto()) @map("_id") @db.ObjectId
+  pspId                    String
+  reportingDate            String
+  shareholderName          String            @unique
+  shareholderGender        ShareholderGender
+  shareholderType          ShareholderType
+  dateOfBirth              String
+  nationalityOfShareholder String
+  residenceOfShareholder   String
+  countryOfIncorporation   String
+  idNumber                 String            @unique
+  kraPin                   String            @unique
+  contact                  String
+  academicQualifications   String
+  previousEmployment       String
+  dateBecameShareholder    String
+  numberOfShareHeld        Int
+  shareValue               Float
+  percentageOfShare        Float
+}
+
+enum ShareholderGender {
+  C
+  M
+  F
+}
+
+enum ShareholderType {
+  Corporate
+  Individual
+}
+
+model Trustee {
+  rowId                    String @id @default(auto()) @map("_id") @db.ObjectId
+  pspId                    String
+  reportingDate            String
+  trustCompanyName         String @unique
+  directorsOfTrustCo       String
+  trusteeNames             String
+  trustGender              Gender
+  dateOfBirth              String
+  nationalityOfTrustee     String
+  residenceOfShareholder   String
+  idNumber                 String @unique
+  kraPin                   String @unique
+  contact                  String
+  academicQualifications   String
+  otherTrusteeships        String
+  disclosureDetails        String
+  shareholderOfTrust       String
+  percentageOfShareholding Float
+}
+
+model SeniorMgt {
+  rowId                    String @id @default(auto()) @map("_id") @db.ObjectId
+  pspId                    String
+  reportingDate            String
+  officerName              String @unique
+  officerGender            Gender
+  designation              String
+  dateOfBirth              String
+  nationalityOfOfficer     String
+  idNumber                 String @unique
+  kraPin                   String @unique
+  academicQualifications   String
+  dateOfEmployment         String
+  employmentType           String
+  expectedDateOfRetirement String
+  otherAffiliations        String
+  disclosureDetails        String
+}
