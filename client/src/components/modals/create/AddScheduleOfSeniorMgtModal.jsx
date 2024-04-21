@@ -1,19 +1,37 @@
 /* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+
+import apiRequest from "../../../lib/apiRequest";
 
 export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
   function closeModal() {
     setIsOpen(false);
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setErr("");
+    setLoading(true);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    e.preventDefault();
-    setIsOpen(false);
 
-    console.log("Close", data);
+    try {
+      const response = await apiRequest.post(
+        "/psp-schedule-of-senior-management",
+        data
+      );
+      console.log("Director: ", response.data);
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error) {
+      setErr(error.response.data.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,15 +72,16 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="psp"
+                          htmlFor="pspId"
                           className="text-nowrap font-semibold text-sm"
                         >
                           PSP ID
                         </label>
                         <input
                           type="text"
-                          name="psp"
-                          id="psp"
+                          name="pspId"
+                          id="pspId"
+                          required
                           placeholder="0800002"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -79,6 +98,7 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -94,6 +114,7 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="officerName"
                           id="officerName"
+                          required
                           placeholder="John Doe"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -101,18 +122,19 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="directorGender"
+                          htmlFor="officerGender"
                           className="text-nowrap font-semibold text-sm"
                         >
                           GENDER
                         </label>
                         <select
-                          name="directorGender"
-                          id="directorGender"
+                          name="officerGender"
+                          id="officerGender"
+                          required
                           className="outline-none border p-1.5 rounded"
                         >
-                          <option value="female">Female</option>
-                          <option value="male">Male</option>
+                          <option value="F">Female</option>
+                          <option value="M">Male</option>
                         </select>
                       </div>
 
@@ -127,6 +149,7 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="designation"
                           id="designation"
+                          required
                           placeholder="Chief Executive Officer"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -134,30 +157,32 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dob"
+                          htmlFor="dateOfBirth"
                           className="text-nowrap font-semibold text-sm"
                         >
                           DATE OF BIRTH
                         </label>
                         <input
                           type="date"
-                          name="dob"
-                          id="dob"
+                          name="dateOfBirth"
+                          id="dateOfBirth"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationality"
+                          htmlFor="nationalityOfOfficer"
                           className="text-nowrap font-semibold text-sm"
                         >
                           NATIONALITY
                         </label>
                         <input
                           type="text"
-                          name="nationality"
-                          id="nationality"
+                          name="nationalityOfOfficer"
+                          id="nationalityOfOfficer"
+                          required
                           placeholder="KE"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -165,15 +190,16 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="passport"
+                          htmlFor="idNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ID/PASSPORT NUMBER
                         </label>
                         <input
                           type="text"
-                          name="passport"
-                          id="passport"
+                          name="idNumber"
+                          id="idNumber"
+                          required
                           placeholder="12345678"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -190,6 +216,7 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
                           type="text"
                           name="kraPin"
                           id="kraPin"
+                          required
                           placeholder="A123456789Z"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -197,15 +224,15 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="academic"
+                          htmlFor="academicQualifications"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ACADEMIC/PROF QUALIFICATIONS
                         </label>
                         <input
                           type="text"
-                          name="academic"
-                          id="academic"
+                          name="academicQualifications"
+                          id="academicQualifications"
                           placeholder="ELAC04"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -213,15 +240,16 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="employmentDate"
+                          htmlFor="dateOfEmployment"
                           className="text-nowrap font-semibold text-sm"
                         >
                           DATE OF EMPLOYMENT
                         </label>
                         <input
                           type="date"
-                          name="employmentDate"
-                          id="employmentDate"
+                          name="dateOfEmployment"
+                          id="dateOfEmployment"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -238,52 +266,53 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
                           name="employmentType"
                           id="employmentType"
                           placeholder="ETC01"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="retirementDate"
+                          htmlFor="expectedDateOfRetirement"
                           className="text-nowrap font-semibold text-sm"
                         >
                           EXP. DATE OF RETIREMENT
                         </label>
                         <input
                           type="date"
-                          name=" retirementDate"
-                          id=" retirementDate"
+                          name="expectedDateOfRetirement"
+                          id="expectedDateOfRetirement"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="affiliations"
+                          htmlFor="otherAffiliations"
                           className="text-nowrap font-semibold text-sm"
                         >
                           OTHER AFFILIATIONS
                         </label>
-                        <input
+                        <textarea
                           type="text"
-                          name="affiliations"
-                          id="affiliations"
-                          placeholder=""
+                          name="otherAffiliations"
+                          id="otherAffiliations"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="disclosure"
-                          className="text-nowrap font-semibold text-sm"
+                          htmlFor="disclosureDetails"
+                          className="text-wrap font-semibold text-sm"
                         >
                           DISCLOSURE & TRANSPARENCY DETAILS
                         </label>
                         <textarea
                           type="text"
-                          name="disclosure"
-                          id="disclosure"
+                          name="disclosureDetails"
+                          id="disclosureDetails"
                           placeholder="ELAC04"
                           className="outline-none border p-1.5 rounded"
                         />
@@ -294,10 +323,12 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        Save
+                        {loading ? "Saving..." : "Save"}
                       </button>
                     </div>
                   </form>
+
+                  {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

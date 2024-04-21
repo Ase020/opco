@@ -113,21 +113,21 @@ model Director {
   rowId                  String       @id @default(auto()) @map("_id") @db.ObjectId
   pspId                  String
   reportingDate          String
-  directorName           String       @unique
+  directorName           String
   directorGender         Gender
   directorType           DirectorType
   dateOfBirth            String
   nationalityOfDirector  String
   residenceOfDirector    String
-  idNumber               String       @unique
-  kraPin                 String       @unique
+  idNumber               String
+  kraPin                 String
   contact                String
-  academicQualifications String
-  otherDirectorships     String
+  academicQualifications String?      @default("")
+  otherDirectorships     String?      @default("N/A")
   dateOfAppointment      String
-  dateOfRetirement       String
-  reasonForRetirement    String
-  disclosureDetails      String
+  dateOfRetirement       String?      @default("")
+  reasonForRetirement    String?      @default("")
+  disclosureDetails      String?      @default("")
 }
 
 enum Gender {
@@ -144,18 +144,18 @@ model Shareholder {
   rowId                    String            @id @default(auto()) @map("_id") @db.ObjectId
   pspId                    String
   reportingDate            String
-  shareholderName          String            @unique
+  shareholderName          String
   shareholderGender        ShareholderGender
   shareholderType          ShareholderType
   dateOfBirth              String
   nationalityOfShareholder String
   residenceOfShareholder   String
   countryOfIncorporation   String
-  idNumber                 String            @unique
-  kraPin                   String            @unique
+  idNumber                 String
+  kraPin                   String
   contact                  String
-  academicQualifications   String
-  previousEmployment       String
+  academicQualifications   String?           @default("")
+  previousEmployment       String?           @default("")
   dateBecameShareholder    String
   numberOfShareHeld        Int
   shareValue               Float
@@ -174,41 +174,41 @@ enum ShareholderType {
 }
 
 model Trustee {
-  rowId                    String @id @default(auto()) @map("_id") @db.ObjectId
+  rowId                    String  @id @default(auto()) @map("_id") @db.ObjectId
   pspId                    String
   reportingDate            String
-  trustCompanyName         String @unique
+  trustCompanyName         String
   directorsOfTrustCo       String
   trusteeNames             String
   trustGender              Gender
   dateOfBirth              String
   nationalityOfTrustee     String
   residenceOfShareholder   String
-  idNumber                 String @unique
-  kraPin                   String @unique
+  idNumber                 String
+  kraPin                   String
   contact                  String
   academicQualifications   String
-  otherTrusteeships        String
-  disclosureDetails        String
+  otherTrusteeships        String? @default("")
+  disclosureDetails        String? @default("")
   shareholderOfTrust       String
   percentageOfShareholding Float
 }
 
 model SeniorMgt {
-  rowId                    String @id @default(auto()) @map("_id") @db.ObjectId
+  rowId                    String  @id @default(auto()) @map("_id") @db.ObjectId
   pspId                    String
   reportingDate            String
-  officerName              String @unique
+  officerName              String
   officerGender            Gender
   designation              String
   dateOfBirth              String
   nationalityOfOfficer     String
-  idNumber                 String @unique
-  kraPin                   String @unique
-  academicQualifications   String
+  idNumber                 String
+  kraPin                   String
+  academicQualifications   String? @default("")
   dateOfEmployment         String
   employmentType           String
   expectedDateOfRetirement String
-  otherAffiliations        String
-  disclosureDetails        String
+  otherAffiliations        String? @default("N/A")
+  disclosureDetails        String? @default("")
 }

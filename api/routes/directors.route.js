@@ -13,7 +13,7 @@ const directorsRouter = express.Router();
 directorsRouter.get("/", verifyToken, getDirectors);
 directorsRouter.get("/:rowId", verifyToken, getDirector);
 directorsRouter.post("/", verifyToken, createDirector);
-directorsRouter.put("/:rowId", verifyToken, updateDirector);
+directorsRouter.patch("/:rowId", verifyToken, updateDirector);
 directorsRouter.delete("/:rowId", verifyToken, deleteDirector);
 
 export default directorsRouter;

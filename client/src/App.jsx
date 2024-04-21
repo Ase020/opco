@@ -20,6 +20,10 @@ import {
   cybersecurityIncidentLoader,
   fraudIncidentsLoader,
   mobilePSPLoader,
+  scheduleOfDirectorsLoader,
+  scheduleOfSeniorMgtLoader,
+  scheduleOfShareholdersLoader,
+  scheduleOfTrusteesLoader,
   trustAccDetailsLoader,
   trustAccPlacementsLoader,
 } from "./lib/loaders";
@@ -66,18 +70,22 @@ function App() {
         {
           path: "/psp-schedule-of-directors",
           element: <PSPScheduleOfDirectors />,
+          loader: scheduleOfDirectorsLoader,
         },
         {
           path: "/psp-schedule-of-senior-management",
           element: <PSPScheduleOfSeniorMgt />,
+          loader: scheduleOfSeniorMgtLoader,
         },
         {
           path: "/psp-schedule-of-Shareholders",
           element: <PSPScheduleOfShareholders />,
+          loader: scheduleOfShareholdersLoader,
         },
         {
           path: "/psp-schedule-of-trustees",
           element: <PSPScheduleOfTrustees />,
+          loader: scheduleOfTrusteesLoader,
         },
         {
           path: "/trust-account-details",

@@ -28,7 +28,7 @@ export { default as MobilePSPHeader } from "./table/headers/MobilePSPHeader";
 export { default as PSPCybersecurityHeader } from "./table/headers/PSPCybersecurityHeader";
 export { default as PSPIncidentFraudHeader } from "./table/headers/PSPIncidentFraudHeader";
 export { default as PSPScheduleOfDirectorsHeader } from "./table/headers/PSPScheduleOfDirectorsHeader";
-export { default as PSPScheduleOfSeniorMgtHeader } from "./table/headers/PSPScheduleOfDirectorsHeader";
+export { default as PSPScheduleOfSeniorMgtHeader } from "./table/headers/PSPScheduleOfSeniorMgtHeader";
 export { default as PSPScheduleOfShareholdersHeader } from "./table/headers/PSPScheduleOfShareholdersHeader";
 export { default as PSPScheduleOfTrusteesHeader } from "./table/headers/PSPScheduleOfTrusteesHeader";
 

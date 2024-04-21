@@ -8,7 +8,7 @@ const PSPScheduleOfSeniorMgtHeader = () => {
         <th className="border p-4 bg-[#04AA6D]">OFFICER_NAME</th>
         <th className="border p-4 bg-[#04AA6D]">GENDER</th>
         <th className="border p-4 bg-[#04AA6D]">DESIGNATION</th>
-        <th className="border p-4 bg-[#04AA6D]">DOB</th>
+        <th className="border p-4 bg-[#04AA6D]">DATE OF BIRTH</th>
         <th className="border p-4 bg-[#04AA6D]">NATIONALITY</th>
         <th className="border p-4 bg-[#04AA6D]">ID/P</th>
         <th className="border p-4 bg-[#04AA6D]">PIN</th>

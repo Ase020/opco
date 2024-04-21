@@ -25,14 +25,13 @@ export default function EditPSPScheduleOfDirectorsModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.put(
-        `/trust-accounts/${trustAcc.rowId}`,
+      const response = await apiRequest.patch(
+        `/psp-schedule-of-directors/${trustAcc.rowId}`,
         data
       );
-      console.log("Trust Acc Details: ", response.data);
+      console.log("Director: ", response.data);
       setLoading(false);
       setIsOpen(false);
-      // console.log("Edit Data: ", data);
     } catch (error) {
       setErr(error.response.data.message);
       setLoading(false);
@@ -71,7 +70,7 @@ export default function EditPSPScheduleOfDirectorsModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Edit Trust Account
+                    Edit Director Details
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -86,24 +85,9 @@ export default function EditPSPScheduleOfDirectorsModal({
                           type="text"
                           name="pspId"
                           id="pspId"
-                          className="outline-none border p-1.5 rounded"
+                          required
                           defaultValue={trustAcc.pspId}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="bankId"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          BANK ID
-                        </label>
-                        <input
-                          type="text"
-                          name="bankId"
-                          id="bankId"
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.bankId}
                         />
                       </div>
 
@@ -118,157 +102,258 @@ export default function EditPSPScheduleOfDirectorsModal({
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
-                          className="outline-none border p-1.5 rounded"
                           required
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="bankAccNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          BANK ACCOUNT
-                        </label>
-                        <input
-                          type="number"
-                          name="bankAccNumber"
-                          id="bankAccNumber"
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.bankAccNumber}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustAccDrTypeCode"
+                          htmlFor="directorName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUST ACC TYPE CODE
+                          DIRECTOR&apos;S NAME
                         </label>
                         <input
                           type="text"
-                          name="trustAccDrTypeCode"
-                          id="trustAccDrTypeCode"
+                          name="directorName"
+                          id="directorName"
+                          required
+                          defaultValue={trustAcc.directorName}
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.trustAccDrTypeCode}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="orgReceivingDonation"
+                          htmlFor="directorGender"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          ORG RECEIVING DONATION
+                          DIRECTOR&apos;S GENDER
+                        </label>
+                        <select
+                          name="directorGender"
+                          id="directorGender"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        >
+                          <option value="F">Female</option>
+                          <option value="M">Male</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="directorType"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DIRECTOR TYPE
+                        </label>
+
+                        <select
+                          name="directorType"
+                          id="directorType"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        >
+                          <option value="EXECUTIVE">Executive</option>
+                          <option value="NONEXECUTIVE">Non-Executive</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateOfBirth"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE OF BIRTH
+                        </label>
+                        <input
+                          type="date"
+                          name="dateOfBirth"
+                          id="dateOfBirth"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="nationalityOfDirector"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          NATIONALITY OF DIRECTOR
                         </label>
                         <input
                           type="text"
-                          name="orgReceivingDonation"
-                          id="orgReceivingDonation"
+                          name="nationalityOfDirector"
+                          id="nationalityOfDirector"
+                          defaultValue={trustAcc.nationalityOfDirector}
+                          required
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.orgReceivingDonation}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="sectorCode"
+                          htmlFor="residenceOfDirector"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SECTOR CODE
+                          COUNTRY OF RESIDENCE
                         </label>
                         <input
                           type="text"
-                          name="sectorCode"
-                          id="sectorCode"
-                          placeholder="Sector Code"
+                          name="residenceOfDirector"
+                          id="residenceOfDirector"
+                          defaultValue={trustAcc.residenceOfDirector}
+                          required
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.sectorCode}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustAccIntUtilizedDetails"
+                          htmlFor="idNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUST ACC INT UTILIZED
+                          ID/PASSPORT NUMBER
                         </label>
                         <input
                           type="text"
-                          name="trustAccIntUtilizedDetails"
-                          id="trustAccIntUtilizedDetails"
+                          name="idNumber"
+                          id="idNumber"
+                          required
+                          defaultValue={trustAcc.idNumber}
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.trustAccIntUtilizedDetails}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="openingBal"
+                          htmlFor="kraPin"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          OPENING BALANCE
+                          KRA PIN NUMBER
                         </label>
                         <input
-                          type="number"
-                          name="openingBal"
-                          id="openingBal"
-                          min={0}
+                          type="text"
+                          name="kraPin"
+                          id="kraPin"
+                          required
+                          defaultValue={trustAcc.kraPin}
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.openingBal}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="principalAmount"
+                          htmlFor="contact"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PRINCIPAL AMOUNT
+                          CONTACT
                         </label>
                         <input
-                          type="number"
-                          name="principalAmount"
-                          id="principalAmount"
+                          type="text"
+                          name="contact"
+                          id="contact"
+                          required
+                          defaultValue={trustAcc.contact}
                           className="outline-none border p-1.5 rounded"
-                          min={0}
-                          defaultValue={trustAcc.principalAmount}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="interestEarned"
+                          htmlFor="academicQualifications"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INTEREST EARNED
+                          ACADEMIC/PROF QUALIFICATIONS
                         </label>
                         <input
-                          type="number"
-                          name="interestEarned"
-                          id="interestEarned"
+                          type="text"
+                          name="academicQualifications"
+                          id="academicQualifications"
+                          defaultValue={trustAcc.academicQualifications}
                           className="outline-none border p-1.5 rounded"
-                          min={0}
-                          defaultValue={trustAcc.interestEarned}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustAccInterestUtilized"
+                          htmlFor="otherDirectorships"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INTEREST UTILIZED
+                          OTHER DIRECTORSHIPS
+                        </label>
+                        <textarea
+                          type="text"
+                          name="otherDirectorships"
+                          id="otherDirectorships"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.otherDirectorships}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateOfAppointment"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE OF APPOINTMENT
                         </label>
                         <input
-                          type="number"
-                          name="trustAccInterestUtilized"
-                          id="trustAccInterestUtilized"
+                          type="date"
+                          name="dateOfAppointment"
+                          id="dateOfAppointment"
+                          required
                           className="outline-none border p-1.5 rounded"
-                          min={0}
-                          defaultValue={trustAcc.trustAccInterestUtilized}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateOfRetirement"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE OF RETIREMENT
+                        </label>
+                        <input
+                          type="date"
+                          name=" dateOfRetirement"
+                          id=" dateOfRetirement"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="reasonForRetirement"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          REASON FOR RETIREMENT
+                        </label>
+                        <textarea
+                          type="text"
+                          name="reasonForRetirement"
+                          id="reasonForRetirement"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.reasonForRetirement}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="disclosureDetails"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DISCLOSURE & TRANSPARENCY DETAILS
+                        </label>
+                        <textarea
+                          type="text"
+                          name="disclosureDetails"
+                          id="disclosureDetails"
+                          defaultValue={trustAcc.disclosureDetails}
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
                     </div>

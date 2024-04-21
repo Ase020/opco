@@ -47,3 +47,39 @@ export const cybersecurityIncidentLoader = async () => {
     cybersecurityIncidentResponse: cybersecurityIncidentPromise,
   });
 };
+
+export const scheduleOfDirectorsLoader = async () => {
+  const scheduleOfDirectorsPromise = apiRequest("/psp-schedule-of-directors");
+
+  return defer({
+    scheduleOfDirectorsResponse: scheduleOfDirectorsPromise,
+  });
+};
+
+export const scheduleOfShareholdersLoader = async () => {
+  const scheduleOfShareholdersPromise = apiRequest(
+    "/psp-schedule-of-shareholders"
+  );
+
+  return defer({
+    scheduleOfShareholdersResponse: scheduleOfShareholdersPromise,
+  });
+};
+
+export const scheduleOfTrusteesLoader = async () => {
+  const scheduleOfTrusteesPromise = apiRequest("/psp-schedule-of-trustees");
+
+  return defer({
+    scheduleOfTrusteesResponse: scheduleOfTrusteesPromise,
+  });
+};
+
+export const scheduleOfSeniorMgtLoader = async () => {
+  const scheduleOfSeniorMgtPromise = apiRequest(
+    "/psp-schedule-of-senior-management"
+  );
+
+  return defer({
+    scheduleOfSeniorMgtResponse: scheduleOfSeniorMgtPromise,
+  });
+};
