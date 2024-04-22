@@ -15,6 +15,7 @@ import {
   Signup,
   TrustAccountDetails,
   TrustAccountPlacement,
+  UserApprovals,
   VerificationNotification,
 } from "./pages";
 import {
@@ -57,6 +58,10 @@ function App() {
       path: "/",
       element: <RequireAuthLayout />,
       children: [
+        {
+          path: "/user-approvals",
+          element: <UserApprovals />,
+        },
         {
           path: "/mobile-psp-counterfeit-currency-frauds",
           element: <MobilePSP />,

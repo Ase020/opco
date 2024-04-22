@@ -21,6 +21,8 @@ export { default as EditPSPScheduleOfTrusteesModal } from "./modals/edit/EditPSP
 export { default as DeleteModal } from "./modals/delete/DeleteModal";
 
 export { default as Navbar } from "./Navbar";
+export { default as ProfileDropdown } from "./ProfileDropdown";
+export { default as User } from "./User";
 
 export { default as TrustAccDetailsHeader } from "./table/headers/TrustAccDetailsHeader";
 export { default as TrustAccPlacementsHeader } from "./table/headers/TrustAccPlacementsHeader";

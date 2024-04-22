@@ -12,6 +12,7 @@ export { default as PSPScheduleOfShareholders } from "./PSPScheduleOfShareholder
 export { default as PSPScheduleOfTrustees } from "./PSPScheduleOfTrustees";
 export { default as TrustAccountDetails } from "./TrustAccountDetails";
 export { default as TrustAccountPlacement } from "./TrustAccountPlacement";
+export { default as UserApprovals } from "./UserApprovals";
 export { default as VerificationNotification } from "./VerificationNotification";
 
 export const navLinks = [

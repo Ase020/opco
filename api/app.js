@@ -13,6 +13,7 @@ import shareholdersRouter from "./routes/shareholders.route.js";
 import directorsRouter from "./routes/directors.route.js";
 import trusteesRouter from "./routes/trustees.route.js";
 import seniorMgtRouter from "./routes/seniorMgt.route.js";
+import userRouter from "./routes/user.route.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
+app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/trust-accounts", trustAccountRouter);
 app.use("/api/trust-account-placements", trustAccPlacementRouter);
