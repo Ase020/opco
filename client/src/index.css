@@ -7,3 +7,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+@layer base {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}

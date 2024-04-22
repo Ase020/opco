@@ -20,7 +20,7 @@ const Signup = () => {
       const response = await apiRequest.post("/auth/signup", userData);
 
       console.log("User Data: ", response.data);
-      navigate("/login");
+      navigate("/verification-notification");
     } catch (error) {
       console.error("Error: ", error);
       setErr(error.response.data.message);

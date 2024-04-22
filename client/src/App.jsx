@@ -15,6 +15,7 @@ import {
   Signup,
   TrustAccountDetails,
   TrustAccountPlacement,
+  VerificationNotification,
 } from "./pages";
 import {
   cybersecurityIncidentLoader,
@@ -45,6 +46,10 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/verification-notification",
+          element: <VerificationNotification />,
         },
       ],
     },
