@@ -23,7 +23,7 @@ const TrustAccountDetails = () => {
       const trustAccountsData = await apiRequest.get("/trust-accounts");
       setTrustAccounts(trustAccountsData.data);
     } catch (error) {
-      console.error(error);
+      console.log("Error: ", error.response.data.message);
     }
   };
 
