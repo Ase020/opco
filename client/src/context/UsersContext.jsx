@@ -31,12 +31,29 @@ export const UsersContextProvider = ({ children }) => {
     }
   };
 
+  const deleteUser = async (userId) => {
+    try {
+      await apiRequest.delete(`/users/${userId}`);
+
+      fetchData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const verifiedUsers = users.filter((user) => user.verified);
   const unverifiedUsers = users.filter((user) => !user.verified);
 
   return (
     <UsersContext.Provider
-      value={{ users, setUsers, verifiedUsers, unverifiedUsers, verifyUser }}
+      value={{
+        users,
+        setUsers,
+        verifiedUsers,
+        unverifiedUsers,
+        verifyUser,
+        deleteUser,
+      }}
     >
       {children}
     </UsersContext.Provider>

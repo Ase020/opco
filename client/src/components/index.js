@@ -19,6 +19,7 @@ export { default as EditPSPScheduleOfShareholdersModal } from "./modals/edit/Edi
 export { default as EditPSPScheduleOfTrusteesModal } from "./modals/edit/EditPSPScheduleOfTrusteesModal";
 
 export { default as DeleteModal } from "./modals/delete/DeleteModal";
+export { default as DeleteUserModal } from "./modals/delete/DeleteUserModal";
 
 export { default as Navbar } from "./Navbar";
 export { default as ProfileDropdown } from "./ProfileDropdown";

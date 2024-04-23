@@ -14,10 +14,26 @@ const Signup = () => {
     setErr("");
     setLoading(true);
     const formData = new FormData(e.target);
-    const userData = Object.fromEntries(formData);
+
+    const email = formData.get("email");
+    const username = formData.get("username");
+    const userType = formData.get("userType");
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirmPassword");
+
+    if (password !== confirmPassword) {
+      setErr("Password must be same as Confirm Password!");
+      setLoading(false);
+      throw new Error("Password must be same as Confirm Password!");
+    }
 
     try {
-      const response = await apiRequest.post("/auth/signup", userData);
+      const response = await apiRequest.post("/auth/signup", {
+        email,
+        username,
+        userType,
+        password,
+      });
 
       console.log("User Data: ", response.data);
       navigate("/verification-notification");
@@ -79,6 +95,7 @@ const Signup = () => {
             <option value="trust">Trust</option>
             <option value="security">Security</option>
             <option value="cyber">Cybersecurity</option>
+            <option value="legal">Legal</option>
             <option value="am">Airtel Money</option>
             <option value="superAdmin">Super Admin</option>
           </select>

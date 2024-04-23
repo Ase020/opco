@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 
 import { UsersContext } from "../context/UsersContext";
+import DeleteUserModal from "./modals/delete/DeleteUserModal";
 
 export default function User({ user }) {
   const { verifyUser } = useContext(UsersContext);
+  let [isOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
 
   return (
     <div className="border p-2 rounded-lg flex justify-between">
@@ -31,9 +37,12 @@ export default function User({ user }) {
         <button
           type="button"
           className="px-4 py-1.5 rounded-lg bg-red-400 hover:bg-red-500 text-white"
+          onClick={openModal}
         >
           Delete
         </button>
+
+        <DeleteUserModal isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
       </div>
     </div>
   );
