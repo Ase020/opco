@@ -80,6 +80,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           id="pspId"
                           placeholder="0800002"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -96,6 +97,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           id="bankId"
                           placeholder="0000001"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -128,6 +130,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           id="bankAccNumber"
                           placeholder="440003475411"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -144,6 +147,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           id="trustAccDrTypeCode"
                           placeholder="DBT01"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -160,6 +164,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           id="orgReceivingDonation"
                           placeholder="Amref Health Africa"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -193,6 +198,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           id="trustAccIntUtilizedDetails"
                           placeholder="DBT04"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -210,6 +216,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           placeholder="120,540,482.00"
                           min={0}
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -227,6 +234,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           placeholder="120,540,482.00"
                           className="outline-none border p-1.5 rounded"
                           min={0}
+                          required
                         />
                       </div>
 
@@ -244,6 +252,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
                           placeholder="12,054,048.20"
                           className="outline-none border p-1.5 rounded"
                           min={0}
+                          required
                         />
                       </div>
 

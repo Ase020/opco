@@ -24,7 +24,6 @@ const Login = () => {
       updateUser(response.data.userData);
       navigate("/");
     } catch (error) {
-      console.error("Error: ", error);
       setErr(error.response.data.message);
     } finally {
       setLoading(false);
@@ -73,7 +72,9 @@ const Login = () => {
           {loading ? "Logging in..." : "Login"}
         </button>
 
-        <p className="mx-auto italic font-medium text-red-500">{err}</p>
+        <p className="mx-auto italic font-medium text-center text-red-500">
+          {err}
+        </p>
       </form>
     </section>
   );

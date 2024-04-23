@@ -13,6 +13,10 @@ export const confirmUserData = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(500).json({ message: "Login Failed. Try again!" });
+    res
+      .status(500)
+      .json({
+        message: "User account not verified! Contact your administrator.",
+      });
   }
 };

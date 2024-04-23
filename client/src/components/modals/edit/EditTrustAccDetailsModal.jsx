@@ -32,7 +32,6 @@ export default function EditTrustAccDetailsModal({
       console.log("Trust Acc Details: ", response.data);
       setLoading(false);
       setIsOpen(false);
-      // console.log("Edit Data: ", data);
     } catch (error) {
       setErr(error.response.data.message);
       setLoading(false);
@@ -88,6 +87,7 @@ export default function EditTrustAccDetailsModal({
                           id="pspId"
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.pspId}
+                          required
                         />
                       </div>
 
@@ -104,6 +104,7 @@ export default function EditTrustAccDetailsModal({
                           id="bankId"
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.bankId}
+                          required
                         />
                       </div>
 
@@ -136,6 +137,7 @@ export default function EditTrustAccDetailsModal({
                           id="bankAccNumber"
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.bankAccNumber}
+                          required
                         />
                       </div>
 
@@ -152,6 +154,7 @@ export default function EditTrustAccDetailsModal({
                           id="trustAccDrTypeCode"
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.trustAccDrTypeCode}
+                          required
                         />
                       </div>
 
@@ -168,6 +171,7 @@ export default function EditTrustAccDetailsModal({
                           id="orgReceivingDonation"
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.orgReceivingDonation}
+                          required
                         />
                       </div>
 
@@ -201,6 +205,7 @@ export default function EditTrustAccDetailsModal({
                           id="trustAccIntUtilizedDetails"
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.trustAccIntUtilizedDetails}
+                          required
                         />
                       </div>
 
@@ -218,6 +223,7 @@ export default function EditTrustAccDetailsModal({
                           min={0}
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.openingBal}
+                          required
                         />
                       </div>
 
@@ -235,6 +241,7 @@ export default function EditTrustAccDetailsModal({
                           className="outline-none border p-1.5 rounded"
                           min={0}
                           defaultValue={trustAcc.principalAmount}
+                          required
                         />
                       </div>
 
@@ -252,6 +259,7 @@ export default function EditTrustAccDetailsModal({
                           className="outline-none border p-1.5 rounded"
                           min={0}
                           defaultValue={trustAcc.interestEarned}
+                          required
                         />
                       </div>
 
@@ -269,6 +277,7 @@ export default function EditTrustAccDetailsModal({
                           className="outline-none border p-1.5 rounded"
                           min={0}
                           defaultValue={trustAcc.trustAccInterestUtilized}
+                          required
                         />
                       </div>
                     </div>

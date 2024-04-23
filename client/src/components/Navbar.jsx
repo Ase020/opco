@@ -9,7 +9,9 @@ const Navbar = () => {
 
   return (
     <div className="max-w-[1440px] mx-auto py-10 px-6 flex items-center justify-between">
-      <Link to="/">Home</Link>
+      <Link to="/">
+        <img src="/logo.png" alt="logo" className="w-20" />
+      </Link>
 
       <div className="flex items-center gap-4">
         {currentUser ? (

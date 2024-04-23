@@ -23,7 +23,9 @@ const TrustAccDetailsRow = ({ trustAcc }) => {
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
       <td className="border py-2 px-4">{trustAcc.bankAccNumber}</td>
       <td className="border py-2 px-4">{trustAcc.trustAccDrTypeCode}</td>
-      <td className="border py-2 px-4">{trustAcc.orgReceivingDonation}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.orgReceivingDonation}
+      </td>
       <td className="border py-2 px-4">{trustAcc.sectorCode}</td>
       <td className="border py-2 px-4">
         {trustAcc.trustAccIntUtilizedDetails}
