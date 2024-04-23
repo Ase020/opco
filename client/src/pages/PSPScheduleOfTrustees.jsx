@@ -1,20 +1,35 @@
-import { Suspense, useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import {
   AddScheduleOfTrusteesModal,
   PSPScheduleOfTrusteesHeader,
   PSPScheduleOfTrusteesRow,
 } from "../components";
+import apiRequest from "../lib/apiRequest";
 
 const PSPScheduleOfTrustees = () => {
-  const trustees = useLoaderData();
-
-  let [isOpen, setIsOpen] = useState(false);
+  const [trustees, setTrustees] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
+
+  useEffect(() => {
+    fetchTrustAccountsData();
+  }, []);
+
+  const fetchTrustAccountsData = async () => {
+    try {
+      const trustAccountsData = await apiRequest.get(
+        "/psp-schedule-of-trustees"
+      );
+      setTrustees(trustAccountsData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
@@ -25,33 +40,14 @@ const PSPScheduleOfTrustees = () => {
             <PSPScheduleOfTrusteesHeader />
 
             <tbody>
-              <Suspense
-                fallback={
-                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                    <td className="border py-2 px-1">Loading...</td>
-                  </tr>
-                }
-              >
-                <Await
-                  resolve={trustees.scheduleOfTrusteesResponse}
-                  errorElement={
-                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                      <td className="border py-2 px-1">
-                        Error loading trustee data!
-                      </td>
-                    </tr>
-                  }
-                >
-                  {(scheduleOfTrusteesResponse) =>
-                    scheduleOfTrusteesResponse.data.map((incident) => (
-                      <PSPScheduleOfTrusteesRow
-                        key={incident.rowId}
-                        trustAcc={incident}
-                      />
-                    ))
-                  }
-                </Await>
-              </Suspense>
+              {trustees &&
+                trustees.map((trustAcc) => (
+                  <PSPScheduleOfTrusteesRow
+                    key={trustAcc.rowId}
+                    trustAcc={trustAcc}
+                    onRecordAdded={fetchTrustAccountsData}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
@@ -65,7 +61,11 @@ const PSPScheduleOfTrustees = () => {
         </button>
       </div>
 
-      <AddScheduleOfTrusteesModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddScheduleOfTrusteesModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };

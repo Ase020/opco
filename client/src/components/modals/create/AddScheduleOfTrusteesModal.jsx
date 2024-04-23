@@ -4,7 +4,11 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../lib/apiRequest";
 
-export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
+export default function AddScheduleOfTrusteesModal({
+  isOpen,
+  setIsOpen,
+  onRecordAdded,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +27,8 @@ export default function AddScheduleOfTrusteesModal({ isOpen, setIsOpen }) {
     try {
       const response = await apiRequest.post("/psp-schedule-of-trustees", data);
       console.log("Trustee: ", response.data);
+
+      onRecordAdded();
       setLoading(false);
       setIsOpen(false);
     } catch (error) {

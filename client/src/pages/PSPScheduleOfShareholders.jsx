@@ -1,19 +1,35 @@
-import { Suspense, useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import {
   AddScheduleOfShareholdersModal,
   PSPScheduleOfShareholdersHeader,
   PSPScheduleOfShareholdersRow,
 } from "../components";
+import apiRequest from "../lib/apiRequest";
 
 const PSPScheduleOfShareholders = () => {
-  const shareholders = useLoaderData();
+  const [shareholders, setShareholders] = useState([]);
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
+
+  useEffect(() => {
+    fetchTrustAccountsData();
+  }, []);
+
+  const fetchTrustAccountsData = async () => {
+    try {
+      const trustAccountsData = await apiRequest.get(
+        "/psp-schedule-of-shareholders"
+      );
+      setShareholders(trustAccountsData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
@@ -24,33 +40,14 @@ const PSPScheduleOfShareholders = () => {
             <PSPScheduleOfShareholdersHeader />
 
             <tbody>
-              <Suspense
-                fallback={
-                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                    <td className="border py-2 px-1">Loading...</td>
-                  </tr>
-                }
-              >
-                <Await
-                  resolve={shareholders.scheduleOfShareholdersResponse}
-                  errorElement={
-                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                      <td className="border py-2 px-1">
-                        Error loading shareholder data!
-                      </td>
-                    </tr>
-                  }
-                >
-                  {(scheduleOfShareholdersResponse) =>
-                    scheduleOfShareholdersResponse.data.map((incident) => (
-                      <PSPScheduleOfShareholdersRow
-                        key={incident.rowId}
-                        trustAcc={incident}
-                      />
-                    ))
-                  }
-                </Await>
-              </Suspense>
+              {shareholders &&
+                shareholders.map((trustAcc) => (
+                  <PSPScheduleOfShareholdersRow
+                    key={trustAcc.rowId}
+                    trustAcc={trustAcc}
+                    onRecordAdded={fetchTrustAccountsData}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
@@ -64,7 +61,11 @@ const PSPScheduleOfShareholders = () => {
         </button>
       </div>
 
-      <AddScheduleOfShareholdersModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddScheduleOfShareholdersModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };

@@ -139,7 +139,10 @@ export const updateTrustAccount = async (req, res) => {
 
     res
       .status(202)
-      .json({ message: "Account updated successfully!", updatedTrustAcc });
+      .json({
+        message: "Trust Account updated successfully!",
+        updatedTrustAcc,
+      });
   } catch (error) {
     res.status(500).json({ message: "Failed to update trust account!", error });
   }

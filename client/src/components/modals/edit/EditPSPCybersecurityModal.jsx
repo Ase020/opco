@@ -8,6 +8,7 @@ export default function EditPSPCybersecurityModal({
   isOpen,
   setIsOpen,
   trustAcc,
+  onRecordAdded,
 }) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,8 @@ export default function EditPSPCybersecurityModal({
         data
       );
       console.log("Cybersecurity Incidents: ", response.data);
+
+      onRecordAdded();
       setLoading(false);
       setIsOpen(false);
     } catch (error) {

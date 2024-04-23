@@ -3,7 +3,7 @@ import DeleteModal from "../../modals/delete/DeleteModal";
 import EditPSPScheduleOfTrusteesModal from "../../modals/edit/EditPSPScheduleOfTrusteesModal";
 
 /* eslint-disable react/prop-types */
-const PSPScheduleOfTrusteesRow = ({ trustAcc }) => {
+const PSPScheduleOfTrusteesRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -76,12 +76,14 @@ const PSPScheduleOfTrusteesRow = ({ trustAcc }) => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
+          onRecordAdded={onRecordAdded}
         />
 
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
           endPoint={`/psp-schedule-of-trustees/${trustAcc.rowId}`}
+          onRecordAdded={onRecordAdded}
         />
       </td>
     </tr>

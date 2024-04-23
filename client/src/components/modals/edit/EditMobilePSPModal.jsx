@@ -4,7 +4,12 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../lib/apiRequest";
 
-export default function EditMobilePSPModal({ isOpen, setIsOpen, trustAcc }) {
+export default function EditMobilePSPModal({
+  isOpen,
+  setIsOpen,
+  trustAcc,
+  onRecordAdded,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,6 +31,8 @@ export default function EditMobilePSPModal({ isOpen, setIsOpen, trustAcc }) {
         data
       );
       console.log("Counterfeit Currency Frauds: ", response.data);
+
+      onRecordAdded();
       setLoading(false);
       setIsOpen(false);
     } catch (error) {

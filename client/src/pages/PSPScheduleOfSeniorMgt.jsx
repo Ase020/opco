@@ -1,19 +1,34 @@
-import { Suspense, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddScheduleOfSeniorMgtModal,
   PSPScheduleOfSeniorMgtHeader,
   PSPScheduleOfSeniorMgtRow,
 } from "../components";
-import { Await, useLoaderData } from "react-router-dom";
+import apiRequest from "../lib/apiRequest";
 
 const PSPScheduleOfSeniorMgt = () => {
-  const seniorManagers = useLoaderData();
-
+  const [seniorMgts, setSeniorMgts] = useState([]);
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
+
+  useEffect(() => {
+    fetchTrustAccountsData();
+  }, []);
+
+  const fetchTrustAccountsData = async () => {
+    try {
+      const trustAccountsData = await apiRequest.get(
+        "/psp-schedule-of-senior-management"
+      );
+      setSeniorMgts(trustAccountsData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
@@ -26,33 +41,14 @@ const PSPScheduleOfSeniorMgt = () => {
             <PSPScheduleOfSeniorMgtHeader />
 
             <tbody>
-              <Suspense
-                fallback={
-                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                    <td className="border py-2 px-1">Loading...</td>
-                  </tr>
-                }
-              >
-                <Await
-                  resolve={seniorManagers.scheduleOfSeniorMgtResponse}
-                  errorElement={
-                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                      <td className="border py-2 px-1">
-                        Error senior manager data!
-                      </td>
-                    </tr>
-                  }
-                >
-                  {(scheduleOfSeniorMgtResponse) =>
-                    scheduleOfSeniorMgtResponse.data.map((incident) => (
-                      <PSPScheduleOfSeniorMgtRow
-                        key={incident.rowId}
-                        trustAcc={incident}
-                      />
-                    ))
-                  }
-                </Await>
-              </Suspense>
+              {seniorMgts &&
+                seniorMgts.map((trustAcc) => (
+                  <PSPScheduleOfSeniorMgtRow
+                    key={trustAcc.rowId}
+                    trustAcc={trustAcc}
+                    onRecordAdded={fetchTrustAccountsData}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
@@ -66,7 +62,11 @@ const PSPScheduleOfSeniorMgt = () => {
         </button>
       </div>
 
-      <AddScheduleOfSeniorMgtModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddScheduleOfSeniorMgtModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };

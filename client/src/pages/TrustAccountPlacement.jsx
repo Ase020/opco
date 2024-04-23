@@ -1,18 +1,33 @@
-import { Suspense, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddTrustAccPlacementModal,
   TrustAccPlacementsHeader,
   TrustAccPlacementsRow,
 } from "../components";
-import { Await, useLoaderData } from "react-router-dom";
+import apiRequest from "../lib/apiRequest";
 
 const TrustAccountPlacement = () => {
+  const [trustPlacements, setTrustPlacements] = useState([]);
   let [isOpen, setIsOpen] = useState(false);
-  const trustAccPlacements = useLoaderData();
 
   function openModal() {
     setIsOpen(true);
   }
+
+  useEffect(() => {
+    fetchTrustAccountsData();
+  }, []);
+
+  const fetchTrustAccountsData = async () => {
+    try {
+      const trustAccountsData = await apiRequest.get(
+        "/trust-account-placements"
+      );
+      setTrustPlacements(trustAccountsData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
@@ -23,33 +38,14 @@ const TrustAccountPlacement = () => {
             <TrustAccPlacementsHeader />
 
             <tbody>
-              <Suspense
-                fallback={
-                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                    <td className="border py-2 px-1">Loading...</td>
-                  </tr>
-                }
-              >
-                <Await
-                  resolve={trustAccPlacements.trustAccPlacementsResponse}
-                  errorElement={
-                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                      <td className="border py-2 px-1">
-                        Error loading trust account placements!
-                      </td>
-                    </tr>
-                  }
-                >
-                  {(trustAccPlacementsResponse) =>
-                    trustAccPlacementsResponse.data.map((trustAcc) => (
-                      <TrustAccPlacementsRow
-                        key={trustAcc.rowId}
-                        trustAcc={trustAcc}
-                      />
-                    ))
-                  }
-                </Await>
-              </Suspense>
+              {trustPlacements &&
+                trustPlacements.map((trustAcc) => (
+                  <TrustAccPlacementsRow
+                    key={trustAcc.rowId}
+                    trustAcc={trustAcc}
+                    onRecordAdded={fetchTrustAccountsData}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
@@ -63,7 +59,11 @@ const TrustAccountPlacement = () => {
         </button>
       </div>
 
-      <AddTrustAccPlacementModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddTrustAccPlacementModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };

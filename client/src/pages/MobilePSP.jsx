@@ -1,19 +1,35 @@
-import { Suspense, useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
+import { useState } from "react";
 import {
   AddMobilePSPModal,
   MobilePSPHeader,
   MobilePSPRow,
 } from "../components";
+import apiRequest from "../lib/apiRequest";
 
 const MobilePSP = () => {
-  const mobilePSPs = useLoaderData();
+  const [mobilePSPs, setMobilePSPs] = useState([]);
 
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
+
+  "useEffect"(() => {
+    fetchTrustAccountsData();
+  }, []);
+
+  const fetchTrustAccountsData = async () => {
+    try {
+      const trustAccountsData = await apiRequest.get(
+        "/mobile-psp-counterfeit-currency-frauds"
+      );
+      setMobilePSPs(trustAccountsData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
@@ -26,30 +42,14 @@ const MobilePSP = () => {
             <MobilePSPHeader />
 
             <tbody>
-              <Suspense
-                fallback={
-                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                    <td className="border py-2 px-1">Loading...</td>
-                  </tr>
-                }
-              >
-                <Await
-                  resolve={mobilePSPs.mobilePSPResponse}
-                  errorElement={
-                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                      <td className="border py-2 px-1">
-                        Error loading counterfeit currency frauds!
-                      </td>
-                    </tr>
-                  }
-                >
-                  {(mobilePSPResponse) =>
-                    mobilePSPResponse.data.map((trustAcc) => (
-                      <MobilePSPRow key={trustAcc.rowId} trustAcc={trustAcc} />
-                    ))
-                  }
-                </Await>
-              </Suspense>
+              {mobilePSPs &&
+                mobilePSPs.map((trustAcc) => (
+                  <MobilePSPRow
+                    key={trustAcc.rowId}
+                    trustAcc={trustAcc}
+                    onRecordAdded={fetchTrustAccountsData}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
@@ -63,7 +63,11 @@ const MobilePSP = () => {
         </button>
       </div>
 
-      <AddMobilePSPModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddMobilePSPModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };

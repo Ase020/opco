@@ -3,7 +3,7 @@ import DeleteModal from "../../modals/delete/DeleteModal";
 import EditFraudIncidentsModal from "../../modals/edit/EditFraudIncidentsModal";
 
 /* eslint-disable react/prop-types */
-const PSPIncidentFraudRow = ({ trustAcc }) => {
+const PSPIncidentFraudRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -55,12 +55,14 @@ const PSPIncidentFraudRow = ({ trustAcc }) => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
+          onRecordAdded={onRecordAdded}
         />
 
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
           endPoint={`/psp-incidents-of-fraud-theft-robbery/${trustAcc.rowId}`}
+          onRecordAdded={onRecordAdded}
         />
       </td>
     </tr>

@@ -7,6 +7,7 @@ export default function DeleteModal({
   isDeleteModalOpen,
   setIsDeleteModalOpen,
   endPoint,
+  onRecordAdded,
 }) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,7 @@ export default function DeleteModal({
     try {
       await apiRequest.delete(endPoint);
       setLoading(false);
+      onRecordAdded();
       closeModal();
     } catch (error) {
       setErr(error.response.data.message);

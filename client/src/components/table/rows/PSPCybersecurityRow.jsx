@@ -5,7 +5,7 @@ import { formatDateTime } from "../../../lib/formatDatetime";
 import EditPSPCybersecurityModal from "../../modals/edit/EditPSPCybersecurityModal";
 
 /* eslint-disable react/prop-types */
-const PSPCybersecurityRow = ({ trustAcc }) => {
+const PSPCybersecurityRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -64,12 +64,14 @@ const PSPCybersecurityRow = ({ trustAcc }) => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
+          onRecordAdded={onRecordAdded}
         />
 
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
           endPoint={`/psp-cybersecurity-incident-record/${trustAcc.rowId}`}
+          onRecordAdded={onRecordAdded}
         />
       </td>
     </tr>

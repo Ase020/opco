@@ -3,7 +3,7 @@ import DeleteModal from "../../modals/delete/DeleteModal";
 import EditMobilePSPModal from "../../modals/edit/EditMobilePSPModal";
 
 /* eslint-disable react/prop-types */
-const MobilePSPRow = ({ trustAcc }) => {
+const MobilePSPRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -55,12 +55,14 @@ const MobilePSPRow = ({ trustAcc }) => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
+          onRecordAdded={onRecordAdded}
         />
 
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
           endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
+          onRecordAdded={onRecordAdded}
         />
       </td>
     </tr>

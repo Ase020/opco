@@ -8,6 +8,7 @@ export default function EditFraudIncidentsModal({
   isOpen,
   setIsOpen,
   trustAcc,
+  onRecordAdded,
 }) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,8 @@ export default function EditFraudIncidentsModal({
         data
       );
       console.log("Fraud Incident: ", response.data);
+
+      onRecordAdded();
       setLoading(false);
       setIsOpen(false);
     } catch (error) {

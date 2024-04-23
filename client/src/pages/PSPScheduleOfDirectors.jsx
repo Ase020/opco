@@ -1,20 +1,36 @@
-import { Suspense, useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import {
   AddScheduleOfDirectorsModal,
   PSPScheduleOfDirectorsHeader,
   PSPScheduleOfDirectorsRow,
 } from "../components";
+import apiRequest from "../lib/apiRequest";
 
 const PSPScheduleOfDirectors = () => {
-  const directors = useLoaderData();
+  const [directors, setDirectors] = useState([]);
 
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
+
+  useEffect(() => {
+    fetchTrustAccountsData();
+  }, []);
+
+  const fetchTrustAccountsData = async () => {
+    try {
+      const trustAccountsData = await apiRequest.get(
+        "/psp-schedule-of-directors"
+      );
+      setDirectors(trustAccountsData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
@@ -25,33 +41,14 @@ const PSPScheduleOfDirectors = () => {
             <PSPScheduleOfDirectorsHeader />
 
             <tbody>
-              <Suspense
-                fallback={
-                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                    <td className="border py-2 px-1">Loading...</td>
-                  </tr>
-                }
-              >
-                <Await
-                  resolve={directors.scheduleOfDirectorsResponse}
-                  errorElement={
-                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                      <td className="border py-2 px-1">
-                        Error loading fraud incidents!
-                      </td>
-                    </tr>
-                  }
-                >
-                  {(scheduleOfDirectorsResponse) =>
-                    scheduleOfDirectorsResponse.data.map((incident) => (
-                      <PSPScheduleOfDirectorsRow
-                        key={incident.rowId}
-                        trustAcc={incident}
-                      />
-                    ))
-                  }
-                </Await>
-              </Suspense>
+              {directors &&
+                directors.map((trustAcc) => (
+                  <PSPScheduleOfDirectorsRow
+                    key={trustAcc.rowId}
+                    trustAcc={trustAcc}
+                    onRecordAdded={fetchTrustAccountsData}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
@@ -65,7 +62,11 @@ const PSPScheduleOfDirectors = () => {
         </button>
       </div>
 
-      <AddScheduleOfDirectorsModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddScheduleOfDirectorsModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };

@@ -4,7 +4,11 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../lib/apiRequest";
 
-export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
+export default function AddScheduleOfShareholdersModal({
+  isOpen,
+  setIsOpen,
+  onRecordAdded,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,6 +30,8 @@ export default function AddScheduleOfShareholdersModal({ isOpen, setIsOpen }) {
         data
       );
       console.log("Shareholder: ", response.data);
+
+      onRecordAdded();
       setLoading(false);
       setIsOpen(false);
     } catch (error) {

@@ -8,6 +8,7 @@ export default function EditTrustAccDetailsModal({
   isOpen,
   setIsOpen,
   trustAcc,
+  onRecordAdded,
 }) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,6 +33,8 @@ export default function EditTrustAccDetailsModal({
       console.log("Trust Acc Details: ", response.data);
       setLoading(false);
       setIsOpen(false);
+
+      onRecordAdded();
     } catch (error) {
       setErr(error.response.data.message);
       setLoading(false);

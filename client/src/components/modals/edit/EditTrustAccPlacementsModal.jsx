@@ -8,6 +8,7 @@ export default function EditTrustAccPlacementsModal({
   isOpen,
   setIsOpen,
   trustAcc,
+  onRecordAdded,
 }) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,10 +30,11 @@ export default function EditTrustAccPlacementsModal({
         `/trust-account-placements/${trustAcc.rowId}`,
         data
       );
-      console.log("Trust Acc Details: ", response.data);
+      console.log("Trust Acc Placements: ", response.data);
       setLoading(false);
       setIsOpen(false);
-      // console.log("Edit Data: ", data);
+
+      onRecordAdded();
     } catch (error) {
       setErr(error.response.data.message);
       setLoading(false);
@@ -88,6 +90,7 @@ export default function EditTrustAccPlacementsModal({
                           id="pspId"
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.pspId}
+                          required
                         />
                       </div>
 
@@ -121,6 +124,7 @@ export default function EditTrustAccPlacementsModal({
                           placeholder="TFP02"
                           className="outline-none border p-1.5 rounded"
                           defaultValue={trustAcc.trustFundPlacement}
+                          required
                         />
                       </div>
 
@@ -136,7 +140,7 @@ export default function EditTrustAccPlacementsModal({
                           name="trustFundInvMaturityDate"
                           id="trustFundInvMaturityDate"
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.trustFundInvMaturityDate}
+                          required
                         />
                       </div>
 
@@ -151,7 +155,7 @@ export default function EditTrustAccPlacementsModal({
                           type="number"
                           name="catTrustFundInvestedAmt"
                           id="catTrustFundInvestedAmt"
-                          defaultValue={0}
+                          defaultValue={trustAcc.catTrustFundInvestedAmt}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -167,7 +171,7 @@ export default function EditTrustAccPlacementsModal({
                           type="number"
                           name="interestAmtPerCat"
                           id="interestAmtPerCat"
-                          defaultValue={0}
+                          defaultValue={trustAcc.interestAmtPerCat}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

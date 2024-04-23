@@ -4,7 +4,11 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../lib/apiRequest";
 
-export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
+export default function AddPSPIncidentFraudModal({
+  isOpen,
+  setIsOpen,
+  onRecordAdded,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,6 +30,7 @@ export default function AddPSPIncidentFraudModal({ isOpen, setIsOpen }) {
         data
       );
       console.log("Fraud Incident: ", response.data);
+      onRecordAdded();
       setLoading(false);
       setIsOpen(false);
     } catch (error) {

@@ -3,7 +3,7 @@ import EditTrustAccDetailsModal from "../../modals/edit/EditTrustAccDetailsModal
 import DeleteModal from "../../modals/delete/DeleteModal";
 
 /* eslint-disable react/prop-types */
-const TrustAccDetailsRow = ({ trustAcc }) => {
+const TrustAccDetailsRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -58,12 +58,14 @@ const TrustAccDetailsRow = ({ trustAcc }) => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
+          onRecordAdded={onRecordAdded}
         />
 
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
           endPoint={`/trust-accounts/${trustAcc.rowId}`}
+          onRecordAdded={onRecordAdded}
         />
       </td>
     </tr>

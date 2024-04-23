@@ -1,20 +1,35 @@
-import { Suspense, useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import {
   AddPSPCybersecurityModal,
   PSPCybersecurityHeader,
   PSPCybersecurityRow,
 } from "../components";
+import apiRequest from "../lib/apiRequest";
 
 const PSPCybersecurity = () => {
-  const cybersecurityIncidents = useLoaderData();
+  const [cybersecurityIncidents, setCybersecurityIncidents] = useState([]);
 
   let [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
+
+  useEffect(() => {
+    fetchTrustAccountsData();
+  }, []);
+
+  const fetchTrustAccountsData = async () => {
+    try {
+      const trustAccountsData = await apiRequest.get(
+        "/psp-cybersecurity-incident-record"
+      );
+      setCybersecurityIncidents(trustAccountsData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
@@ -28,33 +43,14 @@ const PSPCybersecurity = () => {
             <PSPCybersecurityHeader />
 
             <tbody>
-              <Suspense
-                fallback={
-                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                    <td className="border py-2 px-1">Loading...</td>
-                  </tr>
-                }
-              >
-                <Await
-                  resolve={cybersecurityIncidents.cybersecurityIncidentResponse}
-                  errorElement={
-                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                      <td className="border py-2 px-1">
-                        Error loading cybersecurity incidents!
-                      </td>
-                    </tr>
-                  }
-                >
-                  {(cybersecurityIncidentResponse) =>
-                    cybersecurityIncidentResponse.data.map((trustAcc) => (
-                      <PSPCybersecurityRow
-                        key={trustAcc.rowId}
-                        trustAcc={trustAcc}
-                      />
-                    ))
-                  }
-                </Await>
-              </Suspense>
+              {cybersecurityIncidents &&
+                cybersecurityIncidents.map((trustAcc) => (
+                  <PSPCybersecurityRow
+                    key={trustAcc.rowId}
+                    trustAcc={trustAcc}
+                    onRecordAdded={fetchTrustAccountsData}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
@@ -68,7 +64,11 @@ const PSPCybersecurity = () => {
         </button>
       </div>
 
-      <AddPSPCybersecurityModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddPSPCybersecurityModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };

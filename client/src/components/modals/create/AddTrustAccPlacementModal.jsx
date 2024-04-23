@@ -4,7 +4,11 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../lib/apiRequest";
 
-export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
+export default function AddTrustAccPlacementModal({
+  isOpen,
+  setIsOpen,
+  onRecordAdded,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +26,9 @@ export default function AddTrustAccPlacementModal({ isOpen, setIsOpen }) {
 
     try {
       const response = await apiRequest.post("/trust-account-placements", data);
-      console.log("Trust Acc Details: ", response.data);
+      console.log("Trust Acc Placement: ", response.data);
+
+      onRecordAdded();
       setLoading(false);
       setIsOpen(false);
     } catch (error) {

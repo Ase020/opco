@@ -1,19 +1,31 @@
-import { Suspense, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddTrustAccDetailsModal,
   TrustAccDetailsHeader,
   TrustAccDetailsRow,
 } from "../components";
-import { Await, useLoaderData } from "react-router-dom";
+import apiRequest from "../lib/apiRequest";
 
 const TrustAccountDetails = () => {
-  const trustAccounts = useLoaderData();
-
-  let [isOpen, setIsOpen] = useState(false);
+  const [trustAccounts, setTrustAccounts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
+
+  useEffect(() => {
+    fetchTrustAccountsData();
+  }, []);
+
+  const fetchTrustAccountsData = async () => {
+    try {
+      const trustAccountsData = await apiRequest.get("/trust-accounts");
+      setTrustAccounts(trustAccountsData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
@@ -25,33 +37,14 @@ const TrustAccountDetails = () => {
             <TrustAccDetailsHeader />
 
             <tbody>
-              <Suspense
-                fallback={
-                  <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                    <td className="border py-2 px-1">Loading...</td>
-                  </tr>
-                }
-              >
-                <Await
-                  resolve={trustAccounts.trustAccDetailsResponse}
-                  errorElement={
-                    <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
-                      <td className="border py-2 px-1">
-                        Error loading trust accounts!
-                      </td>
-                    </tr>
-                  }
-                >
-                  {(trustAccDetailsResponse) =>
-                    trustAccDetailsResponse.data.map((trustAcc) => (
-                      <TrustAccDetailsRow
-                        key={trustAcc.rowId}
-                        trustAcc={trustAcc}
-                      />
-                    ))
-                  }
-                </Await>
-              </Suspense>
+              {trustAccounts &&
+                trustAccounts.map((trustAcc) => (
+                  <TrustAccDetailsRow
+                    key={trustAcc.rowId}
+                    trustAcc={trustAcc}
+                    onRecordAdded={fetchTrustAccountsData}
+                  />
+                ))}
             </tbody>
           </table>
         </div>
@@ -65,7 +58,11 @@ const TrustAccountDetails = () => {
         </button>
       </div>
 
-      <AddTrustAccDetailsModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddTrustAccDetailsModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };

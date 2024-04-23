@@ -4,7 +4,11 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../lib/apiRequest";
 
-export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
+export default function AddTrustAccDetailsModal({
+  isOpen,
+  setIsOpen,
+  onRecordAdded,
+}) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -25,6 +29,7 @@ export default function AddTrustAccDetailsModal({ isOpen, setIsOpen }) {
       console.log("Trust Acc Details: ", response.data);
       setLoading(false);
       setIsOpen(false);
+      onRecordAdded();
     } catch (error) {
       setErr(error.response.data.message);
       setLoading(false);
