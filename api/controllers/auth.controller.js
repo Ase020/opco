@@ -60,9 +60,9 @@ export const login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: true,
+        // secure: true,
         maxAge: tokenAge,
-        sameSite: "strict",
+        // sameSite: "strict",
       })
       .status(200)
       .json({ message: "Logged in successfully!", userData: userInfo });
