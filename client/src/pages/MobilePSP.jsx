@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddMobilePSPModal,
   MobilePSPHeader,
@@ -15,7 +15,7 @@ const MobilePSP = () => {
     setIsOpen(true);
   }
 
-  "useEffect"(() => {
+  useEffect(() => {
     fetchTrustAccountsData();
   }, []);
 
