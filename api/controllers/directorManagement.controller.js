@@ -10,7 +10,7 @@ export const getDirectorManagements = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const directorManagementInfo =
@@ -33,7 +33,7 @@ export const getDirectorManagement = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const directorManagementInfo =
@@ -86,7 +86,7 @@ export const createDirectorManagement = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const newDirectorManagementInfo =
@@ -169,7 +169,7 @@ export const updateDirectorManagement = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const updatedDirectorManagementInfo =
@@ -224,7 +224,7 @@ export const deleteDirectorManagement = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     await prisma.directorManagementInfo.delete({

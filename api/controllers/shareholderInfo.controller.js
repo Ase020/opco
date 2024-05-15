@@ -10,7 +10,7 @@ export const getShareholderInfos = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const shareholderInfos = await prisma.shareholderInfo.findMany();
@@ -32,7 +32,7 @@ export const getShareholderInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const shareholderInfo = await prisma.shareholderInfo.findUnique({
@@ -75,7 +75,7 @@ export const createShareholderInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const newShareholderInfo = await prisma.shareholderInfo.create({
@@ -139,7 +139,7 @@ export const updateShareholderInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const updatedShareholderInfo = await prisma.shareholderInfo.update({
@@ -184,7 +184,7 @@ export const deleteShareholderInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     await prisma.shareholderInfo.delete({

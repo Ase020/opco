@@ -10,7 +10,7 @@ export const getExchangeRateInfos = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const exchangeRateInfos = await prisma.exchangeRatesInfo.findMany();
@@ -32,7 +32,7 @@ export const getExchangeRateInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const exchangeRateInfo = await prisma.exchangeRatesInfo.findUnique({
@@ -66,7 +66,7 @@ export const createExchangeRateInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const newExchangeRateInfo = await prisma.exchangeRatesInfo.create({
@@ -112,7 +112,7 @@ export const updateExchangeRateInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const updatedExchangeRateInfo = await prisma.exchangeRatesInfo.update({
@@ -148,7 +148,7 @@ export const deleteExchangeRateInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     await prisma.exchangeRatesInfo.delete({

@@ -10,7 +10,7 @@ export const getFinancialPositions = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const financialPosition = await prisma.financialPosition.findMany();
@@ -33,7 +33,7 @@ export const getFinancialPosition = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const financialPosition = await prisma.financialPosition.findUnique({
@@ -65,7 +65,7 @@ export const createFinancialPosition = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const newFinancialPosition = await prisma.financialPosition.create({
@@ -106,7 +106,7 @@ export const updateFinancialPosition = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const updatedFinancialPosition = await prisma.financialPosition.update({
@@ -140,7 +140,7 @@ export const deleteFinancialPosition = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     await prisma.financialPosition.delete({

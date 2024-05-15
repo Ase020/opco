@@ -10,7 +10,7 @@ export const getForeignExchangePositions = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const foreignExchangePositions =
@@ -33,7 +33,7 @@ export const getForeignExchangePosition = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const foreignExchangePosition =
@@ -68,7 +68,7 @@ export const createForeignExchangePosition = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const newForeignExchangePosition =
@@ -115,7 +115,7 @@ export const updateForeignExchangePosition = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const updatedForeignExchangePosition =
@@ -152,7 +152,7 @@ export const deleteForeignExchangePosition = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     await prisma.foreignExchangePosition.delete({
