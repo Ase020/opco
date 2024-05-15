@@ -285,10 +285,10 @@ model ShareholderInfo {
   address             String?
   phoneNumber         String?
   majorPromoter       String?
-  subscribedShares    Int
-  shareValue          Int
-  shareholdingAmount  Int
-  paidUpShares        Int
+  subscribedShares    Float
+  shareValue          Float
+  shareholdingAmount  Float
+  paidUpShares        Float
   percentageOfShare   Float
 }
 
