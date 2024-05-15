@@ -9,32 +9,32 @@ import {
   deleteCounterfeitCurrencyFraud,
 } from "../controllers/counterfeitCurrencyFraud.controller.js";
 
-const conterfeitCurrencyFraudRouter = express.Router();
+const counterfeitCurrencyFraudRouter = express.Router();
 
-conterfeitCurrencyFraudRouter.get(
+counterfeitCurrencyFraudRouter.get(
   "/",
   verifyToken,
   getCounterfeitCurrencyFrauds
 );
-conterfeitCurrencyFraudRouter.get(
+counterfeitCurrencyFraudRouter.get(
   "/:rowId",
   verifyToken,
   getCounterfeitCurrencyFraud
 );
-conterfeitCurrencyFraudRouter.post(
+counterfeitCurrencyFraudRouter.post(
   "/",
   verifyToken,
   createCounterfeitCurrencyFraud
 );
-conterfeitCurrencyFraudRouter.put(
+counterfeitCurrencyFraudRouter.put(
   "/:rowId",
   verifyToken,
   updateCounterfeitCurrencyFraud
 );
-conterfeitCurrencyFraudRouter.delete(
+counterfeitCurrencyFraudRouter.delete(
   "/:rowId",
   verifyToken,
   deleteCounterfeitCurrencyFraud
 );
 
-export default conterfeitCurrencyFraudRouter;
+export default counterfeitCurrencyFraudRouter;

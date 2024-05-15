@@ -212,3 +212,92 @@ model SeniorMgt {
   otherAffiliations        String? @default("N/A")
   disclosureDetails        String? @default("")
 }
+
+model ExchangeRatesInfo {
+  rowId            String @id @default(auto()) @map("_id") @db.ObjectId
+  institutionCode  String
+  reportingDate    String
+  currencyCode     String
+  buyingRate       Float
+  sellingRate      Float
+  meanRate         Float
+  closingBidRate   Float
+  closingOfferRate Float
+  usdCrossRate     Float
+}
+
+model ForeignExchangePosition {
+  rowId                    String @id @default(auto()) @map("_id") @db.ObjectId
+  institutionCode          String
+  reportingDate            String
+  currencyCode             String
+  kesSpotRate              Float
+  openingPositionAmount    Float
+  totalInflowsAmount       Float
+  otherTotalInflowsAmount  Float
+  totalOutflowsAmount      Float
+  otherTotalOutflowsAmount Float
+}
+
+model DirectorManagementInfo {
+  rowId                   String  @id @default(auto()) @map("_id") @db.ObjectId
+  institutionCode         String
+  reportingDate           String
+  sequenceId              String
+  nameOfDirector          String
+  staffId                 String?
+  memberType              String?
+  executiveCatType        String
+  gender                  Gender
+  nationality             String
+  residency               String
+  identificationNumber    String
+  passportNumber          String?
+  dob                     String
+  academicQualification   String
+  profession              String
+  contactNumber           String?
+  email                   String?
+  appointmentDate         String
+  cbkApprovalDate         String
+  boardChairCommittee     String?
+  boardCommitteeName      String?
+  managementCommitteeName String?
+  companyName             String?
+  roleInCompany           String?
+  shareholdingFlag        String?
+  shareholdingInfo        String?
+  bankingExperience       Int
+}
+
+model ShareholderInfo {
+  rowId               String  @id @default(auto()) @map("_id") @db.ObjectId
+  bankCode            String
+  reportingDate       String
+  shareholderSequence String
+  name                String
+  gender              Gender
+  type                String
+  registrationDate    String
+  nationality         String
+  residence           String
+  idNumber            String
+  address             String?
+  phoneNumber         String?
+  majorPromoter       String?
+  subscribedShares    Int
+  shareValue          Int
+  shareholdingAmount  Int
+  paidUpShares        Int
+  percentageOfShare   Float
+}
+
+model FinancialPosition {
+  rowId             String @id @default(auto()) @map("_id") @db.ObjectId
+  fxbCode           String
+  reportingDate     String
+  mappingCode       String
+  amount            Float
+  numberOfEmployees Int
+  numberOfOutlets   Int
+}

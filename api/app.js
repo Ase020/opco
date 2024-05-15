@@ -2,18 +2,24 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-
-import authRouter from "./routes/auth.route.js";
-import trustAccountRouter from "./routes/trustAccountRouter.route.js";
-import trustAccPlacementRouter from "./routes/trustAccPlacementRouter.route.js";
-import fraudIncidentRouter from "./routes/fraudIncident.route.js";
-import conterfeitCurrencyFraudRouter from "./routes/conterfeitCurrencyFraud.route.js";
-import cybersecurityIncidentRouter from "./routes/cybersecurityIncident.route.js";
-import shareholdersRouter from "./routes/shareholders.route.js";
-import directorsRouter from "./routes/directors.route.js";
-import trusteesRouter from "./routes/trustees.route.js";
-import seniorMgtRouter from "./routes/seniorMgt.route.js";
-import userRouter from "./routes/user.route.js";
+import {
+  authRouter,
+  counterfeitCurrencyFraudRouter,
+  cybersecurityIncidentRouter,
+  directorManagementRouter,
+  directorsRouter,
+  exchangeRateInfoRouter,
+  exchangeRatePositionRouter,
+  financialPositionRouter,
+  fraudIncidentRouter,
+  seniorMgtRouter,
+  shareholderInfoRouter,
+  shareholdersRouter,
+  trustAccPlacementRouter,
+  trustAccountRouter,
+  trusteesRouter,
+  userRouter,
+} from "./routes/index.js";
 
 const app = express();
 
@@ -32,18 +38,27 @@ app.use(cors(corOptions));
 
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+
+// Payment Services Providers(PSP)
 app.use("/api/trust-accounts", trustAccountRouter);
 app.use("/api/trust-account-placements", trustAccPlacementRouter);
 app.use("/api/psp-incidents-of-fraud-theft-robbery", fraudIncidentRouter);
 app.use(
   "/api/mobile-psp-counterfeit-currency-frauds",
-  conterfeitCurrencyFraudRouter
+  counterfeitCurrencyFraudRouter
 );
 app.use("/api/psp-cybersecurity-incident-record", cybersecurityIncidentRouter);
 app.use("/api/psp-schedule-of-shareholders", shareholdersRouter);
 app.use("/api/psp-schedule-of-directors", directorsRouter);
 app.use("/api/psp-schedule-of-trustees", trusteesRouter);
 app.use("/api/psp-schedule-of-senior-management", seniorMgtRouter);
+
+// Banking Supervision Department(BSD)
+app.use("/api/exchange-rate-info", exchangeRateInfoRouter);
+app.use("/api/exchange-rate-position", exchangeRatePositionRouter);
+app.use("/api/director-management-info", directorManagementRouter);
+app.use("/api/shareholder-info", shareholderInfoRouter);
+app.use("/api/financial-position", financialPositionRouter);
 
 app.listen(8800, () => {
   console.log("Server running!");
