@@ -12,9 +12,9 @@ import {
 const financialPositionRouter = express.Router();
 
 financialPositionRouter.get("/", verifyToken, getFinancialPositions);
-financialPositionRouter.get("/rowId", verifyToken, getFinancialPosition);
+financialPositionRouter.get("/:rowId", verifyToken, getFinancialPosition);
 financialPositionRouter.post("/", verifyToken, createFinancialPosition);
-financialPositionRouter.put("/rowId", verifyToken, updateFinancialPosition);
-financialPositionRouter.get("/rowId", verifyToken, deleteFinancialPosition);
+financialPositionRouter.put("/:rowId", verifyToken, updateFinancialPosition);
+financialPositionRouter.delete("/:rowId", verifyToken, deleteFinancialPosition);
 
 export default financialPositionRouter;

@@ -12,9 +12,9 @@ import {
 const exchangeRateInfoRouter = express.Router();
 
 exchangeRateInfoRouter.get("/", verifyToken, getExchangeRateInfos);
-exchangeRateInfoRouter.get("/rowId", verifyToken, getExchangeRateInfo);
+exchangeRateInfoRouter.get("/:rowId", verifyToken, getExchangeRateInfo);
 exchangeRateInfoRouter.post("/", verifyToken, createExchangeRateInfo);
-exchangeRateInfoRouter.put("/rowId", verifyToken, updateExchangeRateInfo);
-exchangeRateInfoRouter.get("/rowId", verifyToken, deleteExchangeRateInfo);
+exchangeRateInfoRouter.put("/:rowId", verifyToken, updateExchangeRateInfo);
+exchangeRateInfoRouter.delete("/:rowId", verifyToken, deleteExchangeRateInfo);
 
 export default exchangeRateInfoRouter;

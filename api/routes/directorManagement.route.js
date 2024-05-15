@@ -12,9 +12,13 @@ import {
 const directorManagementRouter = express.Router();
 
 directorManagementRouter.get("/", verifyToken, getDirectorManagements);
-directorManagementRouter.get("/rowId", verifyToken, getDirectorManagement);
+directorManagementRouter.get("/:rowId", verifyToken, getDirectorManagement);
 directorManagementRouter.post("/", verifyToken, createDirectorManagement);
-directorManagementRouter.put("/rowId", verifyToken, updateDirectorManagement);
-directorManagementRouter.get("/rowId", verifyToken, deleteDirectorManagement);
+directorManagementRouter.put("/:rowId", verifyToken, updateDirectorManagement);
+directorManagementRouter.delete(
+  "/:rowId",
+  verifyToken,
+  deleteDirectorManagement
+);
 
 export default directorManagementRouter;

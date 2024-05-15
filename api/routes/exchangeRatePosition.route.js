@@ -13,7 +13,7 @@ const exchangeRatePositionRouter = express.Router();
 
 exchangeRatePositionRouter.get("/", verifyToken, getForeignExchangePositions);
 exchangeRatePositionRouter.get(
-  "/rowId",
+  "/:rowId",
   verifyToken,
   getForeignExchangePosition
 );
@@ -23,12 +23,12 @@ exchangeRatePositionRouter.post(
   createForeignExchangePosition
 );
 exchangeRatePositionRouter.put(
-  "/rowId",
+  "/:rowId",
   verifyToken,
   updateForeignExchangePosition
 );
-exchangeRatePositionRouter.get(
-  "/rowId",
+exchangeRatePositionRouter.delete(
+  "/:rowId",
   verifyToken,
   deleteForeignExchangePosition
 );

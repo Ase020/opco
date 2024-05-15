@@ -36,12 +36,12 @@ export const getDirectorManagement = async (req, res) => {
     if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
-    const directorManagementInfo =
+    const singleDirectorManagementInfo =
       await prisma.directorManagementInfo.findUnique({
         where: { rowId },
       });
 
-    res.status(200).json(directorManagementInfo);
+    res.status(200).json(singleDirectorManagementInfo);
   } catch (error) {
     res
       .status(500)

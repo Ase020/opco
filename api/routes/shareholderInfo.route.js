@@ -12,9 +12,9 @@ import {
 const shareholderInfoRouter = express.Router();
 
 shareholderInfoRouter.get("/", verifyToken, getShareholderInfos);
-shareholderInfoRouter.get("/rowId", verifyToken, getShareholderInfo);
+shareholderInfoRouter.get("/:rowId", verifyToken, getShareholderInfo);
 shareholderInfoRouter.post("/", verifyToken, createShareholderInfo);
-shareholderInfoRouter.put("/rowId", verifyToken, updateShareholderInfo);
-shareholderInfoRouter.get("/rowId", verifyToken, deleteShareholderInfo);
+shareholderInfoRouter.put("/:rowId", verifyToken, updateShareholderInfo);
+shareholderInfoRouter.delete("/:rowId", verifyToken, deleteShareholderInfo);
 
 export default shareholderInfoRouter;
