@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EditTrustAccDetailsModal from "../../../modals/edit/EditTrustAccDetailsModal";
+import EditTrustAccDetailsModal from "../../../modals/edit/PSP/EditTrustAccDetailsModal";
 import DeleteModal from "../../../modals/delete/DeleteModal";
 
 /* eslint-disable react/prop-types */

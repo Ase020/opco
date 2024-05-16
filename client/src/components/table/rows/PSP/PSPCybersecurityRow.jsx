@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import DeleteModal from "../../../modals/delete/DeleteModal";
 import { formatDateTime } from "../../../../lib/formatDatetime";
-import EditPSPCybersecurityModal from "../../../modals/edit/EditPSPCybersecurityModal";
+import EditPSPCybersecurityModal from "../../../modals/edit/PSP/EditPSPCybersecurityModal";
 
 /* eslint-disable react/prop-types */
 const PSPCybersecurityRow = ({ trustAcc, onRecordAdded }) => {

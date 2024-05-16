@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditMobilePSPModal from "../../../modals/edit/EditMobilePSPModal";
+import EditMobilePSPModal from "../../../modals/edit/PSP/EditMobilePSPModal";
 
 /* eslint-disable react/prop-types */
 const MobilePSPRow = ({ trustAcc, onRecordAdded }) => {

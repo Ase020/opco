@@ -118,7 +118,7 @@ function App() {
           loader: trustAccPlacementsLoader,
         },
         {
-          path: "/particulars-Of-directors-management-information",
+          path: "/particulars-of-directors-management-information",
           element: <DirectorMgt />,
           loader: directorMgtLoader,
         },

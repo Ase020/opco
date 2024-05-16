@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function EditFraudIncidentsModal({
+export default function EditMobilePSPModal({
   isOpen,
   setIsOpen,
   trustAcc,
@@ -27,10 +27,10 @@ export default function EditFraudIncidentsModal({
 
     try {
       const response = await apiRequest.put(
-        `/psp-incidents-of-fraud-theft-robbery/${trustAcc.rowId}`,
+        `/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`,
         data
       );
-      console.log("Fraud Incident: ", response.data);
+      console.log("Counterfeit Currency Frauds: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -73,7 +73,7 @@ export default function EditFraudIncidentsModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Edit Fraud Incident
+                    Edit Counterfeit Currency Fraud
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -89,8 +89,8 @@ export default function EditFraudIncidentsModal({
                           name="pspId"
                           id="pspId"
                           defaultValue={trustAcc.pspId}
-                          className="outline-none border p-1.5 rounded"
                           required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
@@ -105,8 +105,8 @@ export default function EditFraudIncidentsModal({
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
-                          className="outline-none border p-1.5 rounded"
                           required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
@@ -121,206 +121,160 @@ export default function EditFraudIncidentsModal({
                           type="text"
                           name="subCountyCode"
                           id="subCountyCode"
+                          required
                           defaultValue={trustAcc.subCountyCode}
                           className="outline-none border p-1.5 rounded"
-                          required
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="subFraudCode"
+                          htmlFor="agentId"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SUB FRAUD CODE
+                          AGENT ID
                         </label>
                         <input
                           type="text"
-                          name="subFraudCode"
-                          id="subFraudCode"
-                          defaultValue={trustAcc.subFraudCode}
-                          className="outline-none border p-1.5 rounded"
+                          name="agentId"
+                          id="agentId"
+                          defaultValue={trustAcc.agentId}
                           required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="fraudCategoryFlag"
+                          htmlFor="denominationCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          FRAUD CATEGORY FLAG
+                          DENOMINATION CODE
                         </label>
                         <input
                           type="text"
-                          name="fraudCategoryFlag"
-                          id="fraudCategoryFlag"
-                          placeholder="FCT01"
-                          defaultValue={trustAcc.fraudCategoryFlag}
+                          name="denominationCode"
+                          id="denominationCode"
+                          defaultValue={trustAcc.denominationCode}
                           className="outline-none border p-1.5 rounded"
-                          required
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="victimCategory"
+                          htmlFor="serialNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          VICTIM CATEGORY
+                          SERIAL NO
                         </label>
                         <input
                           type="text"
-                          name="victimCategory"
-                          id="victimCategory"
-                          defaultValue={trustAcc.victimCategory}
-                          className="outline-none border p-1.5 rounded"
+                          name="serialNumber"
+                          id="serialNumber"
+                          defaultValue={trustAcc.serialNumber}
                           required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="victimInfo"
+                          htmlFor="depositorsName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          VICTIM INFO
+                          DEPOSITOR&apos;S NAME
                         </label>
                         <input
                           type="text"
-                          name="victimInfo"
-                          id="victimInfo"
-                          defaultValue={trustAcc.victimInfo}
-                          className="outline-none border p-1.5 rounded"
+                          name="depositorsName"
+                          id="depositorsName"
+                          defaultValue={trustAcc.depositorsName}
                           required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateOfOccurence"
+                          htmlFor="tellersName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          OCCURRENCE DATE
+                          TELLER&apos;S NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="tellersName"
+                          id="tellersName"
+                          required
+                          defaultValue={trustAcc.tellersName}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateConfiscated"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE CONFISCATED
                         </label>
                         <input
                           type="date"
-                          name="dateOfOccurence"
-                          id="dateOfOccurence"
-                          className="outline-none border p-1.5 rounded"
+                          name="dateConfiscated"
+                          id="dateConfiscated"
                           required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="numberOfIncidents"
+                          htmlFor="dateSubmittedToCBK"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NUMBER OF INCIDENTS
+                          DATE SUBMITTED
+                        </label>
+                        <input
+                          type="date"
+                          name="dateSubmittedToCBK"
+                          id="dateSubmittedToCBK"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="numberOfPieces"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          PIECES
                         </label>
                         <input
                           type="number"
-                          name="numberOfIncidents"
-                          id="numberOfIncidents"
-                          defaultValue={trustAcc.numberOfIncidents}
+                          name="numberOfPieces"
+                          id="numberOfPieces"
+                          className="outline-none border p-1.5 rounded"
                           min={1}
-                          className="outline-none border p-1.5 rounded"
-                          required
+                          defaultValue={trustAcc.numberOfPieces}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="amountInvolved"
+                          htmlFor="remarks"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          AMOUNT INVOLVED
-                        </label>
-                        <input
-                          type="number"
-                          name="amountInvolved"
-                          id="amountInvolved"
-                          placeholder="1,000,482"
-                          min={10}
-                          defaultValue={trustAcc.amountInvolved}
-                          className="outline-none border p-1.5 rounded"
-                          required
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="amountLost"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          AMOUNT LOST
-                        </label>
-                        <input
-                          type="number"
-                          name="amountLost"
-                          id="amountLost"
-                          placeholder="1,000,482"
-                          min={0}
-                          defaultValue={trustAcc.amountLost}
-                          className="outline-none border p-1.5 rounded"
-                          required
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="amountRecovered"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          AMOUNT RECOVERED
-                        </label>
-                        <input
-                          type="number"
-                          name="amountRecovered"
-                          id="amountRecovered"
-                          placeholder="0"
-                          min={0}
-                          defaultValue={trustAcc.amountRecovered}
-                          className="outline-none border p-1.5 rounded"
-                          required
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="actionTaken"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ACTION TAKEN
+                          REMARKS
                         </label>
                         <textarea
-                          type="text"
-                          name="actionTaken"
-                          id="actionTaken"
-                          defaultValue={trustAcc.actionTaken}
+                          type="number"
+                          name="remarks"
+                          id="remarks"
+                          min={0}
+                          defaultValue={trustAcc.remarks}
                           className="outline-none border p-1.5 rounded"
-                          required
                         />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="recoveryDetails"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          RECOVERY DETAILS
-                        </label>
-
-                        <select
-                          name="recoveryDetails"
-                          id="recoveryDetails"
-                          className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.recoveryDetails}
-                          required
-                        >
-                          <option value="Incomplete">Incomplete</option>
-                          <option value="Complete">Complete</option>
-                        </select>
                       </div>
                     </div>
                     <div className="mt-4">

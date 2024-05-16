@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function EditPSPCybersecurityModal({
+export default function EditPSPScheduleOfDirectorsModal({
   isOpen,
   setIsOpen,
   trustAcc,
@@ -26,11 +26,11 @@ export default function EditPSPCybersecurityModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.put(
-        `/psp-cybersecurity-incident-record/${trustAcc.rowId}`,
+      const response = await apiRequest.patch(
+        `/psp-schedule-of-directors/${trustAcc.rowId}`,
         data
       );
-      console.log("Cybersecurity Incidents: ", response.data);
+      console.log("Director: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -73,7 +73,7 @@ export default function EditPSPCybersecurityModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Edit Cybersecurity Incident
+                    Edit Director Details
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -88,8 +88,8 @@ export default function EditPSPCybersecurityModal({
                           type="text"
                           name="pspId"
                           id="pspId"
-                          defaultValue={trustAcc.pspId}
                           required
+                          defaultValue={trustAcc.pspId}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -112,16 +112,69 @@ export default function EditPSPCybersecurityModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="incidentNumber"
+                          htmlFor="directorName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INCIDENT NUMBER
+                          DIRECTOR&apos;S NAME
                         </label>
                         <input
                           type="text"
-                          name="incidentNumber"
-                          id="incidentNumber"
-                          defaultValue={trustAcc.incidentNumber}
+                          name="directorName"
+                          id="directorName"
+                          required
+                          defaultValue={trustAcc.directorName}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="directorGender"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DIRECTOR&apos;S GENDER
+                        </label>
+                        <select
+                          name="directorGender"
+                          id="directorGender"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        >
+                          <option value="F">Female</option>
+                          <option value="M">Male</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="directorType"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DIRECTOR TYPE
+                        </label>
+
+                        <select
+                          name="directorType"
+                          id="directorType"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        >
+                          <option value="EXECUTIVE">Executive</option>
+                          <option value="NONEXECUTIVE">Non-Executive</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateOfBirth"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE OF BIRTH
+                        </label>
+                        <input
+                          type="date"
+                          name="dateOfBirth"
+                          id="dateOfBirth"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -129,49 +182,33 @@ export default function EditPSPCybersecurityModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="locationOfAttacker"
+                          htmlFor="nationalityOfDirector"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          LOCATION OF ATTACKER
+                          NATIONALITY OF DIRECTOR
                         </label>
                         <input
                           type="text"
-                          name="locationOfAttacker"
-                          id="locationOfAttacker"
+                          name="nationalityOfDirector"
+                          id="nationalityOfDirector"
+                          defaultValue={trustAcc.nationalityOfDirector}
                           required
-                          defaultValue={trustAcc.locationOfAttacker}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="incidentMode"
+                          htmlFor="residenceOfDirector"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INCIDENT MODE
+                          COUNTRY OF RESIDENCE
                         </label>
                         <input
                           type="text"
-                          name="incidentMode"
-                          id="incidentMode"
-                          required
-                          defaultValue={trustAcc.incidentMode}
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="datetimeOfIncident"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          INCIDENT DATE
-                        </label>
-                        <input
-                          type="datetime-local"
-                          name="datetimeOfIncident"
-                          id="datetimeOfIncident"
+                          name="residenceOfDirector"
+                          id="residenceOfDirector"
+                          defaultValue={trustAcc.residenceOfDirector}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -179,121 +216,147 @@ export default function EditPSPCybersecurityModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="lossType"
+                          htmlFor="idNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          LOSS TYPE
+                          ID/PASSPORT NUMBER
                         </label>
                         <input
                           type="text"
-                          name="lossType"
-                          id="lossType"
-                          defaultValue={trustAcc.lossType}
+                          name="idNumber"
+                          id="idNumber"
                           required
+                          defaultValue={trustAcc.idNumber}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="detailsOfIncident"
+                          htmlFor="kraPin"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DETAILS OF THE INCIDENT
+                          KRA PIN NUMBER
+                        </label>
+                        <input
+                          type="text"
+                          name="kraPin"
+                          id="kraPin"
+                          required
+                          defaultValue={trustAcc.kraPin}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="contact"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          CONTACT
+                        </label>
+                        <input
+                          type="text"
+                          name="contact"
+                          id="contact"
+                          required
+                          defaultValue={trustAcc.contact}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="academicQualifications"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          ACADEMIC/PROF QUALIFICATIONS
+                        </label>
+                        <input
+                          type="text"
+                          name="academicQualifications"
+                          id="academicQualifications"
+                          defaultValue={trustAcc.academicQualifications}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="otherDirectorships"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          OTHER DIRECTORSHIPS
                         </label>
                         <textarea
                           type="text"
-                          name="detailsOfIncident"
-                          id="detailsOfIncident"
+                          name="otherDirectorships"
+                          id="otherDirectorships"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.otherDirectorships}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateOfAppointment"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE OF APPOINTMENT
+                        </label>
+                        <input
+                          type="date"
+                          name="dateOfAppointment"
+                          id="dateOfAppointment"
                           required
-                          defaultValue={trustAcc.detailsOfIncident}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="actionTakenToManageIncident"
+                          htmlFor="dateOfRetirement"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          ACTION TAKEN TO MANAGE
+                          DATE OF RETIREMENT
+                        </label>
+                        <input
+                          type="date"
+                          name=" dateOfRetirement"
+                          id=" dateOfRetirement"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="reasonForRetirement"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          REASON FOR RETIREMENT
                         </label>
                         <textarea
                           type="text"
-                          name="actionTakenToManageIncident"
-                          id="actionTakenToManageIncident"
-                          defaultValue={trustAcc.actionTakenToManageIncident}
-                          required
+                          name="reasonForRetirement"
+                          id="reasonForRetirement"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.reasonForRetirement}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="datetimeOfIncidentResolution"
+                          htmlFor="disclosureDetails"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INCIDENT RESOLUTION DATE
-                        </label>
-                        <input
-                          type="datetime-local"
-                          name="datetimeOfIncidentResolution"
-                          id="datetimeOfIncidentResolution"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="actionTakenToMitigateIncident"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          MITIGATION ACTION
+                          DISCLOSURE & TRANSPARENCY DETAILS
                         </label>
                         <textarea
                           type="text"
-                          name="actionTakenToMitigateIncident"
-                          id="actionTakenToMitigateIncident"
-                          defaultValue={trustAcc.actionTakenToMitigateIncident}
-                          required
+                          name="disclosureDetails"
+                          id="disclosureDetails"
+                          defaultValue={trustAcc.disclosureDetails}
                           className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="amountInvolved"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          AMOUNT INVOLVED
-                        </label>
-                        <input
-                          type="number"
-                          name="amountInvolved"
-                          id="amountInvolved"
-                          defaultValue={trustAcc.amountInvolved}
-                          className="outline-none border p-1.5 rounded"
-                          min={0}
-                          required
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="amountLost"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          AMOUNT LOST
-                        </label>
-                        <input
-                          type="number"
-                          name="amountLost"
-                          id="amountLost"
-                          defaultValue={trustAcc.amountLost}
-                          className="outline-none border p-1.5 rounded"
-                          min={0}
-                          required
                         />
                       </div>
                     </div>

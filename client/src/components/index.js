@@ -10,15 +10,17 @@ export { default as AddTrustAccPlacementModal } from "./modals/create/PSP/AddTru
 
 export { default as AddDirectorMgtModal } from "./modals/create/BSD/AddDirectorMgtModal";
 
-export { default as EditFraudIncidentsModal } from "./modals/edit/EditFraudIncidentsModal";
-export { default as EditTrustAccDetailsModal } from "./modals/edit/EditTrustAccDetailsModal";
-export { default as EditTrustAccPlacementsModal } from "./modals/edit/EditTrustAccPlacementsModal";
-export { default as EditMobilePSPModal } from "./modals/edit/EditMobilePSPModal";
-export { default as EditPSPCybersecurityModal } from "./modals/edit/EditPSPCybersecurityModal";
-export { default as EditPSPScheduleOfSeniorMgtModal } from "./modals/edit/EditPSPScheduleOfSeniorMgtModal";
-export { default as EditPSPScheduleOfDirectorsModal } from "./modals/edit/EditPSPScheduleOfDirectorsModal";
-export { default as EditPSPScheduleOfShareholdersModal } from "./modals/edit/EditPSPScheduleOfShareholdersModal";
-export { default as EditPSPScheduleOfTrusteesModal } from "./modals/edit/EditPSPScheduleOfTrusteesModal";
+export { default as EditFraudIncidentsModal } from "./modals/edit/PSP/EditFraudIncidentsModal";
+export { default as EditTrustAccDetailsModal } from "./modals/edit/PSP/EditTrustAccDetailsModal";
+export { default as EditTrustAccPlacementsModal } from "./modals/edit/PSP/EditTrustAccPlacementsModal";
+export { default as EditMobilePSPModal } from "./modals/edit/PSP/EditMobilePSPModal";
+export { default as EditPSPCybersecurityModal } from "./modals/edit/PSP/EditPSPCybersecurityModal";
+export { default as EditPSPScheduleOfSeniorMgtModal } from "./modals/edit/PSP/EditPSPScheduleOfSeniorMgtModal";
+export { default as EditPSPScheduleOfDirectorsModal } from "./modals/edit/PSP/EditPSPScheduleOfDirectorsModal";
+export { default as EditPSPScheduleOfShareholdersModal } from "./modals/edit/PSP/EditPSPScheduleOfShareholdersModal";
+export { default as EditPSPScheduleOfTrusteesModal } from "./modals/edit/PSP/EditPSPScheduleOfTrusteesModal";
+
+export { default as EditDirectorMgtModal } from "./modals/edit/BSD/EditDirectorMgtModal";
 
 export { default as DeleteModal } from "./modals/delete/DeleteModal";
 export { default as DeleteUserModal } from "./modals/delete/DeleteUserModal";

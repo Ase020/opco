@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function EditPSPScheduleOfeniorMgtModal({
+export default function EditPSPScheduleOfTrusteesModal({
   isOpen,
   setIsOpen,
   trustAcc,
@@ -27,10 +27,10 @@ export default function EditPSPScheduleOfeniorMgtModal({
 
     try {
       const response = await apiRequest.put(
-        `/psp-schedule-of-senior-management/${trustAcc.rowId}`,
+        `/psp-schedule-of-trustees/${trustAcc.rowId}`,
         data
       );
-      console.log("Senior Manager: ", response.data);
+      console.log("Trustee: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -73,7 +73,7 @@ export default function EditPSPScheduleOfeniorMgtModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Edit Senior Manager&apos;s Details
+                    Edit Trustee Details
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -112,54 +112,71 @@ export default function EditPSPScheduleOfeniorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="officerName"
+                          htmlFor="trustCompanyName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          OFFICER NAME
+                          TRUST CO NAME
                         </label>
                         <input
                           type="text"
-                          name="officerName"
-                          id="officerName"
+                          name="trustCompanyName"
+                          id="trustCompanyName"
                           required
-                          defaultValue={trustAcc.officerName}
+                          defaultValue={trustAcc.trustCompanyName}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="officerGender"
+                          htmlFor="directorsOfTrustCo"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          GENDER
+                          DIRECTOR OF TRUST CO
+                        </label>
+                        <input
+                          type="text"
+                          name="directorsOfTrustCo"
+                          id="directorsOfTrustCo"
+                          required
+                          defaultValue={trustAcc.directorsOfTrustCo}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="trusteeNames"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          TRUSTEE
+                        </label>
+                        <input
+                          type="text"
+                          name="trusteeNames"
+                          id="trusteeNames"
+                          required
+                          defaultValue={trustAcc.trusteeNames}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="trustGender"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          TRUSTEE&apos;S GENDER
                         </label>
                         <select
-                          name="officerGender"
-                          id="officerGender"
+                          name="trustGender"
+                          id="trustGender"
                           required
                           className="outline-none border p-1.5 rounded"
                         >
                           <option value="F">Female</option>
                           <option value="M">Male</option>
                         </select>
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="designation"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DESIGNATION
-                        </label>
-                        <input
-                          type="text"
-                          name="designation"
-                          id="designation"
-                          required
-                          defaultValue={trustAcc.designation}
-                          className="outline-none border p-1.5 rounded"
-                        />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
@@ -180,17 +197,34 @@ export default function EditPSPScheduleOfeniorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationalityOfOfficer"
+                          htmlFor="nationalityOfTrustee"
                           className="text-nowrap font-semibold text-sm"
                         >
                           NATIONALITY
                         </label>
                         <input
                           type="text"
-                          name="nationalityOfOfficer"
-                          id="nationalityOfOfficer"
+                          name="nationalityOfTrustee"
+                          id="nationalityOfTrustee"
                           required
-                          defaultValue={trustAcc.nationalityOfOfficer}
+                          defaultValue={trustAcc.nationalityOfTrustee}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="residenceOfShareholder"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          COUNTRY OF RESIDENCE
+                        </label>
+                        <input
+                          type="text"
+                          name="residenceOfShareholder"
+                          id="residenceOfShareholder"
+                          required
+                          defaultValue={trustAcc.residenceOfShareholder}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -231,6 +265,23 @@ export default function EditPSPScheduleOfeniorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
+                          htmlFor="contact"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          CONTACT
+                        </label>
+                        <input
+                          type="text"
+                          name="contact"
+                          id="contact"
+                          required
+                          defaultValue={trustAcc.contact}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
                           htmlFor="academicQualifications"
                           className="text-nowrap font-semibold text-sm"
                         >
@@ -240,6 +291,7 @@ export default function EditPSPScheduleOfeniorMgtModal({
                           type="text"
                           name="academicQualifications"
                           id="academicQualifications"
+                          required
                           defaultValue={trustAcc.academicQualifications}
                           className="outline-none border p-1.5 rounded"
                         />
@@ -247,65 +299,16 @@ export default function EditPSPScheduleOfeniorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateOfEmployment"
+                          htmlFor="otherTrusteeships"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE OF EMPLOYMENT
-                        </label>
-                        <input
-                          type="date"
-                          name="dateOfEmployment"
-                          id="dateOfEmployment"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="employmentType"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          EMPLOYMENT TYPE
-                        </label>
-                        <input
-                          type="text"
-                          name="employmentType"
-                          id="employmentType"
-                          defaultValue={trustAcc.employmentType}
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="expectedDateOfRetirement"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          EXP. DATE OF RETIREMENT
-                        </label>
-                        <input
-                          type="date"
-                          name="expectedDateOfRetirement"
-                          id="expectedDateOfRetirement"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="otherAffiliations"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          OTHER AFFILIATIONS
+                          OTHER TRUSTEESHIPS
                         </label>
                         <textarea
                           type="text"
-                          name="otherAffiliations"
-                          id="otherAffiliations"
-                          defaultValue={trustAcc.otherAffiliations}
+                          name="otherTrusteeships"
+                          id="otherTrusteeships"
+                          defaultValue={trustAcc.otherTrusteeships}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -313,7 +316,7 @@ export default function EditPSPScheduleOfeniorMgtModal({
                       <div className="flex flex-col gap-1 w-56">
                         <label
                           htmlFor="disclosureDetails"
-                          className="text-wrap font-semibold text-sm"
+                          className="text-nowrap font-semibold text-sm"
                         >
                           DISCLOSURE & TRANSPARENCY DETAILS
                         </label>
@@ -322,6 +325,41 @@ export default function EditPSPScheduleOfeniorMgtModal({
                           name="disclosureDetails"
                           id="disclosureDetails"
                           defaultValue={trustAcc.disclosureDetails}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="shareholderOfTrust"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHAREHOLDER NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="shareholderOfTrust"
+                          id="shareholderOfTrust"
+                          required
+                          defaultValue={trustAcc.shareholderOfTrust}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="percentageOfShareholding"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHARES PERCENTAGE
+                        </label>
+                        <input
+                          type="number"
+                          name="percentageOfShareholding"
+                          id="percentageOfShareholding"
+                          defaultValue={trustAcc.percentageOfShareholding}
+                          min={0}
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

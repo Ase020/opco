@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditTrustAccPlacementsModal from "../../../modals/edit/EditTrustAccPlacementsModal";
+import EditTrustAccPlacementsModal from "../../../modals/edit/PSP/EditTrustAccPlacementsModal";
 
 /* eslint-disable react/prop-types */
 const TrustAccPlacementsRow = ({ trustAcc, onRecordAdded }) => {

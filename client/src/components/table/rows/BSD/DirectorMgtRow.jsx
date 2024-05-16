@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditMobilePSPModal from "../../../modals/edit/EditMobilePSPModal";
+import EditDirectorMgtModal from "../../../modals/edit/BSD/EditDirectorMgtModal";
 
 /* eslint-disable react/prop-types */
 const DirectorMgtRow = ({ trustAcc, onRecordAdded }) => {
@@ -69,7 +69,7 @@ const DirectorMgtRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditMobilePSPModal
+        <EditDirectorMgtModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -79,7 +79,7 @@ const DirectorMgtRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
+          endPoint={`/director-management-info/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>

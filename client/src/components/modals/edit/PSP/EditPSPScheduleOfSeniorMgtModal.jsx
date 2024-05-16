@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function EditPSPScheduleOfDirectorsModal({
+export default function EditPSPScheduleOfeniorMgtModal({
   isOpen,
   setIsOpen,
   trustAcc,
@@ -26,11 +26,11 @@ export default function EditPSPScheduleOfDirectorsModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.patch(
-        `/psp-schedule-of-directors/${trustAcc.rowId}`,
+      const response = await apiRequest.put(
+        `/psp-schedule-of-senior-management/${trustAcc.rowId}`,
         data
       );
-      console.log("Director: ", response.data);
+      console.log("Senior Manager: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -73,7 +73,7 @@ export default function EditPSPScheduleOfDirectorsModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Edit Director Details
+                    Edit Senior Manager&apos;s Details
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -112,31 +112,31 @@ export default function EditPSPScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="directorName"
+                          htmlFor="officerName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DIRECTOR&apos;S NAME
+                          OFFICER NAME
                         </label>
                         <input
                           type="text"
-                          name="directorName"
-                          id="directorName"
+                          name="officerName"
+                          id="officerName"
                           required
-                          defaultValue={trustAcc.directorName}
+                          defaultValue={trustAcc.officerName}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="directorGender"
+                          htmlFor="officerGender"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DIRECTOR&apos;S GENDER
+                          GENDER
                         </label>
                         <select
-                          name="directorGender"
-                          id="directorGender"
+                          name="officerGender"
+                          id="officerGender"
                           required
                           className="outline-none border p-1.5 rounded"
                         >
@@ -147,21 +147,19 @@ export default function EditPSPScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="directorType"
+                          htmlFor="designation"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DIRECTOR TYPE
+                          DESIGNATION
                         </label>
-
-                        <select
-                          name="directorType"
-                          id="directorType"
+                        <input
+                          type="text"
+                          name="designation"
+                          id="designation"
                           required
+                          defaultValue={trustAcc.designation}
                           className="outline-none border p-1.5 rounded"
-                        >
-                          <option value="EXECUTIVE">Executive</option>
-                          <option value="NONEXECUTIVE">Non-Executive</option>
-                        </select>
+                        />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
@@ -182,34 +180,17 @@ export default function EditPSPScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationalityOfDirector"
+                          htmlFor="nationalityOfOfficer"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NATIONALITY OF DIRECTOR
+                          NATIONALITY
                         </label>
                         <input
                           type="text"
-                          name="nationalityOfDirector"
-                          id="nationalityOfDirector"
-                          defaultValue={trustAcc.nationalityOfDirector}
+                          name="nationalityOfOfficer"
+                          id="nationalityOfOfficer"
                           required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="residenceOfDirector"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          COUNTRY OF RESIDENCE
-                        </label>
-                        <input
-                          type="text"
-                          name="residenceOfDirector"
-                          id="residenceOfDirector"
-                          defaultValue={trustAcc.residenceOfDirector}
-                          required
+                          defaultValue={trustAcc.nationalityOfOfficer}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -250,23 +231,6 @@ export default function EditPSPScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="contact"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CONTACT
-                        </label>
-                        <input
-                          type="text"
-                          name="contact"
-                          id="contact"
-                          required
-                          defaultValue={trustAcc.contact}
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
                           htmlFor="academicQualifications"
                           className="text-nowrap font-semibold text-sm"
                         >
@@ -283,31 +247,15 @@ export default function EditPSPScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="otherDirectorships"
+                          htmlFor="dateOfEmployment"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          OTHER DIRECTORSHIPS
-                        </label>
-                        <textarea
-                          type="text"
-                          name="otherDirectorships"
-                          id="otherDirectorships"
-                          className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.otherDirectorships}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateOfAppointment"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE OF APPOINTMENT
+                          DATE OF EMPLOYMENT
                         </label>
                         <input
                           type="date"
-                          name="dateOfAppointment"
-                          id="dateOfAppointment"
+                          name="dateOfEmployment"
+                          id="dateOfEmployment"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -315,39 +263,57 @@ export default function EditPSPScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateOfRetirement"
+                          htmlFor="employmentType"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE OF RETIREMENT
+                          EMPLOYMENT TYPE
                         </label>
                         <input
-                          type="date"
-                          name=" dateOfRetirement"
-                          id=" dateOfRetirement"
+                          type="text"
+                          name="employmentType"
+                          id="employmentType"
+                          defaultValue={trustAcc.employmentType}
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="reasonForRetirement"
+                          htmlFor="expectedDateOfRetirement"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          REASON FOR RETIREMENT
+                          EXP. DATE OF RETIREMENT
+                        </label>
+                        <input
+                          type="date"
+                          name="expectedDateOfRetirement"
+                          id="expectedDateOfRetirement"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="otherAffiliations"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          OTHER AFFILIATIONS
                         </label>
                         <textarea
                           type="text"
-                          name="reasonForRetirement"
-                          id="reasonForRetirement"
+                          name="otherAffiliations"
+                          id="otherAffiliations"
+                          defaultValue={trustAcc.otherAffiliations}
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.reasonForRetirement}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
                           htmlFor="disclosureDetails"
-                          className="text-nowrap font-semibold text-sm"
+                          className="text-wrap font-semibold text-sm"
                         >
                           DISCLOSURE & TRANSPARENCY DETAILS
                         </label>
