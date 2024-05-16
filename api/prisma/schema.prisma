@@ -242,6 +242,7 @@ model ForeignExchangePosition {
 model DirectorManagementInfo {
   academicQualification   String
   appointmentDate         String
+  bankingExperience       Int
   boardChairCommittee     String?
   boardCommitteeName      String?
   cbkApprovalDate         String
@@ -267,7 +268,6 @@ model DirectorManagementInfo {
   shareholdingFlag        String?
   shareholdingInfo        String?
   staffId                 String?
-  bankingExperience       Int
 }
 
 model ShareholderInfo {

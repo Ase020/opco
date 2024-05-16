@@ -33,6 +33,7 @@ export default function AddDirectorMgtModal({
       setIsOpen(false);
     } catch (error) {
       setErr(error.response.data.message);
+      console.log(error.response.data);
       setLoading(false);
     }
   };
@@ -200,8 +201,8 @@ export default function AddDirectorMgtModal({
                           className="outline-none border p-1.5 rounded"
                           required
                         >
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
+                          <option value="M">Male</option>
+                          <option value="F">Female</option>
                         </select>
                       </div>
 

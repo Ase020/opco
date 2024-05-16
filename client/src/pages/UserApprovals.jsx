@@ -1,9 +1,30 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { User } from "../components";
 import { UsersContext } from "../context/UsersContext";
+import apiRequest from "../lib/apiRequest";
 
 function UserApprovals() {
-  const { verifiedUsers, unverifiedUsers } = useContext(UsersContext);
+  const [users, setUsers] = useState([]);
+
+  const { usersAse } = useContext(UsersContext);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const usersData = await apiRequest.get("/users");
+      setUsers(usersData.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const verifiedUsers = users.filter((user) => user.verified);
+  const unverifiedUsers = users.filter((user) => !user.verified);
+
+  console.log("Users: ", usersAse);
 
   return (
     <section className="max-w-[1440px] mx-auto flex justify-between gap-8 p-3">

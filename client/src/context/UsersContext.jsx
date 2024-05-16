@@ -41,16 +41,11 @@ export const UsersContextProvider = ({ children }) => {
     }
   };
 
-  const verifiedUsers = users.filter((user) => user.verified);
-  const unverifiedUsers = users.filter((user) => !user.verified);
-
   return (
     <UsersContext.Provider
       value={{
         users,
         setUsers,
-        verifiedUsers,
-        unverifiedUsers,
         verifyUser,
         deleteUser,
       }}
