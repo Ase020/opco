@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
 import {
-  AddScheduleOfShareholdersModal,
-  PSPScheduleOfShareholdersHeader,
-  PSPScheduleOfShareholdersRow,
-} from "../components";
-import apiRequest from "../lib/apiRequest";
+  AddScheduleOfTrusteesModal,
+  PSPScheduleOfTrusteesHeader,
+  PSPScheduleOfTrusteesRow,
+} from "../../components";
+import apiRequest from "../../lib/apiRequest";
 
-const PSPScheduleOfShareholders = () => {
-  const [shareholders, setShareholders] = useState([]);
-  let [isOpen, setIsOpen] = useState(false);
+const PSPScheduleOfTrustees = () => {
+  const [trustees, setTrustees] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -22,9 +22,9 @@ const PSPScheduleOfShareholders = () => {
   const fetchTrustAccountsData = async () => {
     try {
       const trustAccountsData = await apiRequest.get(
-        "/psp-schedule-of-shareholders"
+        "/psp-schedule-of-trustees"
       );
-      setShareholders(trustAccountsData.data);
+      setTrustees(trustAccountsData.data);
     } catch (error) {
       console.error(error);
     }
@@ -33,16 +33,16 @@ const PSPScheduleOfShareholders = () => {
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
-        <h2 className="text-3xl text-center">PSP Schedule of Shareholders </h2>
+        <h2 className="text-3xl text-center">PSP Schedule of Trustees </h2>
 
         <div className="overflow-x-auto">
           <table className="border-collapse w-full mb-10">
-            <PSPScheduleOfShareholdersHeader />
+            <PSPScheduleOfTrusteesHeader />
 
             <tbody>
-              {shareholders &&
-                shareholders.map((trustAcc) => (
-                  <PSPScheduleOfShareholdersRow
+              {trustees &&
+                trustees.map((trustAcc) => (
+                  <PSPScheduleOfTrusteesRow
                     key={trustAcc.rowId}
                     trustAcc={trustAcc}
                     onRecordAdded={fetchTrustAccountsData}
@@ -61,7 +61,7 @@ const PSPScheduleOfShareholders = () => {
         </button>
       </div>
 
-      <AddScheduleOfShareholdersModal
+      <AddScheduleOfTrusteesModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onRecordAdded={fetchTrustAccountsData}
@@ -70,4 +70,4 @@ const PSPScheduleOfShareholders = () => {
   );
 };
 
-export default PSPScheduleOfShareholders;
+export default PSPScheduleOfTrustees;

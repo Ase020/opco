@@ -3,8 +3,8 @@ import {
   AddPSPIncidentFraudModal,
   PSPIncidentFraudHeader,
   PSPIncidentFraudRow,
-} from "../components";
-import apiRequest from "../lib/apiRequest";
+} from "../../components";
+import apiRequest from "../../lib/apiRequest";
 
 const PSPIncidentFraud = () => {
   const [fraudIncidents, setFraudIncidents] = useState([]);

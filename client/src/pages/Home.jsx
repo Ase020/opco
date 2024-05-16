@@ -24,7 +24,7 @@ const Home = () => {
           <Link
             key={id}
             to={link}
-            className="border p-4 w-96 flex-center rounded-xl hover:shadow-md"
+            className="border p-4 w-96 flex-center rounded-xl hover:shadow-md text-center"
           >
             {title}
           </Link>

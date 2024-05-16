@@ -3,8 +3,8 @@ import {
   AddTrustAccDetailsModal,
   TrustAccDetailsHeader,
   TrustAccDetailsRow,
-} from "../components";
-import apiRequest from "../lib/apiRequest";
+} from "../../components";
+import apiRequest from "../../lib/apiRequest";
 
 const TrustAccountDetails = () => {
   const [trustAccounts, setTrustAccounts] = useState([]);

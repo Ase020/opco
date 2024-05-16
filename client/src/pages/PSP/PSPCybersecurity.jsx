@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 import {
-  AddScheduleOfDirectorsModal,
-  PSPScheduleOfDirectorsHeader,
-  PSPScheduleOfDirectorsRow,
-} from "../components";
-import apiRequest from "../lib/apiRequest";
+  AddPSPCybersecurityModal,
+  PSPCybersecurityHeader,
+  PSPCybersecurityRow,
+} from "../../components";
+import apiRequest from "../../lib/apiRequest";
 
-const PSPScheduleOfDirectors = () => {
-  const [directors, setDirectors] = useState([]);
+const PSPCybersecurity = () => {
+  const [cybersecurityIncidents, setCybersecurityIncidents] = useState([]);
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -23,9 +23,9 @@ const PSPScheduleOfDirectors = () => {
   const fetchTrustAccountsData = async () => {
     try {
       const trustAccountsData = await apiRequest.get(
-        "/psp-schedule-of-directors"
+        "/psp-cybersecurity-incident-record"
       );
-      setDirectors(trustAccountsData.data);
+      setCybersecurityIncidents(trustAccountsData.data);
     } catch (error) {
       console.error(error);
     }
@@ -34,16 +34,18 @@ const PSPScheduleOfDirectors = () => {
   return (
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
-        <h2 className="text-3xl text-center">PSP Schedule of Directors </h2>
+        <h2 className="text-3xl text-center">
+          PSP Cybersecurity Incident Record{" "}
+        </h2>
 
         <div className="overflow-x-auto">
           <table className="border-collapse w-full mb-10">
-            <PSPScheduleOfDirectorsHeader />
+            <PSPCybersecurityHeader />
 
             <tbody>
-              {directors &&
-                directors.map((trustAcc) => (
-                  <PSPScheduleOfDirectorsRow
+              {cybersecurityIncidents &&
+                cybersecurityIncidents.map((trustAcc) => (
+                  <PSPCybersecurityRow
                     key={trustAcc.rowId}
                     trustAcc={trustAcc}
                     onRecordAdded={fetchTrustAccountsData}
@@ -62,7 +64,7 @@ const PSPScheduleOfDirectors = () => {
         </button>
       </div>
 
-      <AddScheduleOfDirectorsModal
+      <AddPSPCybersecurityModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onRecordAdded={fetchTrustAccountsData}
@@ -71,4 +73,4 @@ const PSPScheduleOfDirectors = () => {
   );
 };
 
-export default PSPScheduleOfDirectors;
+export default PSPCybersecurity;

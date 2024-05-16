@@ -83,3 +83,43 @@ export const scheduleOfSeniorMgtLoader = async () => {
     scheduleOfSeniorMgtResponse: scheduleOfSeniorMgtPromise,
   });
 };
+
+export const directorMgtLoader = async () => {
+  const directorMgtPromise = apiRequest("/director-management-info");
+
+  return defer({
+    directorMgtResponse: directorMgtPromise,
+  });
+};
+
+export const exchangeRatesLoader = async () => {
+  const exchangeRatesPromise = apiRequest("/exchange-rate-info");
+
+  return defer({
+    exchangeRatesResponse: exchangeRatesPromise,
+  });
+};
+
+export const financialPositionLoader = async () => {
+  const financialPositionPromise = apiRequest("/financial-position");
+
+  return defer({
+    financialPositionResponse: financialPositionPromise,
+  });
+};
+
+export const foreignExchangePositionLoader = async () => {
+  const foreignExchangePositionPromise = apiRequest("/exchange-rate-position");
+
+  return defer({
+    foreignExchangePositionResponse: foreignExchangePositionPromise,
+  });
+};
+
+export const shareholdersInfoLoader = async () => {
+  const shareholdersInfoPromise = apiRequest("/shareholder-info");
+
+  return defer({
+    shareholdersInfoResponse: shareholdersInfoPromise,
+  });
+};

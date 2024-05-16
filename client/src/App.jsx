@@ -1,6 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import {
+  DirectorMgt,
+  ExchangeRates,
+  FinPosition,
+  ForeignExchangePosition,
   Home,
   Layout,
   Login,
@@ -12,6 +16,7 @@ import {
   PSPScheduleOfShareholders,
   PSPScheduleOfTrustees,
   RequireAuthLayout,
+  ShareholdersInfo,
   Signup,
   TrustAccountDetails,
   TrustAccountPlacement,
@@ -20,12 +25,17 @@ import {
 } from "./pages";
 import {
   cybersecurityIncidentLoader,
+  directorMgtLoader,
+  exchangeRatesLoader,
+  financialPositionLoader,
+  foreignExchangePositionLoader,
   fraudIncidentsLoader,
   mobilePSPLoader,
   scheduleOfDirectorsLoader,
   scheduleOfSeniorMgtLoader,
   scheduleOfShareholdersLoader,
   scheduleOfTrusteesLoader,
+  shareholdersInfoLoader,
   trustAccDetailsLoader,
   trustAccPlacementsLoader,
 } from "./lib/loaders";
@@ -106,6 +116,31 @@ function App() {
           path: "/trust-account-placement",
           element: <TrustAccountPlacement />,
           loader: trustAccPlacementsLoader,
+        },
+        {
+          path: "/particulars-Of-directors-management-information",
+          element: <DirectorMgt />,
+          loader: directorMgtLoader,
+        },
+        {
+          path: "/shareholder-information",
+          element: <ShareholdersInfo />,
+          loader: shareholdersInfoLoader,
+        },
+        {
+          path: "/exchange-rates-information",
+          element: <ExchangeRates />,
+          loader: exchangeRatesLoader,
+        },
+        {
+          path: "/foreign-exchange-position",
+          element: <ForeignExchangePosition />,
+          loader: foreignExchangePositionLoader,
+        },
+        {
+          path: "/statements-of-financial-position-and-comprehensive-income",
+          element: <FinPosition />,
+          loader: financialPositionLoader,
         },
       ],
     },
