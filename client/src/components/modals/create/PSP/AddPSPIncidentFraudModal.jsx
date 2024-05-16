@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddScheduleOfTrusteesModal({
+export default function AddPSPIncidentFraudModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -25,9 +25,11 @@ export default function AddScheduleOfTrusteesModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post("/psp-schedule-of-trustees", data);
-      console.log("Trustee: ", response.data);
-
+      const response = await apiRequest.post(
+        "/psp-incidents-of-fraud-theft-robbery",
+        data
+      );
+      console.log("Fraud Incident: ", response.data);
       onRecordAdded();
       setLoading(false);
       setIsOpen(false);
@@ -69,7 +71,7 @@ export default function AddScheduleOfTrusteesModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a Trustee
+                    Add a PSP Incident of fraud, theft, or robbery
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -84,9 +86,9 @@ export default function AddScheduleOfTrusteesModal({
                           type="text"
                           name="pspId"
                           id="pspId"
-                          required
                           placeholder="0800002"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
@@ -101,261 +103,218 @@ export default function AddScheduleOfTrusteesModal({
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
-                          required
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustCompanyName"
+                          htmlFor="subCountyCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUST CO NAME
+                          SUB COUNTY CODE
                         </label>
                         <input
                           type="text"
-                          name="trustCompanyName"
-                          id="trustCompanyName"
-                          required
-                          placeholder="Airtel Africa Co"
+                          name="subCountyCode"
+                          id="subCountyCode"
+                          placeholder="141"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="directorsOfTrustCo"
+                          htmlFor="subFraudCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DIRECTOR OF TRUST CO
+                          SUB FRAUD CODE
                         </label>
                         <input
                           type="text"
-                          name="directorsOfTrustCo"
-                          id="directorsOfTrustCo"
-                          required
-                          placeholder="John Doe"
+                          name="subFraudCode"
+                          id="subFraudCode"
+                          placeholder="CYBCRI"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trusteeNames"
+                          htmlFor="fraudCategoryFlag"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUSTEE
+                          FRAUD CATEGORY FLAG
                         </label>
                         <input
                           type="text"
-                          name="trusteeNames"
-                          id="trusteeNames"
-                          required
-                          placeholder="John Doe"
+                          name="fraudCategoryFlag"
+                          id="fraudCategoryFlag"
+                          placeholder="FCT01"
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustGender"
+                          htmlFor="victimCategory"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUSTEE&apos;S GENDER
+                          VICTIM CATEGORY
                         </label>
-                        <select
-                          name="trustGender"
-                          id="trustGender"
-                          required
+                        <input
+                          type="text"
+                          name="victimCategory"
+                          id="victimCategory"
+                          placeholder="VCB"
                           className="outline-none border p-1.5 rounded"
-                        >
-                          <option value="F">Female</option>
-                          <option value="M">Male</option>
-                        </select>
+                          required
+                        />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateOfBirth"
+                          htmlFor="victimInfo"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE OF BIRTH
+                          VICTIM INFO
+                        </label>
+                        <input
+                          type="text"
+                          name="victimInfo"
+                          id="victimInfo"
+                          placeholder="VICT03"
+                          className="outline-none border p-1.5 rounded"
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateOfOccurence"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          OCCURRENCE DATE
                         </label>
                         <input
                           type="date"
-                          name="dateOfBirth"
-                          id="dateOfBirth"
+                          name="dateOfOccurence"
+                          id="dateOfOccurence"
+                          className="outline-none border p-1.5 rounded"
                           required
-                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationalityOfTrustee"
+                          htmlFor="numberOfIncidents"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NATIONALITY
-                        </label>
-                        <input
-                          type="text"
-                          name="nationalityOfTrustee"
-                          id="nationalityOfTrustee"
-                          required
-                          placeholder="KE"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="residenceOfShareholder"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          COUNTRY OF RESIDENCE
-                        </label>
-                        <input
-                          type="text"
-                          name="residenceOfShareholder"
-                          id="residenceOfShareholder"
-                          required
-                          placeholder="KE"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="idNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ID/PASSPORT NUMBER
-                        </label>
-                        <input
-                          type="text"
-                          name="idNumber"
-                          id="idNumber"
-                          required
-                          placeholder="12345678"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="kraPin"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          KRA PIN NUMBER
-                        </label>
-                        <input
-                          type="text"
-                          name="kraPin"
-                          id="kraPin"
-                          required
-                          placeholder="A123456789Z"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="contact"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CONTACT
-                        </label>
-                        <input
-                          type="text"
-                          name="contact"
-                          id="contact"
-                          required
-                          placeholder="254712345678"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="academicQualifications"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ACADEMIC/PROF QUALIFICATIONS
-                        </label>
-                        <input
-                          type="text"
-                          name="academicQualifications"
-                          id="academicQualifications"
-                          required
-                          placeholder="ELAC04"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="otherTrusteeships"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          OTHER TRUSTEESHIPS
-                        </label>
-                        <textarea
-                          type="text"
-                          name="otherTrusteeships"
-                          id="otherTrusteeships"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="disclosureDetails"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DISCLOSURE & TRANSPARENCY DETAILS
-                        </label>
-                        <textarea
-                          type="text"
-                          name="disclosureDetails"
-                          id="disclosureDetails"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="shareholderOfTrust"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          SHAREHOLDER NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="shareholderOfTrust"
-                          id="shareholderOfTrust"
-                          required
-                          placeholder="Gabana Holdings"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="percentageOfShareholding"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          SHARES PERCENTAGE
+                          NUMBER OF INCIDENTS
                         </label>
                         <input
                           type="number"
-                          name="percentageOfShareholding"
-                          id="percentageOfShareholding"
-                          placeholder="32"
-                          min={0}
-                          required
+                          name="numberOfIncidents"
+                          id="numberOfIncidents"
+                          defaultValue={1}
+                          min={1}
                           className="outline-none border p-1.5 rounded"
+                          required
                         />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="amountInvolved"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          AMOUNT INVOLVED
+                        </label>
+                        <input
+                          type="number"
+                          name="amountInvolved"
+                          id="amountInvolved"
+                          placeholder="1,000,482"
+                          min={10}
+                          defaultValue={10}
+                          className="outline-none border p-1.5 rounded"
+                          required
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="amountLost"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          AMOUNT LOST
+                        </label>
+                        <input
+                          type="number"
+                          name="amountLost"
+                          id="amountLost"
+                          placeholder="1,000,482"
+                          min={0}
+                          className="outline-none border p-1.5 rounded"
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="amountRecovered"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          AMOUNT RECOVERED
+                        </label>
+                        <input
+                          type="number"
+                          name="amountRecovered"
+                          id="amountRecovered"
+                          placeholder="0"
+                          min={0}
+                          defaultValue={0}
+                          className="outline-none border p-1.5 rounded"
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="actionTaken"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          ACTION TAKEN
+                        </label>
+                        <textarea
+                          type="text"
+                          name="actionTaken"
+                          id="actionTaken"
+                          className="outline-none border p-1.5 rounded"
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="recoveryDetails"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          RECOVERY DETAILS
+                        </label>
+
+                        <select
+                          name="recoveryDetails"
+                          id="recoveryDetails"
+                          className="outline-none border p-1.5 rounded"
+                          required
+                        >
+                          <option value="Incomplete">Incomplete</option>
+                          <option value="Complete">Complete</option>
+                        </select>
                       </div>
                     </div>
                     <div className="mt-4">
@@ -367,6 +326,7 @@ export default function AddScheduleOfTrusteesModal({
                       </button>
                     </div>
                   </form>
+
                   {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>

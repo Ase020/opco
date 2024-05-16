@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddScheduleOfShareholdersModal({
+export default function AddTrustAccPlacementModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -26,11 +26,10 @@ export default function AddScheduleOfShareholdersModal({
 
     try {
       const response = await apiRequest.post(
-        "/psp-schedule-of-shareholders",
+        "/psp-schedule-of-senior-management",
         data
       );
-      console.log("Shareholder: ", response.data);
-
+      console.log("Senior Manager: ", response.data);
       onRecordAdded();
       setLoading(false);
       setIsOpen(false);
@@ -72,7 +71,7 @@ export default function AddScheduleOfShareholdersModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a Shareholder
+                    Add a PSP Schedule of Senior Management
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -111,35 +110,34 @@ export default function AddScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareholderName"
+                          htmlFor="officerName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHAREHOLDER NAME
+                          OFFICER NAME
                         </label>
                         <input
                           type="text"
-                          name="shareholderName"
-                          id="shareholderName"
+                          name="officerName"
+                          id="officerName"
                           required
-                          placeholder="Gabana Holdings"
+                          placeholder="John Doe"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareholderGender"
+                          htmlFor="officerGender"
                           className="text-nowrap font-semibold text-sm"
                         >
                           GENDER
                         </label>
                         <select
-                          name="shareholderGender"
-                          id="shareholderGender"
+                          name="officerGender"
+                          id="officerGender"
                           required
                           className="outline-none border p-1.5 rounded"
                         >
-                          <option value="C">Company</option>
                           <option value="F">Female</option>
                           <option value="M">Male</option>
                         </select>
@@ -147,21 +145,19 @@ export default function AddScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareholderType"
+                          htmlFor="designation"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHAREHOLDER TYPE
+                          DESIGNATION
                         </label>
-                        <select
+                        <input
                           type="text"
-                          name="shareholderType"
-                          id="shareholderType"
+                          name="designation"
+                          id="designation"
                           required
+                          placeholder="Chief Executive Officer"
                           className="outline-none border p-1.5 rounded"
-                        >
-                          <option value="Corporate">Corporate</option>
-                          <option value="Individual">Individual</option>
-                        </select>
+                        />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
@@ -169,7 +165,7 @@ export default function AddScheduleOfShareholdersModal({
                           htmlFor="dateOfBirth"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DOB/REG DATE
+                          DATE OF BIRTH
                         </label>
                         <input
                           type="date"
@@ -182,49 +178,15 @@ export default function AddScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationalityOfShareholder"
+                          htmlFor="nationalityOfOfficer"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NATIONALITY OF SHAREHOLDER
+                          NATIONALITY
                         </label>
                         <input
                           type="text"
-                          name="nationalityOfShareholder"
-                          id="nationalityOfShareholder"
-                          required
-                          placeholder="KE"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="residenceOfShareholder"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          COUNTRY OF RESIDENCE
-                        </label>
-                        <input
-                          type="text"
-                          name="residenceOfShareholder"
-                          id="residenceOfShareholder"
-                          required
-                          placeholder="KE"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="countryOfIncorporation"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          COUNTRY OF INCORPORATION
-                        </label>
-                        <input
-                          type="text"
-                          name="countryOfIncorporation"
-                          id="countryOfIncorporation"
+                          name="nationalityOfOfficer"
+                          id="nationalityOfOfficer"
                           required
                           placeholder="KE"
                           className="outline-none border p-1.5 rounded"
@@ -267,29 +229,12 @@ export default function AddScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="contact"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CONTACT
-                        </label>
-                        <input
-                          type="text"
-                          name="contact"
-                          id="contact"
-                          required
-                          placeholder="254712345678"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
                           htmlFor="academicQualifications"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ACADEMIC/PROF QUALIFICATIONS
                         </label>
-                        <textarea
+                        <input
                           type="text"
                           name="academicQualifications"
                           id="academicQualifications"
@@ -300,30 +245,15 @@ export default function AddScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="previousEmployment"
+                          htmlFor="dateOfEmployment"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PREVIOUS EMPLOYMENT
-                        </label>
-                        <input
-                          type="text"
-                          name="previousEmployment"
-                          id="previousEmployment"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateBecameShareholder"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE OF APPOINTMENT
+                          DATE OF EMPLOYMENT
                         </label>
                         <input
                           type="date"
-                          name="dateBecameShareholder"
-                          id="dateBecameShareholder"
+                          name="dateOfEmployment"
+                          id="dateOfEmployment"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -331,50 +261,64 @@ export default function AddScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="numberOfShareHeld"
+                          htmlFor="employmentType"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHARES HELD
-                        </label>
-                        <input
-                          type="number"
-                          name="numberOfShareHeld"
-                          id="numberOfShareHeld"
-                          min={1}
-                          placeholder="72"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="shareValue"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          SHARES VALUE
+                          EMPLOYMENT TYPE
                         </label>
                         <input
                           type="text"
-                          name="shareValue"
-                          id="shareValue"
-                          placeholder="720000000"
+                          name="employmentType"
+                          id="employmentType"
+                          placeholder="ETC01"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="percentageOfShare"
+                          htmlFor="expectedDateOfRetirement"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHARES PERCENTAGE
+                          EXP. DATE OF RETIREMENT
                         </label>
                         <input
-                          type="number"
-                          name="percentageOfShare"
-                          id="percentageOfShare"
-                          placeholder="32"
-                          min={0}
+                          type="date"
+                          name="expectedDateOfRetirement"
+                          id="expectedDateOfRetirement"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="otherAffiliations"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          OTHER AFFILIATIONS
+                        </label>
+                        <textarea
+                          type="text"
+                          name="otherAffiliations"
+                          id="otherAffiliations"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="disclosureDetails"
+                          className="text-wrap font-semibold text-sm"
+                        >
+                          DISCLOSURE & TRANSPARENCY DETAILS
+                        </label>
+                        <textarea
+                          type="text"
+                          name="disclosureDetails"
+                          id="disclosureDetails"
+                          placeholder="ELAC04"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

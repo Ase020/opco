@@ -1,10 +1,9 @@
 import { useState } from "react";
-
-import DeleteModal from "../../modals/delete/DeleteModal";
-import { EditPSPScheduleOfSeniorMgtModal } from "../..";
+import DeleteModal from "../../../modals/delete/DeleteModal";
+import EditPSPScheduleOfTrusteesModal from "../../../modals/edit/EditPSPScheduleOfTrusteesModal";
 
 /* eslint-disable react/prop-types */
-const PSPScheduleOfSeniorMgtRow = ({ trustAcc, onRecordAdded }) => {
+const PSPScheduleOfTrusteesRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -21,29 +20,39 @@ const PSPScheduleOfSeniorMgtRow = ({ trustAcc, onRecordAdded }) => {
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
       <td className="border py-2 px-4">{trustAcc.pspId}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4 text-nowrap">{trustAcc.officerName}</td>
-      <td className="border py-2 px-4 text-center">{trustAcc.officerGender}</td>
-      <td className="border py-2 px-4 text-nowrap">{trustAcc.designation}</td>
-      <td className="border py-2 px-4 text-nowrap">{trustAcc.dateOfBirth}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.trustCompanyName}
+      </td>
+      <td className="border py-2 px-4 text-nowrap text-center">
+        {trustAcc.directorsOfTrustCo}
+      </td>
+      <td className="border py-2 px-4 text-nowrap text-center">
+        {trustAcc.trusteeNames}
+      </td>
+      <td className="border py-2 px-4 text-center">{trustAcc.trustGender}</td>
+      <td className="border py-2 px-4 text-center text-nowrap">
+        {trustAcc.dateOfBirth}
+      </td>
       <td className="border py-2 px-4 text-center">
-        {trustAcc.nationalityOfOfficer}
+        {trustAcc.nationalityOfTrustee}
+      </td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.residenceOfShareholder}
       </td>
       <td className="border py-2 px-4">{trustAcc.idNumber}</td>
       <td className="border py-2 px-4">{trustAcc.kraPin}</td>
+      <td className="border py-2 px-4">{trustAcc.contact}</td>
       <td className="border py-2 px-4 text-center">
         {trustAcc.academicQualifications}
       </td>
-      <td className="border py-2 px-4 text-center">
-        {trustAcc.dateOfEmployment}
-      </td>
-      <td className="border py-2 px-4 text-center">
-        {trustAcc.employmentType}
-      </td>
-      <td className="border py-2 px-4 text-center">
-        {trustAcc.expectedDateOfRetirement}
-      </td>
-      <td className="border py-2 px-4">{trustAcc.otherAffilliations}</td>
+      <td className="border py-2 px-4">{trustAcc.otherTrusteeships}</td>
       <td className="border py-2 px-4">{trustAcc.disclosureDetails}</td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.shareholderOfTrust}
+      </td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.percentageOfShareholding}%
+      </td>
 
       <td className="border py-2 text-center">
         <button
@@ -63,7 +72,7 @@ const PSPScheduleOfSeniorMgtRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditPSPScheduleOfSeniorMgtModal
+        <EditPSPScheduleOfTrusteesModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -73,7 +82,7 @@ const PSPScheduleOfSeniorMgtRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/psp-schedule-of-senior-management/${trustAcc.rowId}`}
+          endPoint={`/psp-schedule-of-trustees/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>
@@ -81,4 +90,4 @@ const PSPScheduleOfSeniorMgtRow = ({ trustAcc, onRecordAdded }) => {
   );
 };
 
-export default PSPScheduleOfSeniorMgtRow;
+export default PSPScheduleOfTrusteesRow;

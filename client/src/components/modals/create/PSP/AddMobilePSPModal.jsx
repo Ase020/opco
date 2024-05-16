@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddScheduleOfDirectorsModal({
+export default function AddMobilePSPModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -26,10 +26,10 @@ export default function AddScheduleOfDirectorsModal({
 
     try {
       const response = await apiRequest.post(
-        "/psp-schedule-of-directors",
+        "/mobile-psp-counterfeit-currency-frauds",
         data
       );
-      console.log("Director: ", response.data);
+      console.log("Counterfeit Currency Fraud: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -72,7 +72,7 @@ export default function AddScheduleOfDirectorsModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a PSP Schedule of Director
+                    Mobile PSP Counterfeit Currency Fraud{" "}
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -87,8 +87,8 @@ export default function AddScheduleOfDirectorsModal({
                           type="text"
                           name="pspId"
                           id="pspId"
-                          required
                           placeholder="0800002"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -111,15 +111,99 @@ export default function AddScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="directorName"
+                          htmlFor="subCountyCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DIRECTOR&apos;S NAME
+                          SUB COUNTY CODE
                         </label>
                         <input
                           type="text"
-                          name="directorName"
-                          id="directorName"
+                          name="subCountyCode"
+                          id="subCountyCode"
+                          required
+                          placeholder="121"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="agentId"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          AGENT ID
+                        </label>
+                        <input
+                          type="text"
+                          name="agentId"
+                          id="agentId"
+                          placeholder="90200"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="denominationCode"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DENOMINATION CODE
+                        </label>
+                        <input
+                          type="text"
+                          name="denominationCode"
+                          id="denominationCode"
+                          defaultValue="KES1000"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="serialNumber"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SERIAL NO
+                        </label>
+                        <input
+                          type="text"
+                          name="serialNumber"
+                          id="serialNumber"
+                          placeholder="AB0029977"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="depositorsName"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DEPOSITOR&apos;S NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="depositorsName"
+                          id="depositorsName"
+                          placeholder="John Doe"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="tellersName"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          TELLER&apos;S NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="tellersName"
+                          id="tellersName"
                           required
                           placeholder="Jane Doe"
                           className="outline-none border p-1.5 rounded"
@@ -128,52 +212,15 @@ export default function AddScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="directorGender"
+                          htmlFor="dateConfiscated"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DIRECTOR&apos;S GENDER
-                        </label>
-                        <select
-                          name="directorGender"
-                          id="directorGender"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        >
-                          <option value="F">Female</option>
-                          <option value="M">Male</option>
-                        </select>
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="directorType"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DIRECTOR TYPE
-                        </label>
-
-                        <select
-                          name="directorType"
-                          id="directorType"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        >
-                          <option value="EXECUTIVE">Executive</option>
-                          <option value="NONEXECUTIVE">Non-Executive</option>
-                        </select>
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateOfBirth"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE OF BIRTH
+                          DATE CONFISCATED
                         </label>
                         <input
                           type="date"
-                          name="dateOfBirth"
-                          id="dateOfBirth"
+                          name="dateConfiscated"
+                          id="dateConfiscated"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -181,131 +228,15 @@ export default function AddScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationalityOfDirector"
+                          htmlFor="dateSubmittedToCBK"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NATIONALITY OF DIRECTOR
-                        </label>
-                        <input
-                          type="text"
-                          name="nationalityOfDirector"
-                          id="nationalityOfDirector"
-                          placeholder="KE"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="residenceOfDirector"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          COUNTRY OF RESIDENCE
-                        </label>
-                        <input
-                          type="text"
-                          name="residenceOfDirector"
-                          id="residenceOfDirector"
-                          placeholder="KE"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="idNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ID/PASSPORT NUMBER
-                        </label>
-                        <input
-                          type="text"
-                          name="idNumber"
-                          id="idNumber"
-                          required
-                          placeholder="12345678"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="kraPin"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          KRA PIN NUMBER
-                        </label>
-                        <input
-                          type="text"
-                          name="kraPin"
-                          id="kraPin"
-                          required
-                          placeholder="A123456789Z"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="contact"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CONTACT
-                        </label>
-                        <input
-                          type="text"
-                          name="contact"
-                          id="contact"
-                          required
-                          placeholder="254712345678"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="academicQualifications"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ACADEMIC/PROF QUALIFICATIONS
-                        </label>
-                        <input
-                          type="text"
-                          name="academicQualifications"
-                          id="academicQualifications"
-                          placeholder="ELAC04"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="otherDirectorships"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          OTHER DIRECTORSHIPS
-                        </label>
-                        <textarea
-                          type="text"
-                          name="otherDirectorships"
-                          id="otherDirectorships"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateOfAppointment"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE OF APPOINTMENT
+                          DATE SUBMITTED
                         </label>
                         <input
                           type="date"
-                          name="dateOfAppointment"
-                          id="dateOfAppointment"
+                          name="dateSubmittedToCBK"
+                          id="dateSubmittedToCBK"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -313,45 +244,33 @@ export default function AddScheduleOfDirectorsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateOfRetirement"
+                          htmlFor="numberOfPieces"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE OF RETIREMENT
+                          PIECES
                         </label>
                         <input
-                          type="date"
-                          name=" dateOfRetirement"
-                          id=" dateOfRetirement"
+                          type="number"
+                          name="numberOfPieces"
+                          id="numberOfPieces"
                           className="outline-none border p-1.5 rounded"
+                          min={1}
+                          defaultValue={1}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="reasonForRetirement"
+                          htmlFor="remarks"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          REASON FOR RETIREMENT
+                          REMARKS
                         </label>
                         <textarea
-                          type="text"
-                          name="reasonForRetirement"
-                          id="reasonForRetirement"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="disclosureDetails"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DISCLOSURE & TRANSPARENCY DETAILS
-                        </label>
-                        <textarea
-                          type="text"
-                          name="disclosureDetails"
-                          id="disclosureDetails"
+                          type="number"
+                          name="remarks"
+                          id="remarks"
+                          min={0}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -365,7 +284,6 @@ export default function AddScheduleOfDirectorsModal({
                       </button>
                     </div>
                   </form>
-
                   {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>

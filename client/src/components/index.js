@@ -1,12 +1,14 @@
-export { default as AddTrustAccDetailsModal } from "./modals/create/AddTrustAccDetailsModal";
-export { default as AddMobilePSPModal } from "./modals/create/AddMobilePSPModal";
-export { default as AddPSPCybersecurityModal } from "./modals/create/AddPSPCybersecurityModal";
-export { default as AddPSPIncidentFraudModal } from "./modals/create/AddPSPIncidentFraudModal";
-export { default as AddScheduleOfDirectorsModal } from "./modals/create/AddScheduleOfDirectorsModal";
-export { default as AddScheduleOfSeniorMgtModal } from "./modals/create/AddScheduleOfSeniorMgtModal";
-export { default as AddScheduleOfShareholdersModal } from "./modals/create/AddScheduleOfShareholdersModal";
-export { default as AddScheduleOfTrusteesModal } from "./modals/create/AddScheduleOfTrusteesModal";
-export { default as AddTrustAccPlacementModal } from "./modals/create/AddTrustAccPlacementModal";
+export { default as AddTrustAccDetailsModal } from "./modals/create/PSP/AddTrustAccDetailsModal";
+export { default as AddMobilePSPModal } from "./modals/create/PSP/AddMobilePSPModal";
+export { default as AddPSPCybersecurityModal } from "./modals/create/PSP/AddPSPCybersecurityModal";
+export { default as AddPSPIncidentFraudModal } from "./modals/create/PSP/AddPSPIncidentFraudModal";
+export { default as AddScheduleOfDirectorsModal } from "./modals/create/PSP/AddScheduleOfDirectorsModal";
+export { default as AddScheduleOfSeniorMgtModal } from "./modals/create/PSP/AddScheduleOfSeniorMgtModal";
+export { default as AddScheduleOfShareholdersModal } from "./modals/create/PSP/AddScheduleOfShareholdersModal";
+export { default as AddScheduleOfTrusteesModal } from "./modals/create/PSP/AddScheduleOfTrusteesModal";
+export { default as AddTrustAccPlacementModal } from "./modals/create/PSP/AddTrustAccPlacementModal";
+
+export { default as AddDirectorMgtModal } from "./modals/create/BSD/AddDirectorMgtModal";
 
 export { default as EditFraudIncidentsModal } from "./modals/edit/EditFraudIncidentsModal";
 export { default as EditTrustAccDetailsModal } from "./modals/edit/EditTrustAccDetailsModal";
@@ -41,12 +43,18 @@ export { default as FinPositionHeader } from "./table/headers/BSD/FinPositionHea
 export { default as ForeignExchangePositionHeader } from "./table/headers/BSD/ForeignExchangePositionHeader";
 export { default as ShareholdersInfoHeader } from "./table/headers/BSD/ShareholdersInfoHeader";
 
-export { default as TrustAccDetailsRow } from "./table/rows/TrustAccDetailsRow";
-export { default as TrustAccPlacementsRow } from "./table/rows/TrustAccPlacementsRow";
-export { default as PSPIncidentFraudRow } from "./table/rows/PSPIncidentFraudRow";
-export { default as MobilePSPRow } from "./table/rows/MobilePSPRow";
-export { default as PSPScheduleOfDirectorsRow } from "./table/rows/PSPScheduleOfDirectorsRow";
-export { default as PSPScheduleOfSeniorMgtRow } from "./table/rows/PSPScheduleOfSeniorMgtRow";
-export { default as PSPScheduleOfShareholdersRow } from "./table/rows/PSPScheduleOfShareholdersRow";
-export { default as PSPScheduleOfTrusteesRow } from "./table/rows/PSPScheduleOfTrusteesRow";
-export { default as PSPCybersecurityRow } from "./table/rows/PSPCybersecurityRow";
+export { default as TrustAccDetailsRow } from "./table/rows/PSP/TrustAccDetailsRow";
+export { default as TrustAccPlacementsRow } from "./table/rows/PSP/TrustAccPlacementsRow";
+export { default as PSPIncidentFraudRow } from "./table/rows/PSP/PSPIncidentFraudRow";
+export { default as MobilePSPRow } from "./table/rows/PSP/MobilePSPRow";
+export { default as PSPScheduleOfDirectorsRow } from "./table/rows/PSP/PSPScheduleOfDirectorsRow";
+export { default as PSPScheduleOfSeniorMgtRow } from "./table/rows/PSP/PSPScheduleOfSeniorMgtRow";
+export { default as PSPScheduleOfShareholdersRow } from "./table/rows/PSP/PSPScheduleOfShareholdersRow";
+export { default as PSPScheduleOfTrusteesRow } from "./table/rows/PSP/PSPScheduleOfTrusteesRow";
+export { default as PSPCybersecurityRow } from "./table/rows/PSP/PSPCybersecurityRow";
+
+export { default as DirectorMgtRow } from "./table/rows/BSD/DirectorMgtRow";
+export { default as ExchangeRatesRow } from "./table/rows/BSD/ExchangeRatesRow";
+export { default as FinPositionRow } from "./table/rows/BSD/FinPositionRow";
+export { default as ForeignExchangePositionRow } from "./table/rows/BSD/ForeignExchangePositionRow";
+export { default as ShareholdersInfoRow } from "./table/rows/BSD/ShareholdersInfoRow";

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   AddScheduleOfSeniorMgtModal,
   ExchangeRatesHeader,
-  PSPScheduleOfSeniorMgtRow,
+  ExchangeRatesRow,
 } from "../../components";
 import apiRequest from "../../lib/apiRequest";
 
@@ -39,7 +39,7 @@ const ExchangeRates = () => {
             <tbody>
               {exchangeRates &&
                 exchangeRates.map((trustAcc) => (
-                  <PSPScheduleOfSeniorMgtRow
+                  <ExchangeRatesRow
                     key={trustAcc.rowId}
                     trustAcc={trustAcc}
                     onRecordAdded={fetchExchangeRatesData}

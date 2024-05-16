@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddMobilePSPModal({
+export default function AddDirectorMgtModal({
   isOpen,
   setIsOpen,
   onRecordAdded,

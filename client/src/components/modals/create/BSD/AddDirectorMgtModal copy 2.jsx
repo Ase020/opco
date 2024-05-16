@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddPSPCybersecurityModal({
+export default function AddDirectorMgtModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -26,7 +26,7 @@ export default function AddPSPCybersecurityModal({
 
     try {
       const response = await apiRequest.post(
-        "/psp-cybersecurity-incident-record",
+        "/mobile-psp-counterfeit-currency-frauds",
         data
       );
       console.log("Counterfeit Currency Fraud: ", response.data);
@@ -72,7 +72,7 @@ export default function AddPSPCybersecurityModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a PSP Cybersecurity Incident Record
+                    Mobile PSP Counterfeit Currency Fraud{" "}
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -111,83 +111,66 @@ export default function AddPSPCybersecurityModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="incidentNumber"
+                          htmlFor="subCountyCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INCIDENT NUMBER
+                          SUB COUNTY CODE
                         </label>
                         <input
                           type="text"
-                          name="incidentNumber"
-                          id="incidentNumber"
-                          placeholder="785"
+                          name="subCountyCode"
+                          id="subCountyCode"
                           required
+                          placeholder="121"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="locationOfAttacker"
+                          htmlFor="agentId"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          LOCATION OF ATTACKER
+                          AGENT ID
                         </label>
                         <input
                           type="text"
-                          name="locationOfAttacker"
-                          id="locationOfAttacker"
+                          name="agentId"
+                          id="agentId"
+                          placeholder="90200"
                           required
-                          placeholder="Nigeria"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="incidentMode"
+                          htmlFor="denominationCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INCIDENT MODE
+                          DENOMINATION CODE
                         </label>
                         <input
                           type="text"
-                          name="incidentMode"
-                          id="incidentMode"
-                          required
-                          placeholder="ICDT01"
+                          name="denominationCode"
+                          id="denominationCode"
+                          defaultValue="KES1000"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="datetimeOfIncident"
+                          htmlFor="serialNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INCIDENT DATE
-                        </label>
-                        <input
-                          type="datetime-local"
-                          name="datetimeOfIncident"
-                          id="datetimeOfIncident"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="lossType"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          LOSS TYPE
+                          SERIAL NO
                         </label>
                         <input
                           type="text"
-                          name="lossType"
-                          id="lossType"
-                          placeholder="FIN"
+                          name="serialNumber"
+                          id="serialNumber"
+                          placeholder="AB0029977"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -195,64 +178,16 @@ export default function AddPSPCybersecurityModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="detailsOfIncident"
+                          htmlFor="depositorsName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DETAILS OF THE INCIDENT
-                        </label>
-                        <textarea
-                          type="text"
-                          name="detailsOfIncident"
-                          id="detailsOfIncident"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="actionTakenToManageIncident"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ACTION TAKEN TO MANAGE
-                        </label>
-                        <textarea
-                          type="text"
-                          name="actionTakenToManageIncident"
-                          id="actionTakenToManageIncident"
-                          required
-                          placeholder="Powering off network routers"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="datetimeOfIncidentResolution"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          INCIDENT RESOLUTION DATE
+                          DEPOSITOR&apos;S NAME
                         </label>
                         <input
-                          type="datetime-local"
-                          name="datetimeOfIncidentResolution"
-                          id="datetimeOfIncidentResolution"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="actionTakenToMitigateIncident"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          MITIGATION ACTION
-                        </label>
-                        <textarea
                           type="text"
-                          name="actionTakenToMitigateIncident"
-                          id="actionTakenToMitigateIncident"
+                          name="depositorsName"
+                          id="depositorsName"
+                          placeholder="John Doe"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -260,37 +195,83 @@ export default function AddPSPCybersecurityModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="amountInvolved"
+                          htmlFor="tellersName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          AMOUNT INVOLVED
+                          TELLER&apos;S NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="tellersName"
+                          id="tellersName"
+                          required
+                          placeholder="Jane Doe"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateConfiscated"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE CONFISCATED
+                        </label>
+                        <input
+                          type="date"
+                          name="dateConfiscated"
+                          id="dateConfiscated"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateSubmittedToCBK"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE SUBMITTED
+                        </label>
+                        <input
+                          type="date"
+                          name="dateSubmittedToCBK"
+                          id="dateSubmittedToCBK"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="numberOfPieces"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          PIECES
                         </label>
                         <input
                           type="number"
-                          name="amountInvolved"
-                          id="amountInvolved"
-                          placeholder="1,540,482"
+                          name="numberOfPieces"
+                          id="numberOfPieces"
                           className="outline-none border p-1.5 rounded"
-                          min={0}
-                          required
+                          min={1}
+                          defaultValue={1}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="amountLost"
+                          htmlFor="remarks"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          AMOUNT LOST
+                          REMARKS
                         </label>
-                        <input
+                        <textarea
                           type="number"
-                          name="amountLost"
-                          id="amountLost"
-                          placeholder="54,048"
-                          className="outline-none border p-1.5 rounded"
+                          name="remarks"
+                          id="remarks"
                           min={0}
-                          required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
                     </div>

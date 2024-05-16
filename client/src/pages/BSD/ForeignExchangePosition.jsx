@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   AddScheduleOfShareholdersModal,
   ForeignExchangePositionHeader,
-  PSPScheduleOfShareholdersRow,
+  ForeignExchangePositionRow,
 } from "../../components";
 import apiRequest from "../../lib/apiRequest";
 
@@ -40,7 +40,7 @@ const ForeignExchangePosition = () => {
             <tbody>
               {shareholders &&
                 shareholders.map((trustAcc) => (
-                  <PSPScheduleOfShareholdersRow
+                  <ForeignExchangePositionRow
                     key={trustAcc.rowId}
                     trustAcc={trustAcc}
                     onRecordAdded={fetchTrustAccountsData}

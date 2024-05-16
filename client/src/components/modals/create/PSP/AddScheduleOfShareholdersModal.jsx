@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddTrustAccPlacementModal({
+export default function AddScheduleOfShareholdersModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -26,10 +26,11 @@ export default function AddTrustAccPlacementModal({
 
     try {
       const response = await apiRequest.post(
-        "/psp-schedule-of-senior-management",
+        "/psp-schedule-of-shareholders",
         data
       );
-      console.log("Senior Manager: ", response.data);
+      console.log("Shareholder: ", response.data);
+
       onRecordAdded();
       setLoading(false);
       setIsOpen(false);
@@ -71,7 +72,7 @@ export default function AddTrustAccPlacementModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a PSP Schedule of Senior Management
+                    Add a Shareholder
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -110,34 +111,35 @@ export default function AddTrustAccPlacementModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="officerName"
+                          htmlFor="shareholderName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          OFFICER NAME
+                          SHAREHOLDER NAME
                         </label>
                         <input
                           type="text"
-                          name="officerName"
-                          id="officerName"
+                          name="shareholderName"
+                          id="shareholderName"
                           required
-                          placeholder="John Doe"
+                          placeholder="Gabana Holdings"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="officerGender"
+                          htmlFor="shareholderGender"
                           className="text-nowrap font-semibold text-sm"
                         >
                           GENDER
                         </label>
                         <select
-                          name="officerGender"
-                          id="officerGender"
+                          name="shareholderGender"
+                          id="shareholderGender"
                           required
                           className="outline-none border p-1.5 rounded"
                         >
+                          <option value="C">Company</option>
                           <option value="F">Female</option>
                           <option value="M">Male</option>
                         </select>
@@ -145,19 +147,21 @@ export default function AddTrustAccPlacementModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="designation"
+                          htmlFor="shareholderType"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DESIGNATION
+                          SHAREHOLDER TYPE
                         </label>
-                        <input
+                        <select
                           type="text"
-                          name="designation"
-                          id="designation"
+                          name="shareholderType"
+                          id="shareholderType"
                           required
-                          placeholder="Chief Executive Officer"
                           className="outline-none border p-1.5 rounded"
-                        />
+                        >
+                          <option value="Corporate">Corporate</option>
+                          <option value="Individual">Individual</option>
+                        </select>
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
@@ -165,7 +169,7 @@ export default function AddTrustAccPlacementModal({
                           htmlFor="dateOfBirth"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE OF BIRTH
+                          DOB/REG DATE
                         </label>
                         <input
                           type="date"
@@ -178,15 +182,49 @@ export default function AddTrustAccPlacementModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationalityOfOfficer"
+                          htmlFor="nationalityOfShareholder"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NATIONALITY
+                          NATIONALITY OF SHAREHOLDER
                         </label>
                         <input
                           type="text"
-                          name="nationalityOfOfficer"
-                          id="nationalityOfOfficer"
+                          name="nationalityOfShareholder"
+                          id="nationalityOfShareholder"
+                          required
+                          placeholder="KE"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="residenceOfShareholder"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          COUNTRY OF RESIDENCE
+                        </label>
+                        <input
+                          type="text"
+                          name="residenceOfShareholder"
+                          id="residenceOfShareholder"
+                          required
+                          placeholder="KE"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="countryOfIncorporation"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          COUNTRY OF INCORPORATION
+                        </label>
+                        <input
+                          type="text"
+                          name="countryOfIncorporation"
+                          id="countryOfIncorporation"
                           required
                           placeholder="KE"
                           className="outline-none border p-1.5 rounded"
@@ -229,12 +267,29 @@ export default function AddTrustAccPlacementModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
+                          htmlFor="contact"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          CONTACT
+                        </label>
+                        <input
+                          type="text"
+                          name="contact"
+                          id="contact"
+                          required
+                          placeholder="254712345678"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
                           htmlFor="academicQualifications"
                           className="text-nowrap font-semibold text-sm"
                         >
                           ACADEMIC/PROF QUALIFICATIONS
                         </label>
-                        <input
+                        <textarea
                           type="text"
                           name="academicQualifications"
                           id="academicQualifications"
@@ -245,15 +300,30 @@ export default function AddTrustAccPlacementModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateOfEmployment"
+                          htmlFor="previousEmployment"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE OF EMPLOYMENT
+                          PREVIOUS EMPLOYMENT
+                        </label>
+                        <input
+                          type="text"
+                          name="previousEmployment"
+                          id="previousEmployment"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateBecameShareholder"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE OF APPOINTMENT
                         </label>
                         <input
                           type="date"
-                          name="dateOfEmployment"
-                          id="dateOfEmployment"
+                          name="dateBecameShareholder"
+                          id="dateBecameShareholder"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -261,64 +331,50 @@ export default function AddTrustAccPlacementModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="employmentType"
+                          htmlFor="numberOfShareHeld"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          EMPLOYMENT TYPE
+                          SHARES HELD
+                        </label>
+                        <input
+                          type="number"
+                          name="numberOfShareHeld"
+                          id="numberOfShareHeld"
+                          min={1}
+                          placeholder="72"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="shareValue"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHARES VALUE
                         </label>
                         <input
                           type="text"
-                          name="employmentType"
-                          id="employmentType"
-                          placeholder="ETC01"
-                          required
+                          name="shareValue"
+                          id="shareValue"
+                          placeholder="720000000"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="expectedDateOfRetirement"
+                          htmlFor="percentageOfShare"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          EXP. DATE OF RETIREMENT
+                          SHARES PERCENTAGE
                         </label>
                         <input
-                          type="date"
-                          name="expectedDateOfRetirement"
-                          id="expectedDateOfRetirement"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="otherAffiliations"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          OTHER AFFILIATIONS
-                        </label>
-                        <textarea
-                          type="text"
-                          name="otherAffiliations"
-                          id="otherAffiliations"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="disclosureDetails"
-                          className="text-wrap font-semibold text-sm"
-                        >
-                          DISCLOSURE & TRANSPARENCY DETAILS
-                        </label>
-                        <textarea
-                          type="text"
-                          name="disclosureDetails"
-                          id="disclosureDetails"
-                          placeholder="ELAC04"
+                          type="number"
+                          name="percentageOfShare"
+                          id="percentageOfShare"
+                          placeholder="32"
+                          min={0}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

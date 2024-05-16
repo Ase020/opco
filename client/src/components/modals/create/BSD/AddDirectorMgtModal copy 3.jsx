@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddTrustAccPlacementModal({
+export default function AddDirectorMgtModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -25,8 +25,11 @@ export default function AddTrustAccPlacementModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post("/trust-account-placements", data);
-      console.log("Trust Acc Placement: ", response.data);
+      const response = await apiRequest.post(
+        "/mobile-psp-counterfeit-currency-frauds",
+        data
+      );
+      console.log("Counterfeit Currency Fraud: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -69,7 +72,7 @@ export default function AddTrustAccPlacementModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a Trust Placement
+                    Mobile PSP Counterfeit Currency Fraud{" "}
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -85,8 +88,8 @@ export default function AddTrustAccPlacementModal({
                           name="pspId"
                           id="pspId"
                           placeholder="0800002"
-                          className="outline-none border p-1.5 rounded"
                           required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
@@ -101,72 +104,173 @@ export default function AddTrustAccPlacementModal({
                           type="date"
                           name="reportingDate"
                           id="reportingDate"
-                          className="outline-none border p-1.5 rounded"
                           required
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustFundPlacement"
+                          htmlFor="subCountyCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUST FUND PLACEMENT
+                          SUB COUNTY CODE
                         </label>
                         <input
                           type="text"
-                          name="trustFundPlacement"
-                          id="trustFundPlacement"
-                          placeholder="TFP02"
-                          className="outline-none border p-1.5 rounded"
+                          name="subCountyCode"
+                          id="subCountyCode"
                           required
+                          placeholder="121"
+                          className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustFundInvMaturityDate"
+                          htmlFor="agentId"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INV MATURITY DATE
+                          AGENT ID
+                        </label>
+                        <input
+                          type="text"
+                          name="agentId"
+                          id="agentId"
+                          placeholder="90200"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="denominationCode"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DENOMINATION CODE
+                        </label>
+                        <input
+                          type="text"
+                          name="denominationCode"
+                          id="denominationCode"
+                          defaultValue="KES1000"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="serialNumber"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SERIAL NO
+                        </label>
+                        <input
+                          type="text"
+                          name="serialNumber"
+                          id="serialNumber"
+                          placeholder="AB0029977"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="depositorsName"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DEPOSITOR&apos;S NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="depositorsName"
+                          id="depositorsName"
+                          placeholder="John Doe"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="tellersName"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          TELLER&apos;S NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="tellersName"
+                          id="tellersName"
+                          required
+                          placeholder="Jane Doe"
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateConfiscated"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE CONFISCATED
                         </label>
                         <input
                           type="date"
-                          name="trustFundInvMaturityDate"
-                          id="trustFundInvMaturityDate"
-                          className="outline-none border p-1.5 rounded"
+                          name="dateConfiscated"
+                          id="dateConfiscated"
                           required
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="catTrustFundInvestedAmt"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          INV AMOUNT
-                        </label>
-                        <input
-                          type="number"
-                          name="catTrustFundInvestedAmt"
-                          id="catTrustFundInvestedAmt"
-                          defaultValue={0}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="interestAmtPerCat"
+                          htmlFor="dateSubmittedToCBK"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INTEREST AMOUNT PER CAT
+                          DATE SUBMITTED
+                        </label>
+                        <input
+                          type="date"
+                          name="dateSubmittedToCBK"
+                          id="dateSubmittedToCBK"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="numberOfPieces"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          PIECES
                         </label>
                         <input
                           type="number"
-                          name="interestAmtPerCat"
-                          id="interestAmtPerCat"
-                          defaultValue={0}
+                          name="numberOfPieces"
+                          id="numberOfPieces"
+                          className="outline-none border p-1.5 rounded"
+                          min={1}
+                          defaultValue={1}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="remarks"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          REMARKS
+                        </label>
+                        <textarea
+                          type="number"
+                          name="remarks"
+                          id="remarks"
+                          min={0}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   AddTrustAccPlacementModal,
   ShareholdersInfoHeader,
-  TrustAccPlacementsRow,
+  ShareholdersInfoRow,
 } from "../../components";
 import apiRequest from "../../lib/apiRequest";
 
@@ -40,7 +40,7 @@ const ShareholdersInfo = () => {
             <tbody>
               {trustPlacements &&
                 trustPlacements.map((trustAcc) => (
-                  <TrustAccPlacementsRow
+                  <ShareholdersInfoRow
                     key={trustAcc.rowId}
                     trustAcc={trustAcc}
                     onRecordAdded={fetchTrustAccountsData}

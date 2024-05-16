@@ -1,9 +1,9 @@
 import { useState } from "react";
-import DeleteModal from "../../modals/delete/DeleteModal";
-import EditTrustAccPlacementsModal from "../../modals/edit/EditTrustAccPlacementsModal";
+import DeleteModal from "../../../modals/delete/DeleteModal";
+import EditMobilePSPModal from "../../../modals/edit/EditMobilePSPModal";
 
 /* eslint-disable react/prop-types */
-const TrustAccPlacementsRow = ({ trustAcc, onRecordAdded }) => {
+const ExchangeRatesRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -20,10 +20,18 @@ const TrustAccPlacementsRow = ({ trustAcc, onRecordAdded }) => {
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
       <td className="border py-2 px-4">{trustAcc.pspId}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4">{trustAcc.trustFundPlacement}</td>
-      <td className="border py-2 px-4">{trustAcc.trustFundInvMaturityDate}</td>
-      <td className="border py-2 px-4">{trustAcc.catTrustFundInvestedAmt}</td>
-      <td className="border py-2 px-4">{trustAcc.interestAmtPerCat}</td>
+      <td className="border py-2 px-4">{trustAcc.subCountyCode}</td>
+      <td className="border py-2 px-4">{trustAcc.agentId}</td>
+      <td className="border py-2 px-4">{trustAcc.denominationCode}</td>
+      <td className="border py-2 px-4">{trustAcc.serialNumber}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.depositorsName}
+      </td>
+      <td className="border py-2 px-4 text-nowrap">{trustAcc.tellersName}</td>
+      <td className="border py-2 px-4">{trustAcc.dateConfiscated}</td>
+      <td className="border py-2 px-4">{trustAcc.dateSubmittedToCBK}</td>
+      <td className="border py-2 px-4">{trustAcc.remarks}</td>
+      <td className="border py-2 px-4">{trustAcc.numberOfPieces}</td>
 
       <td className="border py-2 text-center">
         <button
@@ -43,7 +51,7 @@ const TrustAccPlacementsRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditTrustAccPlacementsModal
+        <EditMobilePSPModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -53,7 +61,7 @@ const TrustAccPlacementsRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/trust-account-placements/${trustAcc.rowId}`}
+          endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>
@@ -61,4 +69,4 @@ const TrustAccPlacementsRow = ({ trustAcc, onRecordAdded }) => {
   );
 };
 
-export default TrustAccPlacementsRow;
+export default ExchangeRatesRow;

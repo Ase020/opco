@@ -1,9 +1,9 @@
 import { useState } from "react";
-import EditTrustAccDetailsModal from "../../modals/edit/EditTrustAccDetailsModal";
-import DeleteModal from "../../modals/delete/DeleteModal";
+import DeleteModal from "../../../modals/delete/DeleteModal";
+import EditMobilePSPModal from "../../../modals/edit/EditMobilePSPModal";
 
 /* eslint-disable react/prop-types */
-const TrustAccDetailsRow = ({ trustAcc, onRecordAdded }) => {
+const FinPositionRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -19,22 +19,19 @@ const TrustAccDetailsRow = ({ trustAcc, onRecordAdded }) => {
     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
       <td className="border py-2 px-4">{trustAcc.pspId}</td>
-      <td className="border py-2 px-4">{trustAcc.bankId}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4">{trustAcc.bankAccNumber}</td>
-      <td className="border py-2 px-4">{trustAcc.trustAccDrTypeCode}</td>
+      <td className="border py-2 px-4">{trustAcc.subCountyCode}</td>
+      <td className="border py-2 px-4">{trustAcc.agentId}</td>
+      <td className="border py-2 px-4">{trustAcc.denominationCode}</td>
+      <td className="border py-2 px-4">{trustAcc.serialNumber}</td>
       <td className="border py-2 px-4 text-nowrap">
-        {trustAcc.orgReceivingDonation}
+        {trustAcc.depositorsName}
       </td>
-      <td className="border py-2 px-4">{trustAcc.sectorCode}</td>
-      <td className="border py-2 px-4">
-        {trustAcc.trustAccIntUtilizedDetails}
-      </td>
-      <td className="border py-2 px-4">{trustAcc.openingBal}</td>
-      <td className="border py-2 px-4">{trustAcc.principalAmount}</td>
-      <td className="border py-2 px-4">{trustAcc.interestEarned}</td>
-      <td className="border py-2 px-4">{trustAcc.closingBal}</td>
-      <td className="border py-2 px-4">{trustAcc.trustAccInterestUtilized}</td>
+      <td className="border py-2 px-4 text-nowrap">{trustAcc.tellersName}</td>
+      <td className="border py-2 px-4">{trustAcc.dateConfiscated}</td>
+      <td className="border py-2 px-4">{trustAcc.dateSubmittedToCBK}</td>
+      <td className="border py-2 px-4">{trustAcc.remarks}</td>
+      <td className="border py-2 px-4">{trustAcc.numberOfPieces}</td>
 
       <td className="border py-2 text-center">
         <button
@@ -54,7 +51,7 @@ const TrustAccDetailsRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditTrustAccDetailsModal
+        <EditMobilePSPModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -64,7 +61,7 @@ const TrustAccDetailsRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/trust-accounts/${trustAcc.rowId}`}
+          endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>
@@ -72,4 +69,4 @@ const TrustAccDetailsRow = ({ trustAcc, onRecordAdded }) => {
   );
 };
 
-export default TrustAccDetailsRow;
+export default FinPositionRow;

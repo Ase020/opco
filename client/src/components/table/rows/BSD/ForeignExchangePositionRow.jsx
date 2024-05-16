@@ -1,9 +1,9 @@
 import { useState } from "react";
-import DeleteModal from "../../modals/delete/DeleteModal";
-import EditFraudIncidentsModal from "../../modals/edit/EditFraudIncidentsModal";
+import DeleteModal from "../../../modals/delete/DeleteModal";
+import EditMobilePSPModal from "../../../modals/edit/EditMobilePSPModal";
 
 /* eslint-disable react/prop-types */
-const PSPIncidentFraudRow = ({ trustAcc, onRecordAdded }) => {
+const ForeignExchangePositionRow = ({ trustAcc, onRecordAdded }) => {
   let [isOpen, setIsOpen] = useState(false);
   let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -21,17 +21,17 @@ const PSPIncidentFraudRow = ({ trustAcc, onRecordAdded }) => {
       <td className="border py-2 px-4">{trustAcc.pspId}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
       <td className="border py-2 px-4">{trustAcc.subCountyCode}</td>
-      <td className="border py-2 px-4">{trustAcc.subFraudCode}</td>
-      <td className="border py-2 px-4">{trustAcc.fraudCategoryFlag}</td>
-      <td className="border py-2 px-4">{trustAcc.victimCategory}</td>
-      <td className="border py-2 px-4">{trustAcc.victimInfo}</td>
-      <td className="border py-2 px-4">{trustAcc.dateOfOccurence}</td>
-      <td className="border py-2 px-4">{trustAcc.numberOfIncidents}</td>
-      <td className="border py-2 px-4">{trustAcc.amountInvolved}</td>
-      <td className="border py-2 px-4">{trustAcc.amountLost}</td>
-      <td className="border py-2 px-4">{trustAcc.amountRecovered}</td>
-      <td className="border py-2 px-4">{trustAcc.actionTaken}</td>
-      <td className="border py-2 px-4">{trustAcc.recoveryDetails}</td>
+      <td className="border py-2 px-4">{trustAcc.agentId}</td>
+      <td className="border py-2 px-4">{trustAcc.denominationCode}</td>
+      <td className="border py-2 px-4">{trustAcc.serialNumber}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.depositorsName}
+      </td>
+      <td className="border py-2 px-4 text-nowrap">{trustAcc.tellersName}</td>
+      <td className="border py-2 px-4">{trustAcc.dateConfiscated}</td>
+      <td className="border py-2 px-4">{trustAcc.dateSubmittedToCBK}</td>
+      <td className="border py-2 px-4">{trustAcc.remarks}</td>
+      <td className="border py-2 px-4">{trustAcc.numberOfPieces}</td>
 
       <td className="border py-2 text-center">
         <button
@@ -51,7 +51,7 @@ const PSPIncidentFraudRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditFraudIncidentsModal
+        <EditMobilePSPModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -61,7 +61,7 @@ const PSPIncidentFraudRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/psp-incidents-of-fraud-theft-robbery/${trustAcc.rowId}`}
+          endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>
@@ -69,4 +69,4 @@ const PSPIncidentFraudRow = ({ trustAcc, onRecordAdded }) => {
   );
 };
 
-export default PSPIncidentFraudRow;
+export default ForeignExchangePositionRow;

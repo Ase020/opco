@@ -240,33 +240,33 @@ model ForeignExchangePosition {
 }
 
 model DirectorManagementInfo {
-  rowId                   String  @id @default(auto()) @map("_id") @db.ObjectId
-  institutionCode         String
-  reportingDate           String
-  sequenceId              String
-  nameOfDirector          String
-  staffId                 String?
-  memberType              String?
-  executiveCatType        String
-  gender                  Gender
-  nationality             String
-  residency               String
-  identificationNumber    String
-  passportNumber          String?
-  dob                     String
   academicQualification   String
-  profession              String
-  contactNumber           String?
-  email                   String?
   appointmentDate         String
-  cbkApprovalDate         String
   boardChairCommittee     String?
   boardCommitteeName      String?
-  managementCommitteeName String?
+  cbkApprovalDate         String
   companyName             String?
+  contactNumber           String?
+  dob                     String
+  email                   String?
+  executiveCatType        String
+  gender                  Gender
+  identificationNumber    String
+  institutionCode         String
+  managementCommitteeName String?
+  memberType              String?
+  nameOfDirector          String
+  nationality             String
+  passportNumber          String?
+  profession              String
+  reportingDate           String
+  residency               String
   roleInCompany           String?
+  rowId                   String  @id @default(auto()) @map("_id") @db.ObjectId
+  sequenceId              String
   shareholdingFlag        String?
   shareholdingInfo        String?
+  staffId                 String?
   bankingExperience       Int
 }
 

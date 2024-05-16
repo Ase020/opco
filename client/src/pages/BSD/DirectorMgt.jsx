@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import {
-  AddTrustAccDetailsModal,
+  AddDirectorMgtModal,
   DirectorMgtHeader,
-  TrustAccDetailsRow,
+  DirectorMgtRow,
 } from "../../components";
 import apiRequest from "../../lib/apiRequest";
 
@@ -20,7 +20,9 @@ const DirectorMgt = () => {
 
   const fetchDirectorMgtsData = async () => {
     try {
-      const directorMgtsData = await apiRequest.get("/trust-accounts");
+      const directorMgtsData = await apiRequest.get(
+        "/director-management-info"
+      );
       setDirectorMgts(directorMgtsData.data);
     } catch (error) {
       console.log("Error: ", error.response.data.message);
@@ -41,7 +43,7 @@ const DirectorMgt = () => {
             <tbody>
               {directorMgts &&
                 directorMgts.map((trustAcc) => (
-                  <TrustAccDetailsRow
+                  <DirectorMgtRow
                     key={trustAcc.rowId}
                     trustAcc={trustAcc}
                     onRecordAdded={fetchDirectorMgtsData}
@@ -60,7 +62,7 @@ const DirectorMgt = () => {
         </button>
       </div>
 
-      <AddTrustAccDetailsModal
+      <AddDirectorMgtModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onRecordAdded={fetchDirectorMgtsData}

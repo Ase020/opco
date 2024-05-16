@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   AddScheduleOfTrusteesModal,
   FinPositionHeader,
-  PSPScheduleOfTrusteesRow,
+  FinPositionRow,
 } from "../../components";
 import apiRequest from "../../lib/apiRequest";
 
@@ -42,7 +42,7 @@ const FinPosition = () => {
             <tbody>
               {finPositions &&
                 finPositions.map((trustAcc) => (
-                  <PSPScheduleOfTrusteesRow
+                  <FinPositionRow
                     key={trustAcc.rowId}
                     trustAcc={trustAcc}
                     onRecordAdded={fetchFinPositionsData}
