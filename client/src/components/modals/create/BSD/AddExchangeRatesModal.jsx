@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddDirectorMgtModal({
+export default function AddExchangeRatesModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -25,11 +25,8 @@ export default function AddDirectorMgtModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post(
-        "/mobile-psp-counterfeit-currency-frauds",
-        data
-      );
-      console.log("Counterfeit Currency Fraud: ", response.data);
+      const response = await apiRequest.post("/exchange-rate-info", data);
+      console.log("Exchange Rate Info: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -72,21 +69,21 @@ export default function AddDirectorMgtModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Mobile PSP Counterfeit Currency Fraud{" "}
+                    Exchange Rate Information
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="pspId"
+                          htmlFor="institutionCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PSP ID
+                          INSTITUTION CODE
                         </label>
                         <input
                           type="text"
-                          name="pspId"
-                          id="pspId"
+                          name="institutionCode"
+                          id="institutionCode"
                           placeholder="0800002"
                           required
                           className="outline-none border p-1.5 rounded"
@@ -111,33 +108,33 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="subCountyCode"
+                          htmlFor="currencyCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SUB COUNTY CODE
+                          CURRENCY CODE
                         </label>
                         <input
                           type="text"
-                          name="subCountyCode"
-                          id="subCountyCode"
+                          name="currencyCode"
+                          id="currencyCode"
                           required
-                          placeholder="121"
+                          placeholder="KES"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="agentId"
+                          htmlFor="buyingRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          AGENT ID
+                          BUYING RATE
                         </label>
                         <input
                           type="text"
-                          name="agentId"
-                          id="agentId"
-                          placeholder="90200"
+                          name="buyingRate"
+                          id="buyingRate"
+                          placeholder="120"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -145,32 +142,32 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="denominationCode"
+                          htmlFor="sellingRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DENOMINATION CODE
+                          SELLING RATE
                         </label>
                         <input
                           type="text"
-                          name="denominationCode"
-                          id="denominationCode"
-                          defaultValue="KES1000"
+                          name="sellingRate"
+                          id="sellingRate"
+                          defaultValue="124.25"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="serialNumber"
+                          htmlFor="meanRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SERIAL NO
+                          MEAN RATE
                         </label>
                         <input
                           type="text"
-                          name="serialNumber"
-                          id="serialNumber"
-                          placeholder="AB0029977"
+                          name="meanRate"
+                          id="meanRate"
+                          placeholder="122.00"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -178,16 +175,16 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="depositorsName"
+                          htmlFor="closingBidRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DEPOSITOR&apos;S NAME
+                          CLOSING BID RATE
                         </label>
                         <input
                           type="text"
-                          name="depositorsName"
-                          id="depositorsName"
-                          placeholder="John Doe"
+                          name="closingBidRate"
+                          id="closingBidRate"
+                          placeholder="118.50"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -195,82 +192,34 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="tellersName"
+                          htmlFor="closingOfferRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TELLER&apos;S NAME
+                          CLOSING OFFER RATE
                         </label>
                         <input
                           type="text"
-                          name="tellersName"
-                          id="tellersName"
+                          name="closingOfferRate"
+                          id="closingOfferRate"
                           required
-                          placeholder="Jane Doe"
+                          placeholder="120.00"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateConfiscated"
+                          htmlFor="usdCrossRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE CONFISCATED
+                          USD CROSS RATE
                         </label>
                         <input
-                          type="date"
-                          name="dateConfiscated"
-                          id="dateConfiscated"
+                          type="text"
+                          name="usdCrossRate"
+                          id="usdCrossRate"
                           required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateSubmittedToCBK"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE SUBMITTED
-                        </label>
-                        <input
-                          type="date"
-                          name="dateSubmittedToCBK"
-                          id="dateSubmittedToCBK"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="numberOfPieces"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          PIECES
-                        </label>
-                        <input
-                          type="number"
-                          name="numberOfPieces"
-                          id="numberOfPieces"
-                          className="outline-none border p-1.5 rounded"
-                          min={1}
-                          defaultValue={1}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="remarks"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          REMARKS
-                        </label>
-                        <textarea
-                          type="number"
-                          name="remarks"
-                          id="remarks"
-                          min={0}
+                          placeholder="120.00"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

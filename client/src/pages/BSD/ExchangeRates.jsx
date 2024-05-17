@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  AddScheduleOfSeniorMgtModal,
+  AddExchangeRatesModal,
   ExchangeRatesHeader,
   ExchangeRatesRow,
 } from "../../components";
@@ -58,7 +58,7 @@ const ExchangeRates = () => {
         </button>
       </div>
 
-      <AddScheduleOfSeniorMgtModal
+      <AddExchangeRatesModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onRecordAdded={fetchExchangeRatesData}

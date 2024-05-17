@@ -18,20 +18,19 @@ const ExchangeRatesRow = ({ trustAcc, onRecordAdded }) => {
   return (
     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
-      <td className="border py-2 px-4">{trustAcc.pspId}</td>
+      <td className="border py-2 px-4">{trustAcc.institutionCode}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4">{trustAcc.subCountyCode}</td>
-      <td className="border py-2 px-4">{trustAcc.agentId}</td>
-      <td className="border py-2 px-4">{trustAcc.denominationCode}</td>
-      <td className="border py-2 px-4">{trustAcc.serialNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.currencyCode}</td>
+      <td className="border py-2 px-4">{trustAcc.buyingRate}</td>
+      <td className="border py-2 px-4">{trustAcc.sellingRate}</td>
+      <td className="border py-2 px-4">{trustAcc.meanRate}</td>
       <td className="border py-2 px-4 text-nowrap">
-        {trustAcc.depositorsName}
+        {trustAcc.closingBidRate}
       </td>
-      <td className="border py-2 px-4 text-nowrap">{trustAcc.tellersName}</td>
-      <td className="border py-2 px-4">{trustAcc.dateConfiscated}</td>
-      <td className="border py-2 px-4">{trustAcc.dateSubmittedToCBK}</td>
-      <td className="border py-2 px-4">{trustAcc.remarks}</td>
-      <td className="border py-2 px-4">{trustAcc.numberOfPieces}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.closingOfferRate}
+      </td>
+      <td className="border py-2 px-4">{trustAcc.usdCrossRate}</td>
 
       <td className="border py-2 text-center">
         <button

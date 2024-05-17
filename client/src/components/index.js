@@ -9,6 +9,7 @@ export { default as AddScheduleOfTrusteesModal } from "./modals/create/PSP/AddSc
 export { default as AddTrustAccPlacementModal } from "./modals/create/PSP/AddTrustAccPlacementModal";
 
 export { default as AddDirectorMgtModal } from "./modals/create/BSD/AddDirectorMgtModal";
+export { default as AddExchangeRatesModal } from "./modals/create/BSD/AddExchangeRatesModal";
 
 export { default as EditFraudIncidentsModal } from "./modals/edit/EditFraudIncidentsModal";
 export { default as EditTrustAccDetailsModal } from "./modals/edit/EditTrustAccDetailsModal";
