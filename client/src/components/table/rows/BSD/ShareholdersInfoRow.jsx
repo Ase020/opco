@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditMobilePSPModal from "../../../modals/edit/PSP/EditMobilePSPModal";
+import EditShareholderInfoModal from "../../../modals/edit/BSD/EditShareholderInfoModal";
 
 /* eslint-disable react/prop-types */
 const ShareholdersInfoRow = ({ trustAcc, onRecordAdded }) => {
@@ -18,20 +18,26 @@ const ShareholdersInfoRow = ({ trustAcc, onRecordAdded }) => {
   return (
     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
-      <td className="border py-2 px-4">{trustAcc.pspId}</td>
+      <td className="border py-2 px-4">{trustAcc.bankCode}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4">{trustAcc.subCountyCode}</td>
-      <td className="border py-2 px-4">{trustAcc.agentId}</td>
-      <td className="border py-2 px-4">{trustAcc.denominationCode}</td>
-      <td className="border py-2 px-4">{trustAcc.serialNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.shareholderSequence}</td>
+      <td className="border py-2 px-4">{trustAcc.name}</td>
+      <td className="border py-2 px-4">{trustAcc.gender}</td>
+      <td className="border py-2 px-4">{trustAcc.type}</td>
       <td className="border py-2 px-4 text-nowrap">
-        {trustAcc.depositorsName}
+        {trustAcc.registrationDate}
       </td>
-      <td className="border py-2 px-4 text-nowrap">{trustAcc.tellersName}</td>
-      <td className="border py-2 px-4">{trustAcc.dateConfiscated}</td>
-      <td className="border py-2 px-4">{trustAcc.dateSubmittedToCBK}</td>
-      <td className="border py-2 px-4">{trustAcc.remarks}</td>
-      <td className="border py-2 px-4">{trustAcc.numberOfPieces}</td>
+      <td className="border py-2 px-4 text-nowrap">{trustAcc.nationality}</td>
+      <td className="border py-2 px-4">{trustAcc.residence}</td>
+      <td className="border py-2 px-4">{trustAcc.idNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.address}</td>
+      <td className="border py-2 px-4">{trustAcc.phoneNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.majorPromoter}</td>
+      <td className="border py-2 px-4">{trustAcc.subscribedShares}</td>
+      <td className="border py-2 px-4">{trustAcc.shareValue}</td>
+      <td className="border py-2 px-4">{trustAcc.shareholdingAmount}</td>
+      <td className="border py-2 px-4">{trustAcc.paidUpShares}</td>
+      <td className="border py-2 px-4">{trustAcc.percentageOfShare}</td>
 
       <td className="border py-2 text-center">
         <button
@@ -51,7 +57,7 @@ const ShareholdersInfoRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditMobilePSPModal
+        <EditShareholderInfoModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -61,7 +67,7 @@ const ShareholdersInfoRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
+          endPoint={`/shareholder-info/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>

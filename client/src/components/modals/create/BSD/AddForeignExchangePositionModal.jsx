@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddExchangeRatesModal({
+export default function AddForeignExchangePositionModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -25,8 +25,8 @@ export default function AddExchangeRatesModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post("/exchange-rate-info", data);
-      console.log("Exchange Rate Info: ", response.data);
+      const response = await apiRequest.post("/exchange-rate-position", data);
+      console.log("Foreign Exchange Rates Position: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -69,7 +69,7 @@ export default function AddExchangeRatesModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Exchange Rate Information
+                    Foreign Exchange Rates Position
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -84,7 +84,7 @@ export default function AddExchangeRatesModal({
                           type="text"
                           name="institutionCode"
                           id="institutionCode"
-                          placeholder="0800002"
+                          placeholder="0700002"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -118,23 +118,23 @@ export default function AddExchangeRatesModal({
                           name="currencyCode"
                           id="currencyCode"
                           required
-                          placeholder="KES"
+                          placeholder="GBP"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="buyingRate"
+                          htmlFor="kesSpotRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          BUYING RATE
+                          KES SPOT RATE
                         </label>
                         <input
                           type="text"
-                          name="buyingRate"
-                          id="buyingRate"
-                          placeholder="120"
+                          name="kesSpotRate"
+                          id="kesSpotRate"
+                          placeholder="102.35"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -142,32 +142,32 @@ export default function AddExchangeRatesModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="sellingRate"
+                          htmlFor="openingPositionAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SELLING RATE
+                          OPENING POSITION AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="sellingRate"
-                          id="sellingRate"
-                          placeholder="124.25"
+                          name="openingPositionAmount"
+                          id="openingPositionAmount"
+                          placeholder="8500"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="meanRate"
+                          htmlFor="totalInflowsAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          MEAN RATE
+                          TOTAL INFLOWS AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="meanRate"
-                          id="meanRate"
-                          placeholder="122.00"
+                          name="totalInflowsAmount"
+                          id="totalInflowsAmount"
+                          placeholder="12320.50"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -175,16 +175,16 @@ export default function AddExchangeRatesModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="closingBidRate"
+                          htmlFor="otherTotalInflowsAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          CLOSING BID RATE
+                          OTHER TOTAL INFLOWS AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="closingBidRate"
-                          id="closingBidRate"
-                          placeholder="118.50"
+                          name="otherTotalInflowsAmount"
+                          id="otherTotalInflowsAmount"
+                          placeholder="657"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -192,34 +192,34 @@ export default function AddExchangeRatesModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="closingOfferRate"
+                          htmlFor="totalOutflowsAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          CLOSING OFFER RATE
+                          TOTAL OUTFLOWS AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="closingOfferRate"
-                          id="closingOfferRate"
+                          name="totalOutflowsAmount"
+                          id="totalOutflowsAmount"
                           required
-                          placeholder="120.00"
+                          placeholder="8507.85"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="usdCrossRate"
+                          htmlFor="otherTotalOutflowsAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          USD CROSS RATE
+                          OTHER TOTAL OUTFLOWS AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="usdCrossRate"
-                          id="usdCrossRate"
+                          name="otherTotalOutflowsAmount"
+                          id="otherTotalOutflowsAmount"
+                          placeholder="8507.85"
                           required
-                          placeholder="120.00"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

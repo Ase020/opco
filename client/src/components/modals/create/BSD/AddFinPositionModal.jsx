@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddExchangeRatesModal({
+export default function AddFinPositionModal({
   isOpen,
   setIsOpen,
   onRecordAdded,
@@ -25,8 +25,8 @@ export default function AddExchangeRatesModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post("/exchange-rate-info", data);
-      console.log("Exchange Rate Info: ", response.data);
+      const response = await apiRequest.post("/financial-position", data);
+      console.log("Financial Position: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -69,21 +69,21 @@ export default function AddExchangeRatesModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Exchange Rate Information
+                    Statements Of Financial Position And Comprehensive Income
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="institutionCode"
+                          htmlFor="fxbCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INSTITUTION CODE
+                          CRB MRP FXB CODE
                         </label>
                         <input
                           type="text"
-                          name="institutionCode"
-                          id="institutionCode"
+                          name="fxbCode"
+                          id="fxbCode"
                           placeholder="0800002"
                           required
                           className="outline-none border p-1.5 rounded"
@@ -108,33 +108,51 @@ export default function AddExchangeRatesModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="currencyCode"
+                          htmlFor="mappingCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          CURRENCY CODE
+                          GL MAPPING CODE
                         </label>
                         <input
                           type="text"
-                          name="currencyCode"
-                          id="currencyCode"
+                          name="mappingCode"
+                          id="mappingCode"
                           required
-                          placeholder="KES"
+                          placeholder="121"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="buyingRate"
+                          htmlFor="amount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          BUYING RATE
+                          AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="buyingRate"
-                          id="buyingRate"
+                          name="amount"
+                          id="amount"
+                          placeholder="90200"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="numberOfEmployees"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          NUMBER OF EMPLOYEES
+                        </label>
+                        <input
+                          type="number"
+                          name="numberOfEmployees"
+                          id="numberOfEmployees"
                           placeholder="120"
+                          min={1}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -142,84 +160,18 @@ export default function AddExchangeRatesModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="sellingRate"
+                          htmlFor="numberOfOutlets"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SELLING RATE
+                          NUMBER OF OUTLETS
                         </label>
                         <input
-                          type="text"
-                          name="sellingRate"
-                          id="sellingRate"
-                          placeholder="124.25"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="meanRate"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          MEAN RATE
-                        </label>
-                        <input
-                          type="text"
-                          name="meanRate"
-                          id="meanRate"
-                          placeholder="122.00"
+                          type="number"
+                          name="numberOfOutlets"
+                          id="numberOfOutlets"
+                          placeholder="12"
+                          min={1}
                           required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="closingBidRate"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CLOSING BID RATE
-                        </label>
-                        <input
-                          type="text"
-                          name="closingBidRate"
-                          id="closingBidRate"
-                          placeholder="118.50"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="closingOfferRate"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CLOSING OFFER RATE
-                        </label>
-                        <input
-                          type="text"
-                          name="closingOfferRate"
-                          id="closingOfferRate"
-                          required
-                          placeholder="120.00"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="usdCrossRate"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          USD CROSS RATE
-                        </label>
-                        <input
-                          type="text"
-                          name="usdCrossRate"
-                          id="usdCrossRate"
-                          required
-                          placeholder="120.00"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

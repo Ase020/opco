@@ -4,9 +4,10 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddDirectorMgtModal({
+export default function EditExchangeRatesInfoModal({
   isOpen,
   setIsOpen,
+  trustAcc,
   onRecordAdded,
 }) {
   const [err, setErr] = useState("");
@@ -25,11 +26,11 @@ export default function AddDirectorMgtModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post(
-        "/mobile-psp-counterfeit-currency-frauds",
+      const response = await apiRequest.put(
+        `/exchange-rate-info/${trustAcc.rowId}`,
         data
       );
-      console.log("Counterfeit Currency Fraud: ", response.data);
+      console.log("Exchange Rate Information: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -72,22 +73,22 @@ export default function AddDirectorMgtModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Mobile PSP Counterfeit Currency Fraud{" "}
+                    Edit Exchange Rate Info
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="pspId"
+                          htmlFor="institutionCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PSP ID
+                          INSTITUTION CODE
                         </label>
                         <input
                           type="text"
-                          name="pspId"
-                          id="pspId"
-                          placeholder="0800002"
+                          name="institutionCode"
+                          id="institutionCode"
+                          defaultValue={trustAcc.institutionCode}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -111,33 +112,33 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="subCountyCode"
+                          htmlFor="currencyCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SUB COUNTY CODE
+                          CURRENCY CODE
                         </label>
                         <input
                           type="text"
-                          name="subCountyCode"
-                          id="subCountyCode"
+                          name="currencyCode"
+                          id="currencyCode"
                           required
-                          placeholder="121"
+                          defaultValue={trustAcc.currencyCode}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="agentId"
+                          htmlFor="buyingRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          AGENT ID
+                          BUYING RATE
                         </label>
                         <input
                           type="text"
-                          name="agentId"
-                          id="agentId"
-                          placeholder="90200"
+                          name="buyingRate"
+                          id="buyingRate"
+                          defaultValue={trustAcc.buyingRate}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -145,49 +146,50 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="denominationCode"
+                          htmlFor="sellingRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DENOMINATION CODE
+                          SELLING RATE
                         </label>
                         <input
                           type="text"
-                          name="denominationCode"
-                          id="denominationCode"
-                          defaultValue="KES1000"
+                          name="sellingRate"
+                          id="sellingRate"
+                          required
+                          defaultValue={trustAcc.sellingRate}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="serialNumber"
+                          htmlFor="meanRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SERIAL NO
+                          MEAN RATE
                         </label>
                         <input
                           type="text"
-                          name="serialNumber"
-                          id="serialNumber"
-                          placeholder="AB0029977"
+                          name="meanRate"
+                          id="meanRate"
                           required
+                          defaultValue={trustAcc.meanRate}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="depositorsName"
+                          htmlFor="closingBidRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DEPOSITOR&apos;S NAME
+                          CLOSING BID RATE
                         </label>
                         <input
                           type="text"
-                          name="depositorsName"
-                          id="depositorsName"
-                          placeholder="John Doe"
+                          name="closingBidRate"
+                          id="closingBidRate"
+                          defaultValue={trustAcc.closingBidRate}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -195,83 +197,33 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="tellersName"
+                          htmlFor="closingOfferRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TELLER&apos;S NAME
+                          CLOSING OFFER RATE
                         </label>
                         <input
                           type="text"
-                          name="tellersName"
-                          id="tellersName"
-                          required
-                          placeholder="Jane Doe"
+                          name="closingOfferRate"
+                          id="closingOfferRate"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.closingOfferRate}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateConfiscated"
+                          htmlFor="usdCrossRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE CONFISCATED
+                          USD CROSS RATE
                         </label>
                         <input
-                          type="date"
-                          name="dateConfiscated"
-                          id="dateConfiscated"
-                          required
+                          type="text"
+                          name="usdCrossRate"
+                          id="usdCrossRate"
                           className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateSubmittedToCBK"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE SUBMITTED
-                        </label>
-                        <input
-                          type="date"
-                          name="dateSubmittedToCBK"
-                          id="dateSubmittedToCBK"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="numberOfPieces"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          PIECES
-                        </label>
-                        <input
-                          type="number"
-                          name="numberOfPieces"
-                          id="numberOfPieces"
-                          className="outline-none border p-1.5 rounded"
-                          min={1}
-                          defaultValue={1}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="remarks"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          REMARKS
-                        </label>
-                        <textarea
-                          type="number"
-                          name="remarks"
-                          id="remarks"
-                          min={0}
-                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.usdCrossRate}
                         />
                       </div>
                     </div>
@@ -280,10 +232,11 @@ export default function AddDirectorMgtModal({
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>
+
                   {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>

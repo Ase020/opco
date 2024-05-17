@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  AddTrustAccPlacementModal,
+  AddShareInfoModal,
   ShareholdersInfoHeader,
   ShareholdersInfoRow,
 } from "../../components";
@@ -20,9 +20,7 @@ const ShareholdersInfo = () => {
 
   const fetchTrustAccountsData = async () => {
     try {
-      const trustAccountsData = await apiRequest.get(
-        "/shareholder-information"
-      );
+      const trustAccountsData = await apiRequest.get("/shareholder-info");
       setTrustPlacements(trustAccountsData.data);
     } catch (error) {
       console.error(error);
@@ -59,7 +57,7 @@ const ShareholdersInfo = () => {
         </button>
       </div>
 
-      <AddTrustAccPlacementModal
+      <AddShareInfoModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onRecordAdded={fetchTrustAccountsData}

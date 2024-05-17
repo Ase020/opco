@@ -76,7 +76,7 @@ export const createShareholderInfo = async (req, res) => {
     const userTokenUserType = decodedToken.userType;
 
     if (userTokenUserType !== "legal" && userTokenUserType !== "superAdmin")
-      return res.status(500).json({ message: "Not Authorized!" });
+      return res.status(500).json({ message: "Not Authorized!11" });
 
     const newShareholderInfo = await prisma.shareholderInfo.create({
       data: {

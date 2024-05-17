@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import {
-  AddScheduleOfTrusteesModal,
+  AddFinPositionModal,
   FinPositionHeader,
   FinPositionRow,
 } from "../../components";
@@ -61,7 +61,7 @@ const FinPosition = () => {
         </button>
       </div>
 
-      <AddScheduleOfTrusteesModal
+      <AddFinPositionModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onRecordAdded={fetchFinPositionsData}

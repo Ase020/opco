@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditMobilePSPModal from "../../../modals/edit/PSP/EditMobilePSPModal";
+import EditExchangeRatesInfoModal from "../../../modals/edit/BSD/EditExchangeRatesInfoModal";
 
 /* eslint-disable react/prop-types */
 const ExchangeRatesRow = ({ trustAcc, onRecordAdded }) => {
@@ -50,7 +50,7 @@ const ExchangeRatesRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditMobilePSPModal
+        <EditExchangeRatesInfoModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -60,7 +60,7 @@ const ExchangeRatesRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
+          endPoint={`/exchange-rate-info/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>

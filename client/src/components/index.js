@@ -10,6 +10,9 @@ export { default as AddTrustAccPlacementModal } from "./modals/create/PSP/AddTru
 
 export { default as AddDirectorMgtModal } from "./modals/create/BSD/AddDirectorMgtModal";
 export { default as AddExchangeRatesModal } from "./modals/create/BSD/AddExchangeRatesModal";
+export { default as AddFinPositionModal } from "./modals/create/BSD/AddFinPositionModal";
+export { default as AddForeignExchangePositionModal } from "./modals/create/BSD/AddForeignExchangePositionModal";
+export { default as AddShareInfoModal } from "./modals/create/BSD/AddShareInfoModal";
 
 export { default as EditFraudIncidentsModal } from "./modals/edit/PSP/EditFraudIncidentsModal";
 export { default as EditTrustAccDetailsModal } from "./modals/edit/PSP/EditTrustAccDetailsModal";
@@ -22,6 +25,10 @@ export { default as EditPSPScheduleOfShareholdersModal } from "./modals/edit/PSP
 export { default as EditPSPScheduleOfTrusteesModal } from "./modals/edit/PSP/EditPSPScheduleOfTrusteesModal";
 
 export { default as EditDirectorMgtModal } from "./modals/edit/BSD/EditDirectorMgtModal";
+export { default as EditExchangeRatesInfoModal } from "./modals/edit/BSD/EditExchangeRatesInfoModal";
+export { default as EditFinPositionModal } from "./modals/edit/BSD/EditFinPositionModal";
+export { default as EditForeignExchangePositionModal } from "./modals/edit/BSD/EditForeignExchangePositionModal";
+export { default as EditShareholderInfoModal } from "./modals/edit/BSD/EditShareholderInfoModal";
 
 export { default as DeleteModal } from "./modals/delete/DeleteModal";
 export { default as DeleteUserModal } from "./modals/delete/DeleteUserModal";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import {
-  AddScheduleOfShareholdersModal,
+  AddForeignExchangePositionModal,
   ForeignExchangePositionHeader,
   ForeignExchangePositionRow,
 } from "../../components";
@@ -59,7 +59,7 @@ const ForeignExchangePosition = () => {
         </button>
       </div>
 
-      <AddScheduleOfShareholdersModal
+      <AddForeignExchangePositionModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onRecordAdded={fetchTrustAccountsData}

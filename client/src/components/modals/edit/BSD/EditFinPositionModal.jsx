@@ -4,9 +4,10 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddDirectorMgtModal({
+export default function EditFinPositionModal({
   isOpen,
   setIsOpen,
+  trustAcc,
   onRecordAdded,
 }) {
   const [err, setErr] = useState("");
@@ -25,11 +26,11 @@ export default function AddDirectorMgtModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post(
-        "/mobile-psp-counterfeit-currency-frauds",
+      const response = await apiRequest.put(
+        `/financial-position/${trustAcc.rowId}`,
         data
       );
-      console.log("Counterfeit Currency Fraud: ", response.data);
+      console.log("Exchange Rate Information: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -72,22 +73,22 @@ export default function AddDirectorMgtModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Mobile PSP Counterfeit Currency Fraud{" "}
+                    Edit Financial Position
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="pspId"
+                          htmlFor="fxbCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PSP ID
+                          CRB MRP FXB CODE
                         </label>
                         <input
                           type="text"
-                          name="pspId"
-                          id="pspId"
-                          placeholder="0800002"
+                          name="fxbCode"
+                          id="fxbCode"
+                          defaultValue={trustAcc.fxbCode}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -111,166 +112,71 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="subCountyCode"
+                          htmlFor="mappingCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SUB COUNTY CODE
+                          GL MAPPING CODE
                         </label>
                         <input
                           type="text"
-                          name="subCountyCode"
-                          id="subCountyCode"
+                          name="mappingCode"
+                          id="mappingCode"
                           required
-                          placeholder="121"
+                          defaultValue={trustAcc.mappingCode}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="agentId"
+                          htmlFor="amount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          AGENT ID
-                        </label>
-                        <input
-                          type="text"
-                          name="agentId"
-                          id="agentId"
-                          placeholder="90200"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="denominationCode"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DENOMINATION CODE
-                        </label>
-                        <input
-                          type="text"
-                          name="denominationCode"
-                          id="denominationCode"
-                          defaultValue="KES1000"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="serialNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          SERIAL NO
-                        </label>
-                        <input
-                          type="text"
-                          name="serialNumber"
-                          id="serialNumber"
-                          placeholder="AB0029977"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="depositorsName"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DEPOSITOR&apos;S NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="depositorsName"
-                          id="depositorsName"
-                          placeholder="John Doe"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="tellersName"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          TELLER&apos;S NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="tellersName"
-                          id="tellersName"
-                          required
-                          placeholder="Jane Doe"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateConfiscated"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE CONFISCATED
-                        </label>
-                        <input
-                          type="date"
-                          name="dateConfiscated"
-                          id="dateConfiscated"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateSubmittedToCBK"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE SUBMITTED
-                        </label>
-                        <input
-                          type="date"
-                          name="dateSubmittedToCBK"
-                          id="dateSubmittedToCBK"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="numberOfPieces"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          PIECES
+                          AMOUNT
                         </label>
                         <input
                           type="number"
-                          name="numberOfPieces"
-                          id="numberOfPieces"
-                          className="outline-none border p-1.5 rounded"
-                          min={1}
-                          defaultValue={1}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="remarks"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          REMARKS
-                        </label>
-                        <textarea
-                          type="number"
-                          name="remarks"
-                          id="remarks"
+                          name="amount"
+                          id="amount"
+                          defaultValue={trustAcc.amount}
                           min={0}
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="numberOfEmployees"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          NO. OF EMPLOYEES
+                        </label>
+                        <input
+                          type="number"
+                          name="numberOfEmployees"
+                          id="numberOfEmployees"
+                          required
+                          min={0}
+                          defaultValue={trustAcc.numberOfEmployees}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="numberOfOutlets"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          NO. OF OUTLETS
+                        </label>
+                        <input
+                          type="number"
+                          name="numberOfOutlets"
+                          id="numberOfOutlets"
+                          required
+                          min={0}
+                          defaultValue={trustAcc.numberOfOutlets}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -280,10 +186,11 @@ export default function AddDirectorMgtModal({
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>
+
                   {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>

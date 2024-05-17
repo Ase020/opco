@@ -4,9 +4,10 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddDirectorMgtModal({
+export default function EditForeignExchangePositionModal({
   isOpen,
   setIsOpen,
+  trustAcc,
   onRecordAdded,
 }) {
   const [err, setErr] = useState("");
@@ -25,11 +26,11 @@ export default function AddDirectorMgtModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post(
-        "/mobile-psp-counterfeit-currency-frauds",
+      const response = await apiRequest.put(
+        `/exchange-rate-position/${trustAcc.rowId}`,
         data
       );
-      console.log("Counterfeit Currency Fraud: ", response.data);
+      console.log("Foreign Exchange Rate Position: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -72,22 +73,22 @@ export default function AddDirectorMgtModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Mobile PSP Counterfeit Currency Fraud{" "}
+                    Edit Foreign Exchange Rate Position
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="pspId"
+                          htmlFor="institutionCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PSP ID
+                          INSTITUTION CODE
                         </label>
                         <input
                           type="text"
-                          name="pspId"
-                          id="pspId"
-                          placeholder="0800002"
+                          name="institutionCode"
+                          id="institutionCode"
+                          defaultValue={trustAcc.institutionCode}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -111,33 +112,33 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="subCountyCode"
+                          htmlFor="currencyCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SUB COUNTY CODE
+                          CURRENCY CODE
                         </label>
                         <input
                           type="text"
-                          name="subCountyCode"
-                          id="subCountyCode"
+                          name="currencyCode"
+                          id="currencyCode"
                           required
-                          placeholder="121"
+                          defaultValue={trustAcc.currencyCode}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="agentId"
+                          htmlFor="kesSpotRate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          AGENT ID
+                          KES SPOT RATE
                         </label>
                         <input
                           type="text"
-                          name="agentId"
-                          id="agentId"
-                          placeholder="90200"
+                          name="kesSpotRate"
+                          id="kesSpotRate"
+                          defaultValue={trustAcc.kesSpotRate}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -145,49 +146,50 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="denominationCode"
+                          htmlFor="openingPositionAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DENOMINATION CODE
+                          OPENING POSITION AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="denominationCode"
-                          id="denominationCode"
-                          defaultValue="KES1000"
+                          name="openingPositionAmount"
+                          id="openingPositionAmount"
+                          required
+                          defaultValue={trustAcc.openingPositionAmount}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="serialNumber"
+                          htmlFor="totalInflowsAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SERIAL NO
+                          TOTAL INFLOWS AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="serialNumber"
-                          id="serialNumber"
-                          placeholder="AB0029977"
+                          name="totalInflowsAmount"
+                          id="totalInflowsAmount"
                           required
+                          defaultValue={trustAcc.totalInflowsAmount}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="depositorsName"
+                          htmlFor="otherTotalInflowsAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DEPOSITOR&apos;S NAME
+                          OTHER TOTAL INFLOWS AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="depositorsName"
-                          id="depositorsName"
-                          placeholder="John Doe"
+                          name="otherTotalInflowsAmount"
+                          id="otherTotalInflowsAmount"
+                          defaultValue={trustAcc.otherTotalInflowsAmount}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -195,83 +197,33 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="tellersName"
+                          htmlFor="totalOutflowsAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TELLER&apos;S NAME
+                          TOTAL OUTFLOWS AMOUNT
                         </label>
                         <input
                           type="text"
-                          name="tellersName"
-                          id="tellersName"
-                          required
-                          placeholder="Jane Doe"
+                          name="totalOutflowsAmount"
+                          id="totalOutflowsAmount"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.totalOutflowsAmount}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateConfiscated"
+                          htmlFor="otherTotalOutflowsAmount"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE CONFISCATED
+                          OTHER TOTAL OUTFLOWS AMOUNT
                         </label>
                         <input
-                          type="date"
-                          name="dateConfiscated"
-                          id="dateConfiscated"
-                          required
+                          type="text"
+                          name="otherTotalOutflowsAmount"
+                          id="otherTotalOutflowsAmount"
                           className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dateSubmittedToCBK"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE SUBMITTED
-                        </label>
-                        <input
-                          type="date"
-                          name="dateSubmittedToCBK"
-                          id="dateSubmittedToCBK"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="numberOfPieces"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          PIECES
-                        </label>
-                        <input
-                          type="number"
-                          name="numberOfPieces"
-                          id="numberOfPieces"
-                          className="outline-none border p-1.5 rounded"
-                          min={1}
-                          defaultValue={1}
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="remarks"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          REMARKS
-                        </label>
-                        <textarea
-                          type="number"
-                          name="remarks"
-                          id="remarks"
-                          min={0}
-                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.otherTotalOutflowsAmount}
                         />
                       </div>
                     </div>
@@ -280,10 +232,11 @@ export default function AddDirectorMgtModal({
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>
+
                   {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>

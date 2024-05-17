@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditMobilePSPModal from "../../../modals/edit/PSP/EditMobilePSPModal";
+import EditForeignExchangePositionModal from "../../../modals/edit/BSD/EditForeignExchangePositionModal";
 
 /* eslint-disable react/prop-types */
 const ForeignExchangePositionRow = ({ trustAcc, onRecordAdded }) => {
@@ -18,20 +18,19 @@ const ForeignExchangePositionRow = ({ trustAcc, onRecordAdded }) => {
   return (
     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
-      <td className="border py-2 px-4">{trustAcc.pspId}</td>
+      <td className="border py-2 px-4">{trustAcc.institutionCode}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4">{trustAcc.subCountyCode}</td>
-      <td className="border py-2 px-4">{trustAcc.agentId}</td>
-      <td className="border py-2 px-4">{trustAcc.denominationCode}</td>
-      <td className="border py-2 px-4">{trustAcc.serialNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.currencyCode}</td>
+      <td className="border py-2 px-4">{trustAcc.kesSpotRate}</td>
+      <td className="border py-2 px-4">{trustAcc.openingPositionAmount}</td>
+      <td className="border py-2 px-4">{trustAcc.totalInflowsAmount}</td>
       <td className="border py-2 px-4 text-nowrap">
-        {trustAcc.depositorsName}
+        {trustAcc.otherTotalInflowsAmount}
       </td>
-      <td className="border py-2 px-4 text-nowrap">{trustAcc.tellersName}</td>
-      <td className="border py-2 px-4">{trustAcc.dateConfiscated}</td>
-      <td className="border py-2 px-4">{trustAcc.dateSubmittedToCBK}</td>
-      <td className="border py-2 px-4">{trustAcc.remarks}</td>
-      <td className="border py-2 px-4">{trustAcc.numberOfPieces}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.totalOutflowsAmount}
+      </td>
+      <td className="border py-2 px-4">{trustAcc.otherTotalOutflowsAmount}</td>
 
       <td className="border py-2 text-center">
         <button
@@ -51,7 +50,7 @@ const ForeignExchangePositionRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditMobilePSPModal
+        <EditForeignExchangePositionModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -61,7 +60,7 @@ const ForeignExchangePositionRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
+          endPoint={`/exchange-rate-position/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>
