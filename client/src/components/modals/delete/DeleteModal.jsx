@@ -60,7 +60,7 @@ export default function DeleteModal({
                     as="h3"
                     className="text-lg text-center font-medium leading-6 text-gray-900"
                   >
-                    Are you sure you want to delete this Trust Account?
+                    Are you sure you want to delete this record?
                   </Dialog.Title>
                   <div className="flex items-center mx-auto space-x-16">
                     <button

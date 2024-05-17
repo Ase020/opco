@@ -4,9 +4,10 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddDirectorMgtModal({
+export default function EditPSPScheduleOfShareholdersModal({
   isOpen,
   setIsOpen,
+  trustAcc,
   onRecordAdded,
 }) {
   const [err, setErr] = useState("");
@@ -25,15 +26,17 @@ export default function AddDirectorMgtModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post("/director-management-info", data);
-      console.log("DirectorMgt: ", response.data);
+      const response = await apiRequest.put(
+        `/psp-schedule-of-Shareholders/${trustAcc.rowId}`,
+        data
+      );
+      console.log("Shareholder: ", response.data);
 
       onRecordAdded();
       setLoading(false);
       setIsOpen(false);
     } catch (error) {
       setErr(error.response.data.message);
-      console.log(error.response.data);
       setLoading(false);
     }
   };
@@ -70,23 +73,23 @@ export default function AddDirectorMgtModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Particulars Of Directors/Management Information
+                    Edit Shareholder&apos;s Details
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="institutionCode"
+                          htmlFor="pspId"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INSTITUTION CODE
+                          PSP ID
                         </label>
                         <input
                           type="text"
-                          name="institutionCode"
-                          id="institutionCode"
-                          placeholder="0800002"
+                          name="pspId"
+                          id="pspId"
                           required
+                          defaultValue={trustAcc.pspId}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -109,410 +112,271 @@ export default function AddDirectorMgtModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="sequenceId"
+                          htmlFor="shareholderName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SEQUENCE ID
+                          SHAREHOLDER NAME
                         </label>
                         <input
                           type="text"
-                          name="sequenceId"
-                          id="sequenceId"
+                          name="shareholderName"
+                          id="shareholderName"
                           required
-                          placeholder="121"
+                          defaultValue={trustAcc.shareholderName}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nameOfDirector"
+                          htmlFor="shareholderGender"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="nameOfDirector"
-                          id="nameOfDirector"
-                          placeholder="John Doe"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="staffId"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          STAFF ID
-                        </label>
-                        <input
-                          type="text"
-                          name="staffId"
-                          id="staffId"
-                          defaultValue="STF1001"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="memberType"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          MEMBER TYPE
-                        </label>
-                        <input
-                          type="text"
-                          name="memberType"
-                          id="memberType"
-                          placeholder="AB0029977"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="executiveCatType"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          EXECUTIVE CATEGORY TYPE
-                        </label>
-                        <input
-                          type="text"
-                          name="executiveCatType"
-                          id="executiveCatType"
-                          placeholder="EXTC01"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label htmlFor="gender" className="font-semibold">
                           GENDER
                         </label>
-
                         <select
-                          name="gender"
-                          id="gender"
-                          className="outline-none border p-1.5 rounded"
+                          name="shareholderGender"
+                          id="shareholderGender"
                           required
+                          className="outline-none border p-1.5 rounded"
                         >
-                          <option value="M">Male</option>
+                          <option value="C">Company</option>
                           <option value="F">Female</option>
+                          <option value="M">Male</option>
                         </select>
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationality"
+                          htmlFor="shareholderType"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NATIONALITY
+                          SHAREHOLDER TYPE
                         </label>
-                        <input
-                          type="text"
-                          name="nationality"
-                          id="nationality"
-                          className="outline-none border p-1.5 rounded"
-                          placeholder="KEN"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="residency"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          RESIDENCY
-                        </label>
-                        <input
-                          type="text"
-                          name="residency"
-                          id="residency"
-                          className="outline-none border p-1.5 rounded"
-                          placeholder="KEN"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="identificationNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ID NUMBER
-                        </label>
-                        <input
-                          type="text"
-                          name="identificationNumber"
-                          id="identificationNumber"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                          placeholder="12345678"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="passportNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          PASSPORT NO.
-                        </label>
-                        <input
-                          type="text"
-                          name="passportNumber"
-                          id="passportNumber"
-                          className="outline-none border p-1.5 rounded"
-                          placeholder="12345678"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="dob"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          DATE OF BIRTH/REGISTRATION
-                        </label>
-                        <input
-                          type="date"
-                          name="dob"
-                          id="dob"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="academicQualification"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ACADEMIC QUALIFICATION
-                        </label>
-                        <textarea
-                          type="text"
-                          name="academicQualification"
-                          id="academicQualification"
-                          required
-                          placeholder="AQC01"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="profession"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          PROFESSION
-                        </label>
-                        <input
-                          type="text"
-                          name="profession"
-                          id="profession"
-                          required
-                          placeholder="PC012"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="contactNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CONTACT NO.
-                        </label>
-                        <input
-                          type="text"
-                          name="contactNumber"
-                          id="contactNumber"
-                          placeholder="0712345678"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="email"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          EMAIL
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          id="email"
-                          placeholder="john.doe@gmail.com"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="appointmentDate"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          APPOINTMENT DATE
-                        </label>
-                        <input
-                          type="date"
-                          name="appointmentDate"
-                          id="appointmentDate"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="cbkApprovalDate"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CBK APPROVAL DATE
-                        </label>
-                        <input
-                          type="date"
-                          name="cbkApprovalDate"
-                          id="cbkApprovalDate"
-                          required
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="boardChairCommittee"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          BOARD CHAIR COMMITTEE
-                        </label>
-                        <input
-                          type="text"
-                          name="boardChairCommittee"
-                          id="boardChairCommittee"
-                          placeholder="Committee"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="boardCommitteeName"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          BOARD COMMITTEE NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="boardCommitteeName"
-                          id="boardCommitteeName"
-                          placeholder="Committee 1"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="managementCommitteeName"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          MANAGEMENT COMMITTEE NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="managementCommitteeName"
-                          id="managementCommitteeName"
-                          placeholder="Committee 1"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="companyName"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          COMPANY NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="companyName"
-                          id="companyName"
-                          placeholder="Company 1"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="roleInCompany"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ROLE IN COMPANY NAME
-                        </label>
-                        <input
-                          type="text"
-                          name="roleInCompany"
-                          id="roleInCompany"
-                          placeholder="Managing Director"
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="shareholdingFlag"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          SHAREHOLDING FLAG
-                        </label>
-
                         <select
-                          name="shareholdingFlag"
-                          id="shareholdingFlag"
+                          type="text"
+                          name="shareholderType"
+                          id="shareholderType"
+                          required
                           className="outline-none border p-1.5 rounded"
                         >
-                          <option value="Y">Yes</option>
-                          <option value="N">No</option>
+                          <option value="Corporate">Corporate</option>
+                          <option value="Individual">Individual</option>
                         </select>
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareholdingInfo"
+                          htmlFor="dateOfBirth"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHAREHOLDING INFO
+                          DOB/REG DATE
                         </label>
-                        <textarea
-                          type="text"
-                          name="shareholdingInfo"
-                          id="shareholdingInfo"
-                          placeholder="10000 which is 10% shareholding"
+                        <input
+                          type="date"
+                          name="dateOfBirth"
+                          id="dateOfBirth"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
+
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="bankingExperience"
+                          htmlFor="nationalityOfShareholder"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          BANKING EXPERIENCE
+                          NATIONALITY OF SHAREHOLDER
+                        </label>
+                        <input
+                          type="text"
+                          name="nationalityOfShareholder"
+                          id="nationalityOfShareholder"
+                          required
+                          defaultValue={trustAcc.nationalityOfShareholder}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="residenceOfShareholder"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          COUNTRY OF RESIDENCE
+                        </label>
+                        <input
+                          type="text"
+                          name="residenceOfShareholder"
+                          id="residenceOfShareholder"
+                          required
+                          defaultValue={trustAcc.residenceOfShareholder}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="countryOfIncorporation"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          COUNTRY OF INCORPORATION
+                        </label>
+                        <input
+                          type="text"
+                          name="countryOfIncorporation"
+                          id="countryOfIncorporation"
+                          required
+                          defaultValue={trustAcc.countryOfIncorporation}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="idNumber"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          ID/PASSPORT NUMBER
+                        </label>
+                        <input
+                          type="text"
+                          name="idNumber"
+                          id="idNumber"
+                          required
+                          defaultValue={trustAcc.idNumber}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="kraPin"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          KRA PIN NUMBER
+                        </label>
+                        <input
+                          type="text"
+                          name="kraPin"
+                          id="kraPin"
+                          required
+                          defaultValue={trustAcc.kraPin}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="contact"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          CONTACT
+                        </label>
+                        <input
+                          type="text"
+                          name="contact"
+                          id="contact"
+                          required
+                          defaultValue={trustAcc.contact}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="academicQualifications"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          ACADEMIC/PROF QUALIFICATIONS
+                        </label>
+                        <textarea
+                          type="text"
+                          name="academicQualifications"
+                          id="academicQualifications"
+                          defaultValue={trustAcc.academicQualifications}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="previousEmployment"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          PREVIOUS EMPLOYMENT
+                        </label>
+                        <input
+                          type="text"
+                          name="previousEmployment"
+                          id="previousEmployment"
+                          defaultValue={trustAcc.previousEmployment}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dateBecameShareholder"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE OF APPOINTMENT
+                        </label>
+                        <input
+                          type="date"
+                          name="dateBecameShareholder"
+                          id="dateBecameShareholder"
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="numberOfShareHeld"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHARES HELD
                         </label>
                         <input
                           type="number"
-                          name="bankingExperience"
-                          id="bankingExperience"
+                          name="numberOfShareHeld"
+                          id="numberOfShareHeld"
+                          min={1}
+                          defaultValue={trustAcc.numberOfShareHeld}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="shareValue"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHARES VALUE
+                        </label>
+                        <input
+                          type="text"
+                          name="shareValue"
+                          id="shareValue"
+                          defaultValue={trustAcc.shareValue}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="percentageOfShare"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHARES PERCENTAGE
+                        </label>
+                        <input
+                          type="number"
+                          name="percentageOfShare"
+                          id="percentageOfShare"
+                          defaultValue={trustAcc.percentageOfShare}
                           min={0}
-                          max={199}
-                          required
-                          placeholder="3"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -522,10 +386,11 @@ export default function AddDirectorMgtModal({
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>
+
                   {err && <p className="text-red-400 italic">{err}</p>}
                 </Dialog.Panel>
               </Transition.Child>

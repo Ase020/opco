@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditMobilePSPModal from "../../../modals/edit/EditMobilePSPModal";
+import EditDirectorMgtModal from "../../../modals/edit/BSD/EditDirectorMgtModal";
 
 /* eslint-disable react/prop-types */
 const DirectorMgtRow = ({ trustAcc, onRecordAdded }) => {
@@ -18,20 +18,38 @@ const DirectorMgtRow = ({ trustAcc, onRecordAdded }) => {
   return (
     <tr className="even:bg-[#f2f2f2] hover:bg-[#ddd]">
       {/* <td className="border py-2 px-4">{trustAcc.rowId}</td> */}
-      <td className="border py-2 px-4">{trustAcc.pspId}</td>
+      <td className="border py-2 px-4">{trustAcc.institutionCode}</td>
       <td className="border py-2 px-4">{trustAcc.reportingDate}</td>
-      <td className="border py-2 px-4">{trustAcc.subCountyCode}</td>
-      <td className="border py-2 px-4">{trustAcc.agentId}</td>
-      <td className="border py-2 px-4">{trustAcc.denominationCode}</td>
-      <td className="border py-2 px-4">{trustAcc.serialNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.sequenceId}</td>
       <td className="border py-2 px-4 text-nowrap">
-        {trustAcc.depositorsName}
+        {trustAcc.nameOfDirector}
       </td>
-      <td className="border py-2 px-4 text-nowrap">{trustAcc.tellersName}</td>
-      <td className="border py-2 px-4">{trustAcc.dateConfiscated}</td>
-      <td className="border py-2 px-4">{trustAcc.dateSubmittedToCBK}</td>
-      <td className="border py-2 px-4">{trustAcc.remarks}</td>
-      <td className="border py-2 px-4">{trustAcc.numberOfPieces}</td>
+      <td className="border py-2 px-4 text-nowrap">{trustAcc.staffId}</td>
+      <td className="border py-2 px-4">{trustAcc.memberType}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.executiveCatType}
+      </td>
+      <td className="border py-2 px-4 text-nowrap">{trustAcc.gender}</td>
+      <td className="border py-2 px-4">{trustAcc.nationality}</td>
+      <td className="border py-2 px-4">{trustAcc.residency}</td>
+      <td className="border py-2 px-4 text-nowrap">
+        {trustAcc.identificationNumber}
+      </td>
+      <td className="border py-2 px-4">{trustAcc.passportNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.academicQualification}</td>
+      <td className="border py-2 px-4">{trustAcc.profession}</td>
+      <td className="border py-2 px-4">{trustAcc.contactNumber}</td>
+      <td className="border py-2 px-4">{trustAcc.email}</td>
+      <td className="border py-2 px-4">{trustAcc.appointmentDate}</td>
+      <td className="border py-2 px-4">{trustAcc.cbkApprovalDate}</td>
+      <td className="border py-2 px-4">{trustAcc.boardChairCommittee}</td>
+      <td className="border py-2 px-4">{trustAcc.boardCommitteeName}</td>
+      <td className="border py-2 px-4">{trustAcc.managementCommitteeName}</td>
+      <td className="border py-2 px-4">{trustAcc.companyName}</td>
+      <td className="border py-2 px-4">{trustAcc.roleInCompany}</td>
+      <td className="border py-2 px-4">{trustAcc.shareholdingFlag}</td>
+      <td className="border py-2 px-4">{trustAcc.shareholdingInfo}</td>
+      <td className="border py-2 px-4">{trustAcc.bankingExperience}</td>
 
       <td className="border py-2 text-center">
         <button
@@ -51,7 +69,7 @@ const DirectorMgtRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditMobilePSPModal
+        <EditDirectorMgtModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
@@ -61,7 +79,7 @@ const DirectorMgtRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/mobile-psp-counterfeit-currency-frauds/${trustAcc.rowId}`}
+          endPoint={`/director-management-info/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>

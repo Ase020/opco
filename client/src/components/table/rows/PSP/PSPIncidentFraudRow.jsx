@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditFraudIncidentsModal from "../../../modals/edit/EditFraudIncidentsModal";
+import EditFraudIncidentsModal from "../../../modals/edit/PSP/EditFraudIncidentsModal";
 
 /* eslint-disable react/prop-types */
 const PSPIncidentFraudRow = ({ trustAcc, onRecordAdded }) => {

@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function EditPSPScheduleOfShareholdersModal({
+export default function EditDirectorMgtModal({
   isOpen,
   setIsOpen,
   trustAcc,
@@ -27,10 +27,10 @@ export default function EditPSPScheduleOfShareholdersModal({
 
     try {
       const response = await apiRequest.put(
-        `/psp-schedule-of-Shareholders/${trustAcc.rowId}`,
+        `/director-management-info/${trustAcc.rowId}`,
         data
       );
-      console.log("Shareholder: ", response.data);
+      console.log("Fraud Incident: ", response.data);
 
       onRecordAdded();
       setLoading(false);
@@ -73,23 +73,23 @@ export default function EditPSPScheduleOfShareholdersModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Edit Shareholder&apos;s Details
+                    Edit Director/Management info
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="pspId"
+                          htmlFor="institutionCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PSP ID
+                          INSTITUTION CODE
                         </label>
                         <input
                           type="text"
-                          name="pspId"
-                          id="pspId"
+                          name="institutionCode"
+                          id="institutionCode"
+                          defaultValue={trustAcc.institutionCode}
                           required
-                          defaultValue={trustAcc.pspId}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -112,70 +112,179 @@ export default function EditPSPScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareholderName"
+                          htmlFor="sequenceId"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHAREHOLDER NAME
+                          SEQUENCE ID
                         </label>
                         <input
                           type="text"
-                          name="shareholderName"
-                          id="shareholderName"
+                          name="sequenceId"
+                          id="sequenceId"
                           required
-                          defaultValue={trustAcc.shareholderName}
+                          defaultValue={trustAcc.sequenceId}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareholderGender"
+                          htmlFor="nameOfDirector"
                           className="text-nowrap font-semibold text-sm"
                         >
+                          NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="nameOfDirector"
+                          id="nameOfDirector"
+                          defaultValue={trustAcc.nameOfDirector}
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="staffId"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          STAFF ID
+                        </label>
+                        <input
+                          type="text"
+                          name="staffId"
+                          id="staffId"
+                          defaultValue={trustAcc.staffId}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="memberType"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          MEMBER TYPE
+                        </label>
+                        <input
+                          type="text"
+                          name="memberType"
+                          id="memberType"
+                          defaultValue={trustAcc.memberType}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="executiveCatType"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          EXECUTIVE CATEGORY TYPE
+                        </label>
+                        <input
+                          type="text"
+                          name="executiveCatType"
+                          id="executiveCatType"
+                          defaultValue={trustAcc.executiveCatType}
+                          required
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label htmlFor="gender" className="font-semibold">
                           GENDER
                         </label>
+
                         <select
-                          name="shareholderGender"
-                          id="shareholderGender"
-                          required
+                          name="gender"
+                          id="gender"
                           className="outline-none border p-1.5 rounded"
+                          required
                         >
-                          <option value="C">Company</option>
-                          <option value="F">Female</option>
                           <option value="M">Male</option>
+                          <option value="F">Female</option>
                         </select>
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareholderType"
+                          htmlFor="nationality"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHAREHOLDER TYPE
+                          NATIONALITY
                         </label>
-                        <select
+                        <input
                           type="text"
-                          name="shareholderType"
-                          id="shareholderType"
+                          name="nationality"
+                          id="nationality"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.nationality}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="residency"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          RESIDENCY
+                        </label>
+                        <input
+                          type="text"
+                          name="residency"
+                          id="residency"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.residency}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="identificationNumber"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          ID NUMBER
+                        </label>
+                        <input
+                          type="text"
+                          name="identificationNumber"
+                          id="identificationNumber"
                           required
                           className="outline-none border p-1.5 rounded"
-                        >
-                          <option value="Corporate">Corporate</option>
-                          <option value="Individual">Individual</option>
-                        </select>
+                          defaultValue={trustAcc.identificationNumber}
+                        />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateOfBirth"
+                          htmlFor="passportNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DOB/REG DATE
+                          PASSPORT NO.
+                        </label>
+                        <input
+                          type="text"
+                          name="passportNumber"
+                          id="passportNumber"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.passportNumber}
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="dob"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          DATE OF BIRTH/REGISTRATION
                         </label>
                         <input
                           type="date"
-                          name="dateOfBirth"
-                          id="dateOfBirth"
+                          name="dob"
+                          id="dob"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -183,149 +292,81 @@ export default function EditPSPScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="nationalityOfShareholder"
+                          htmlFor="academicQualification"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          NATIONALITY OF SHAREHOLDER
-                        </label>
-                        <input
-                          type="text"
-                          name="nationalityOfShareholder"
-                          id="nationalityOfShareholder"
-                          required
-                          defaultValue={trustAcc.nationalityOfShareholder}
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="residenceOfShareholder"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          COUNTRY OF RESIDENCE
-                        </label>
-                        <input
-                          type="text"
-                          name="residenceOfShareholder"
-                          id="residenceOfShareholder"
-                          required
-                          defaultValue={trustAcc.residenceOfShareholder}
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="countryOfIncorporation"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          COUNTRY OF INCORPORATION
-                        </label>
-                        <input
-                          type="text"
-                          name="countryOfIncorporation"
-                          id="countryOfIncorporation"
-                          required
-                          defaultValue={trustAcc.countryOfIncorporation}
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="idNumber"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ID/PASSPORT NUMBER
-                        </label>
-                        <input
-                          type="text"
-                          name="idNumber"
-                          id="idNumber"
-                          required
-                          defaultValue={trustAcc.idNumber}
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="kraPin"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          KRA PIN NUMBER
-                        </label>
-                        <input
-                          type="text"
-                          name="kraPin"
-                          id="kraPin"
-                          required
-                          defaultValue={trustAcc.kraPin}
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="contact"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          CONTACT
-                        </label>
-                        <input
-                          type="text"
-                          name="contact"
-                          id="contact"
-                          required
-                          defaultValue={trustAcc.contact}
-                          className="outline-none border p-1.5 rounded"
-                        />
-                      </div>
-
-                      <div className="flex flex-col gap-1 w-56">
-                        <label
-                          htmlFor="academicQualifications"
-                          className="text-nowrap font-semibold text-sm"
-                        >
-                          ACADEMIC/PROF QUALIFICATIONS
+                          ACADEMIC QUALIFICATION
                         </label>
                         <textarea
                           type="text"
-                          name="academicQualifications"
-                          id="academicQualifications"
-                          defaultValue={trustAcc.academicQualifications}
+                          name="academicQualification"
+                          id="academicQualification"
+                          required
+                          defaultValue={trustAcc.academicQualification}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="previousEmployment"
+                          htmlFor="profession"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          PREVIOUS EMPLOYMENT
+                          PROFESSION
                         </label>
                         <input
                           type="text"
-                          name="previousEmployment"
-                          id="previousEmployment"
-                          defaultValue={trustAcc.previousEmployment}
+                          name="profession"
+                          id="profession"
+                          required
+                          defaultValue={trustAcc.profession}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="dateBecameShareholder"
+                          htmlFor="contactNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          DATE OF APPOINTMENT
+                          CONTACT NO.
+                        </label>
+                        <input
+                          type="text"
+                          name="contactNumber"
+                          id="contactNumber"
+                          defaultValue={trustAcc.contactNumber}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="email"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          EMAIL
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          defaultValue={trustAcc.email}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="appointmentDate"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          APPOINTMENT DATE
                         </label>
                         <input
                           type="date"
-                          name="dateBecameShareholder"
-                          id="dateBecameShareholder"
+                          name="appointmentDate"
+                          id="appointmentDate"
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -333,50 +374,148 @@ export default function EditPSPScheduleOfShareholdersModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="numberOfShareHeld"
+                          htmlFor="cbkApprovalDate"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHARES HELD
+                          CBK APPROVAL DATE
                         </label>
                         <input
-                          type="number"
-                          name="numberOfShareHeld"
-                          id="numberOfShareHeld"
-                          min={1}
-                          defaultValue={trustAcc.numberOfShareHeld}
+                          type="date"
+                          name="cbkApprovalDate"
+                          id="cbkApprovalDate"
+                          required
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="shareValue"
+                          htmlFor="boardChairCommittee"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHARES VALUE
+                          BOARD CHAIR COMMITTEE
                         </label>
                         <input
                           type="text"
-                          name="shareValue"
-                          id="shareValue"
-                          defaultValue={trustAcc.shareValue}
+                          name="boardChairCommittee"
+                          id="boardChairCommittee"
+                          defaultValue={trustAcc.boardChairCommittee}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="percentageOfShare"
+                          htmlFor="boardCommitteeName"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          SHARES PERCENTAGE
+                          BOARD COMMITTEE NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="boardCommitteeName"
+                          id="boardCommitteeName"
+                          defaultValue={trustAcc.boardCommitteeName}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="managementCommitteeName"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          MANAGEMENT COMMITTEE NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="managementCommitteeName"
+                          id="managementCommitteeName"
+                          defaultValue={trustAcc.managementCommitteeName}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="companyName"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          COMPANY NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="companyName"
+                          id="companyName"
+                          defaultValue={trustAcc.companyName}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="roleInCompany"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          ROLE IN COMPANY NAME
+                        </label>
+                        <input
+                          type="text"
+                          name="roleInCompany"
+                          id="roleInCompany"
+                          defaultValue={trustAcc.roleInCompany}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="shareholdingFlag"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHAREHOLDING FLAG
+                        </label>
+
+                        <select
+                          name="shareholdingFlag"
+                          id="shareholdingFlag"
+                          className="outline-none border p-1.5 rounded"
+                        >
+                          <option value="Y">Yes</option>
+                          <option value="N">No</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="shareholdingInfo"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          SHAREHOLDING INFO
+                        </label>
+                        <textarea
+                          type="text"
+                          name="shareholdingInfo"
+                          id="shareholdingInfo"
+                          defaultValue={trustAcc.shareholdingInfo}
+                          className="outline-none border p-1.5 rounded"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="bankingExperience"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          BANKING EXPERIENCE
                         </label>
                         <input
                           type="number"
-                          name="percentageOfShare"
-                          id="percentageOfShare"
-                          defaultValue={trustAcc.percentageOfShare}
+                          name="bankingExperience"
+                          id="bankingExperience"
                           min={0}
+                          max={199}
+                          required
+                          defaultValue={trustAcc.bankingExperience}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

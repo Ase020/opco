@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditPSPScheduleOfDirectorsModal from "../../../modals/edit/EditPSPScheduleOfDirectorsModal";
+import EditPSPScheduleOfDirectorsModal from "../../../modals/edit/PSP/EditPSPScheduleOfDirectorsModal";
 
 /* eslint-disable react/prop-types */
 const PSPScheduleOfDirectorsRow = ({ trustAcc, onRecordAdded }) => {

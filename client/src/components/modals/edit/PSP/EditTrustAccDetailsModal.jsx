@@ -2,9 +2,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-import apiRequest from "../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
-export default function EditTrustAccPlacementsModal({
+export default function EditTrustAccDetailsModal({
   isOpen,
   setIsOpen,
   trustAcc,
@@ -27,10 +27,10 @@ export default function EditTrustAccPlacementsModal({
 
     try {
       const response = await apiRequest.put(
-        `/trust-account-placements/${trustAcc.rowId}`,
+        `/trust-accounts/${trustAcc.rowId}`,
         data
       );
-      console.log("Trust Acc Placements: ", response.data);
+      console.log("Trust Acc Details: ", response.data);
       setLoading(false);
       setIsOpen(false);
 
@@ -73,7 +73,7 @@ export default function EditTrustAccPlacementsModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Edit Trust Account Placement
+                    Edit Trust Account
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -96,6 +96,23 @@ export default function EditTrustAccPlacementsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
+                          htmlFor="bankId"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          BANK ID
+                        </label>
+                        <input
+                          type="text"
+                          name="bankId"
+                          id="bankId"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.bankId}
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
                           htmlFor="reportingDate"
                           className="text-nowrap font-semibold text-sm"
                         >
@@ -112,67 +129,158 @@ export default function EditTrustAccPlacementsModal({
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustFundPlacement"
+                          htmlFor="bankAccNumber"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          TRUST FUND PLACEMENT
+                          BANK ACCOUNT
+                        </label>
+                        <input
+                          type="number"
+                          name="bankAccNumber"
+                          id="bankAccNumber"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.bankAccNumber}
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="trustAccDrTypeCode"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          TRUST ACC TYPE CODE
                         </label>
                         <input
                           type="text"
-                          name="trustFundPlacement"
-                          id="trustFundPlacement"
-                          placeholder="TFP02"
+                          name="trustAccDrTypeCode"
+                          id="trustAccDrTypeCode"
                           className="outline-none border p-1.5 rounded"
-                          defaultValue={trustAcc.trustFundPlacement}
+                          defaultValue={trustAcc.trustAccDrTypeCode}
                           required
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="trustFundInvMaturityDate"
+                          htmlFor="orgReceivingDonation"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INV MATURITY DATE
+                          ORG RECEIVING DONATION
                         </label>
                         <input
-                          type="date"
-                          name="trustFundInvMaturityDate"
-                          id="trustFundInvMaturityDate"
+                          type="text"
+                          name="orgReceivingDonation"
+                          id="orgReceivingDonation"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.orgReceivingDonation}
                           required
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="catTrustFundInvestedAmt"
+                          htmlFor="sectorCode"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INV AMOUNT
+                          SECTOR CODE
                         </label>
                         <input
-                          type="number"
-                          name="catTrustFundInvestedAmt"
-                          id="catTrustFundInvestedAmt"
-                          defaultValue={trustAcc.catTrustFundInvestedAmt}
+                          type="text"
+                          name="sectorCode"
+                          id="sectorCode"
+                          placeholder="Sector Code"
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.sectorCode}
                         />
                       </div>
 
                       <div className="flex flex-col gap-1 w-56">
                         <label
-                          htmlFor="interestAmtPerCat"
+                          htmlFor="trustAccIntUtilizedDetails"
                           className="text-nowrap font-semibold text-sm"
                         >
-                          INTEREST AMOUNT PER CAT
+                          TRUST ACC INT UTILIZED
+                        </label>
+                        <input
+                          type="text"
+                          name="trustAccIntUtilizedDetails"
+                          id="trustAccIntUtilizedDetails"
+                          className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.trustAccIntUtilizedDetails}
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="openingBal"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          OPENING BALANCE
                         </label>
                         <input
                           type="number"
-                          name="interestAmtPerCat"
-                          id="interestAmtPerCat"
-                          defaultValue={trustAcc.interestAmtPerCat}
+                          name="openingBal"
+                          id="openingBal"
+                          min={0}
                           className="outline-none border p-1.5 rounded"
+                          defaultValue={trustAcc.openingBal}
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="principalAmount"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          PRINCIPAL AMOUNT
+                        </label>
+                        <input
+                          type="number"
+                          name="principalAmount"
+                          id="principalAmount"
+                          className="outline-none border p-1.5 rounded"
+                          min={0}
+                          defaultValue={trustAcc.principalAmount}
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="interestEarned"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          INTEREST EARNED
+                        </label>
+                        <input
+                          type="number"
+                          name="interestEarned"
+                          id="interestEarned"
+                          className="outline-none border p-1.5 rounded"
+                          min={0}
+                          defaultValue={trustAcc.interestEarned}
+                          required
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1 w-56">
+                        <label
+                          htmlFor="trustAccInterestUtilized"
+                          className="text-nowrap font-semibold text-sm"
+                        >
+                          INTEREST UTILIZED
+                        </label>
+                        <input
+                          type="number"
+                          name="trustAccInterestUtilized"
+                          id="trustAccInterestUtilized"
+                          className="outline-none border p-1.5 rounded"
+                          min={0}
+                          defaultValue={trustAcc.trustAccInterestUtilized}
+                          required
                         />
                       </div>
                     </div>
