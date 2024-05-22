@@ -50,15 +50,20 @@ export const getOutletInfo = async (req, res) => {
 // Create an Outlet Information
 export const createOutletInfo = async (req, res) => {
   const {
-    institutionCode,
+    bankId,
+    outletId,
     reportingDate,
-    currencyCode,
-    buyingRate,
-    sellingRate,
-    meanRate,
-    closingBidRate,
-    closingOfferRate,
-    usdCrossRate,
+    typeOfOutlet,
+    outletName,
+    town,
+    subCountyCode,
+    latitude,
+    longitude,
+    cbkApprovalDate,
+    outletStatus,
+    openingDate,
+    closureDate,
+    licenseFeePayable,
   } = req.body;
   const token = req.cookies?.token;
 
@@ -71,15 +76,20 @@ export const createOutletInfo = async (req, res) => {
 
     const newOutletInfo = await prisma.outletInfo.create({
       data: {
-        institutionCode,
+        bankId,
+        outletId,
         reportingDate,
-        currencyCode,
-        buyingRate: parseFloat(buyingRate),
-        sellingRate: parseFloat(sellingRate),
-        meanRate: parseFloat(meanRate),
-        closingBidRate: parseFloat(closingBidRate),
-        closingOfferRate: parseFloat(closingOfferRate),
-        usdCrossRate: parseFloat(usdCrossRate),
+        typeOfOutlet,
+        outletName,
+        town,
+        subCountyCode,
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        cbkApprovalDate,
+        outletStatus,
+        openingDate,
+        closureDate,
+        licenseFeePayable: parseFloat(licenseFeePayable),
       },
     });
 
@@ -96,15 +106,20 @@ export const createOutletInfo = async (req, res) => {
 export const updateOutletInfo = async (req, res) => {
   const rowId = req.params.rowId;
   const {
-    institutionCode,
+    bankId,
+    outletId,
     reportingDate,
-    currencyCode,
-    buyingRate,
-    sellingRate,
-    meanRate,
-    closingBidRate,
-    closingOfferRate,
-    usdCrossRate,
+    typeOfOutlet,
+    outletName,
+    town,
+    subCountyCode,
+    latitude,
+    longitude,
+    cbkApprovalDate,
+    outletStatus,
+    openingDate,
+    closureDate,
+    licenseFeePayable,
   } = req.body;
   const token = req.cookies?.token;
 
@@ -118,15 +133,20 @@ export const updateOutletInfo = async (req, res) => {
     const updatedOutletInfo = await prisma.outletInfo.update({
       where: { rowId },
       data: {
-        institutionCode,
+        bankId,
+        outletId,
         reportingDate,
-        currencyCode,
-        buyingRate: parseFloat(buyingRate),
-        sellingRate: parseFloat(sellingRate),
-        meanRate: parseFloat(meanRate),
-        closingBidRate: parseFloat(closingBidRate),
-        closingOfferRate: parseFloat(closingOfferRate),
-        usdCrossRate: parseFloat(usdCrossRate),
+        typeOfOutlet,
+        outletName,
+        town,
+        subCountyCode,
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        cbkApprovalDate,
+        outletStatus,
+        openingDate,
+        closureDate,
+        licenseFeePayable: parseFloat(licenseFeePayable),
       },
     });
 

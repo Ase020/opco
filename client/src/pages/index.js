@@ -19,6 +19,7 @@ export { default as DirectorMgt } from "./BSD/DirectorMgt";
 export { default as ExchangeRates } from "./BSD/ExchangeRates";
 export { default as FinPosition } from "./BSD/FinPosition";
 export { default as ForeignExchangePosition } from "./BSD/ForeignExchangePosition";
+export { default as OutletInfo } from "./BSD/OutletInfo";
 export { default as ShareholdersInfo } from "./BSD/ShareholdersInfo";
 
 export const navLinks = [
@@ -104,6 +105,12 @@ export const navLinks = [
     id: 27,
     title: "Statements Of Financial Position And Comprehensive Income",
     link: "/statements-of-financial-position-and-comprehensive-income",
+    userType: "trust",
+  },
+  {
+    id: 28,
+    title: "Branch/Outlet Information",
+    link: "/outlet-information",
     userType: "trust",
   },
 ];

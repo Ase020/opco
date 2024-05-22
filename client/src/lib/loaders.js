@@ -123,3 +123,11 @@ export const shareholdersInfoLoader = async () => {
     shareholdersInfoResponse: shareholdersInfoPromise,
   });
 };
+
+export const outletInfoLoader = async () => {
+  const outletInfoLoaderPromise = apiRequest("/outlet-information");
+
+  return defer({
+    outletInfoLoaderResponse: outletInfoLoaderPromise,
+  });
+};

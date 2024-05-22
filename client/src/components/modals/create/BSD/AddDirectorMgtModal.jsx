@@ -152,7 +152,7 @@ export default function AddDirectorMgtModal({
                           type="text"
                           name="staffId"
                           id="staffId"
-                          defaultValue="STF1001"
+                          placeholder="STF1001"
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>

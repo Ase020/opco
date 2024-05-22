@@ -12,6 +12,7 @@ export { default as AddDirectorMgtModal } from "./modals/create/BSD/AddDirectorM
 export { default as AddExchangeRatesModal } from "./modals/create/BSD/AddExchangeRatesModal";
 export { default as AddFinPositionModal } from "./modals/create/BSD/AddFinPositionModal";
 export { default as AddForeignExchangePositionModal } from "./modals/create/BSD/AddForeignExchangePositionModal";
+export { default as AddOutletInfoModal } from "./modals/create/BSD/AddOutletInfoModal";
 export { default as AddShareInfoModal } from "./modals/create/BSD/AddShareInfoModal";
 
 export { default as EditFraudIncidentsModal } from "./modals/edit/PSP/EditFraudIncidentsModal";
@@ -25,6 +26,7 @@ export { default as EditPSPScheduleOfShareholdersModal } from "./modals/edit/PSP
 export { default as EditPSPScheduleOfTrusteesModal } from "./modals/edit/PSP/EditPSPScheduleOfTrusteesModal";
 
 export { default as EditDirectorMgtModal } from "./modals/edit/BSD/EditDirectorMgtModal";
+export { default as EditOutletInfoModal } from "./modals/edit/BSD/EditOutletInfoModal";
 export { default as EditExchangeRatesInfoModal } from "./modals/edit/BSD/EditExchangeRatesInfoModal";
 export { default as EditFinPositionModal } from "./modals/edit/BSD/EditFinPositionModal";
 export { default as EditForeignExchangePositionModal } from "./modals/edit/BSD/EditForeignExchangePositionModal";
@@ -51,6 +53,7 @@ export { default as DirectorMgtHeader } from "./table/headers/BSD/DirectorMgtHea
 export { default as ExchangeRatesHeader } from "./table/headers/BSD/ExchangeRatesHeader";
 export { default as FinPositionHeader } from "./table/headers/BSD/FinPositionHeader";
 export { default as ForeignExchangePositionHeader } from "./table/headers/BSD/ForeignExchangePositionHeader";
+export { default as OutletInfoHeader } from "./table/headers/BSD/OutletInfoHeader";
 export { default as ShareholdersInfoHeader } from "./table/headers/BSD/ShareholdersInfoHeader";
 
 export { default as TrustAccDetailsRow } from "./table/rows/PSP/TrustAccDetailsRow";
@@ -67,4 +70,5 @@ export { default as DirectorMgtRow } from "./table/rows/BSD/DirectorMgtRow";
 export { default as ExchangeRatesRow } from "./table/rows/BSD/ExchangeRatesRow";
 export { default as FinPositionRow } from "./table/rows/BSD/FinPositionRow";
 export { default as ForeignExchangePositionRow } from "./table/rows/BSD/ForeignExchangePositionRow";
+export { default as OutletInfoRow } from "./table/rows/BSD/OutletInfoRow";
 export { default as ShareholdersInfoRow } from "./table/rows/BSD/ShareholdersInfoRow";
