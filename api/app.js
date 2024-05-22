@@ -12,6 +12,7 @@ import {
   exchangeRatePositionRouter,
   financialPositionRouter,
   fraudIncidentRouter,
+  outletInformationRouter,
   seniorMgtRouter,
   shareholderInfoRouter,
   shareholdersRouter,
@@ -59,6 +60,7 @@ app.use("/api/exchange-rate-position", exchangeRatePositionRouter);
 app.use("/api/director-management-info", directorManagementRouter);
 app.use("/api/shareholder-info", shareholderInfoRouter);
 app.use("/api/financial-position", financialPositionRouter);
+app.use("/api/outlet-information", outletInformationRouter);
 
 app.listen(8800, () => {
   console.log("Server running!");

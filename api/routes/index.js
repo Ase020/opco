@@ -14,3 +14,4 @@ export { default as exchangeRatePositionRouter } from "./exchangeRatePosition.ro
 export { default as directorManagementRouter } from "./directorManagement.route.js";
 export { default as shareholderInfoRouter } from "./shareholderInfo.route.js";
 export { default as counterfeitCurrencyFraudRouter } from "./counterfeitCurrencyFraud.route.js";
+export { default as outletInformationRouter } from "./outletInformation.route.js";

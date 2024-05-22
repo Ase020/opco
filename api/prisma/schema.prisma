@@ -301,3 +301,21 @@ model FinancialPosition {
   numberOfEmployees Int
   numberOfOutlets   Int
 }
+
+model OutletInfo {
+  rowId             String @id @default(auto()) @map("_id") @db.ObjectId
+  bankId            String
+  outletId          String
+  reportingDate     String
+  typeOfOutlet      String
+  outletName        String
+  town              String
+  subCountyCode     String
+  latitude          Float
+  longitude         Float
+  cbkApprovalDate   String
+  outletStatus      String
+  openingDate       String
+  closureDate       String
+  licenseFeePayable Float
+}
