@@ -24,6 +24,8 @@ enum UserType {
   legal
   am
   superAdmin
+  imt
+  cx
 }
 
 model TrustAcc {
@@ -318,4 +320,68 @@ model OutletInfo {
   openingDate       String
   closureDate       String
   licenseFeePayable Float
+}
+
+enum ComplaintCode {
+  CCS01
+  CCS02
+  CCS03
+  CCS04
+  CCS05
+  CCS06
+  CCS07
+  CCS08
+  CCS09
+  CCS10
+  CCS11
+  CCS12
+  CCS13
+  CCS14
+  CCS15
+  CCS16
+  CCS99
+}
+
+enum ComplainantGender {
+  C
+  F
+  M
+  O
+}
+
+enum ComplaintFrequency {
+  CFQC01
+  CFQC02
+  CFQC03
+  CFQC04
+  CFQC05
+  CFQC99
+}
+
+enum StatusCode {
+  REMCST01
+  REMCST02
+  REMCST99
+}
+
+model CustomerComplaint {
+  rowId            String             @id @default(auto()) @map("_id") @db.ObjectId
+  pspId            String
+  reportingDate    String
+  code             ComplaintCode
+  gender           ComplainantGender
+  frequency        ComplaintFrequency
+  name             String
+  age              Int?
+  contact          String
+  subCounty        String?
+  education        String?
+  otherDetails     String?
+  agentId          String
+  dateOfOccurrence String
+  dateReported     String
+  dateResolved     String?
+  remedialStatus   StatusCode
+  amountLost       Float
+  amountRecovered  Float
 }

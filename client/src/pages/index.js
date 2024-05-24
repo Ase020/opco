@@ -6,7 +6,7 @@ export { default as Signup } from "./Signup";
 export { default as MobilePSP } from "./PSP/MobilePSP";
 export { default as PSPCybersecurity } from "./PSP/PSPCybersecurity";
 export { default as PSPIncidentFraud } from "./PSP/PSPIncidentFraud";
-export { default as PSPScheduleOfCustomerCompliants } from "./PSP/PSPScheduleOfCustomerCompliants";
+export { default as PSPScheduleOfCustomerComplaints } from "./PSP/PSPScheduleOfCustomerComplaints";
 export { default as PSPScheduleOfDirectors } from "./PSP/PSPScheduleOfDirectors";
 export { default as PSPScheduleOfSeniorMgt } from "./PSP/PSPScheduleOfSeniorMgt";
 export { default as PSPScheduleOfShareholders } from "./PSP/PSPScheduleOfShareholders";
@@ -115,9 +115,9 @@ export const navLinks = [
     userType: "imt",
   },
   {
-    id: 28,
-    title: "PSP Schedule of Customer Compliants & Remedial Actions",
-    link: "/psp-schedule-of-customer-compliants-&-remedial-actions",
-    userType: "trust",
+    id: 29,
+    title: "PSP Schedule of Customer Complaints & Remedial Actions",
+    link: "/psp-schedule-of-customer-complaints-&-remedial-actions",
+    userType: "cx",
   },
 ];

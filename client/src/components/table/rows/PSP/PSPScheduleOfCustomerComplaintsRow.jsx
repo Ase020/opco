@@ -23,19 +23,25 @@ const PSPScheduleOfCustomerComplaintsRow = ({ trustAcc, onRecordAdded }) => {
       <td className="border py-2 px-4 text-nowrap">{trustAcc.code}</td>
       <td className="border py-2 px-4 text-center">{trustAcc.gender}</td>
       <td className="border py-2 px-4">{trustAcc.frequency}</td>
-      <td className="border py-2 px-4">{trustAcc.name}</td>
+      <td className="border py-2 px-4 text-nowrap">{trustAcc.name}</td>
       <td className="border py-2 px-4 text-center">{trustAcc.age}</td>
       <td className="border py-2 px-4 text-center">{trustAcc.contact}</td>
-      <td className="border py-2 px-4">{trustAcc.subCounty}</td>
-      <td className="border py-2 px-4">{trustAcc.education}</td>
+      <td className="border py-2 px-4 text-center">{trustAcc.subCounty}</td>
+      <td className="border py-2 px-4 text-center">{trustAcc.education}</td>
       <td className="border py-2 px-4">{trustAcc.otherDetails}</td>
-      <td className="border py-2 px-4">{trustAcc.agentId}</td>
-      <td className="border py-2 px-4">{trustAcc.dateOfOccurrence}</td>
-      <td className="border py-2 px-4">{trustAcc.dateReported}</td>
-      <td className="border py-2 px-4">{trustAcc.dateResolved}</td>
-      <td className="border py-2 px-4">{trustAcc.remedialStatus}</td>
-      <td className="border py-2 px-4">{trustAcc.amountLost}</td>
-      <td className="border py-2 px-4">{trustAcc.amountRecovered}</td>
+      <td className="border py-2 px-4 text-center">{trustAcc.agentId}</td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.dateOfOccurrence}
+      </td>
+      <td className="border py-2 px-4 text-center">{trustAcc.dateReported}</td>
+      <td className="border py-2 px-4 text-center">{trustAcc.dateResolved}</td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.remedialStatus}
+      </td>
+      <td className="border py-2 px-4 text-center">{trustAcc.amountLost}</td>
+      <td className="border py-2 px-4 text-center">
+        {trustAcc.amountRecovered}
+      </td>
 
       <td className="border py-2 text-center">
         <button
@@ -65,7 +71,7 @@ const PSPScheduleOfCustomerComplaintsRow = ({ trustAcc, onRecordAdded }) => {
         <DeleteModal
           isDeleteModalOpen={isDeleteModalOpen}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          endPoint={`/psp-schedule-of-customer-compliants-&-remedial-actions/${trustAcc.rowId}`}
+          endPoint={`/psp-schedule-of-customer-complaints-&-remedial-actions/${trustAcc.rowId}`}
           onRecordAdded={onRecordAdded}
         />
       </td>

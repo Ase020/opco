@@ -26,7 +26,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
 
     try {
       const response = await apiRequest.post(
-        "/psp-schedule-of-customer-compliants-&-remedial-actions",
+        "/psp-schedule-of-customer-complaints-&-remedial-actions",
         data
       );
       console.log("Customer Complaint: ", response.data);

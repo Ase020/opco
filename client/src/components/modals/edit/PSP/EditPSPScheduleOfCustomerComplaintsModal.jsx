@@ -26,8 +26,8 @@ export default function EditPSPScheduleOfCustomerComplaintsModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.patch(
-        `/psp-schedule-of-customer-compliants-&-remedial-actions/${trustAcc.rowId}`,
+      const response = await apiRequest.put(
+        `/psp-schedule-of-customer-complaints-&-remedial-actions/${trustAcc.rowId}`,
         data
       );
       console.log("Customer Complaint: ", response.data);

@@ -7,7 +7,7 @@ import {
 } from "../../components";
 import apiRequest from "../../lib/apiRequest";
 
-function PSPScheduleOfCustomerCompliants() {
+function PSPScheduleOfCustomerComplaints() {
   const [customerComplaints, setCustomerComplaints] = useState([]);
 
   let [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,7 @@ function PSPScheduleOfCustomerCompliants() {
   const fetchsetCustomerComplaintsData = async () => {
     try {
       const setCustomerComplaintsData = await apiRequest.get(
-        "/psp-schedule-of-customer-compliants-&-remedial-actions"
+        "/psp-schedule-of-customer-complaints-&-remedial-actions"
       );
       setCustomerComplaints(setCustomerComplaintsData.data);
     } catch (error) {
@@ -35,7 +35,7 @@ function PSPScheduleOfCustomerCompliants() {
     <div className="max-w-[1440px] w-full mx-auto py-10 overflow-hidden">
       <div className="flex justify-center flex-col gap-5 w-full">
         <h2 className="text-3xl text-center">
-          PSP Schedule of Customer Compliants & Remedial Actions
+          PSP Schedule of Customer Complaints & Remedial Actions
         </h2>
 
         <div className="overflow-x-auto">
@@ -73,4 +73,4 @@ function PSPScheduleOfCustomerCompliants() {
   );
 }
 
-export default PSPScheduleOfCustomerCompliants;
+export default PSPScheduleOfCustomerComplaints;

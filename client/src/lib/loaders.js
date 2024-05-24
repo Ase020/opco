@@ -134,7 +134,7 @@ export const outletInfoLoader = async () => {
 
 export const scheduleOfCustomerComplaintsLoader = async () => {
   const scheduleOfCustomerComplaintsLoaderPromise = apiRequest(
-    "/psp-schedule-of-customer-compliants-&-remedial-actions"
+    "/psp-schedule-of-customer-complaints-&-remedial-actions"
   );
 
   return defer({

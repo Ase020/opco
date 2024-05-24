@@ -15,6 +15,7 @@ const PSPScheduleOfCustomerComplaintsHeader = () => {
           SUB COUNTY LOCATION
         </th>
         <th className="border p-4 bg-red-400 text-nowrap">EDUCATION LEVEL</th>
+        <th className="border p-4 bg-red-400 text-nowrap">OTHER DETAILS</th>
         <th className="border p-4 bg-red-400 text-nowrap">AGENT ID</th>
         <th className="border p-4 bg-red-400 text-nowrap">
           DATE OF OCCURRENCE

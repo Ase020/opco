@@ -13,6 +13,7 @@ import {
   financialPositionRouter,
   fraudIncidentRouter,
   outletInformationRouter,
+  scheduleOfCustomerComplaintRouter,
   seniorMgtRouter,
   shareholderInfoRouter,
   shareholdersRouter,
@@ -61,6 +62,10 @@ app.use("/api/director-management-info", directorManagementRouter);
 app.use("/api/shareholder-info", shareholderInfoRouter);
 app.use("/api/financial-position", financialPositionRouter);
 app.use("/api/outlet-information", outletInformationRouter);
+app.use(
+  "/api/psp-schedule-of-customer-complaints-&-remedial-actions",
+  scheduleOfCustomerComplaintRouter
+);
 
 app.listen(8800, () => {
   console.log("Server running!");
