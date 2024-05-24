@@ -4,9 +4,10 @@ import { Fragment, useState } from "react";
 
 import apiRequest from "../../../../lib/apiRequest";
 
-export default function AddScheduleOfCustomerComplaintsModal({
+export default function EditPSPScheduleOfCustomerComplaintsModal({
   isOpen,
   setIsOpen,
+  trustAcc,
   onRecordAdded,
 }) {
   const [err, setErr] = useState("");
@@ -25,8 +26,8 @@ export default function AddScheduleOfCustomerComplaintsModal({
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await apiRequest.post(
-        "/psp-schedule-of-customer-compliants-&-remedial-actions",
+      const response = await apiRequest.patch(
+        `/psp-schedule-of-customer-compliants-&-remedial-actions/${trustAcc.rowId}`,
         data
       );
       console.log("Customer Complaint: ", response.data);
@@ -72,7 +73,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                     as="h2"
                     className="text-2xl font-bold text-gray-900"
                   >
-                    Add a Schedule of Customer Compliant & Remedial Action
+                    Edit Schedule of Customer Compliant & Remedial Action
                   </Dialog.Title>
                   <form className="mt-3" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -290,8 +291,8 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="text"
                           name="name"
                           id="name"
-                          placeholder="John Doe"
                           required
+                          defaultValue={trustAcc.name}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -307,7 +308,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="number"
                           name="age"
                           id="age"
-                          placeholder="27"
+                          defaultValue={trustAcc.age}
                           min={16}
                           max={120}
                           className="outline-none border p-1.5 rounded"
@@ -325,7 +326,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="text"
                           name="contact"
                           id="contact"
-                          placeholder="0712345678"
+                          defaultValue={trustAcc.contact}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -342,7 +343,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="text"
                           name="subCounty"
                           id="subCounty"
-                          placeholder="Kiambu"
+                          defaultValue={trustAcc.subCounty}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -358,7 +359,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="text"
                           name="education"
                           id="education"
-                          placeholder="Secondary"
+                          defaultValue={trustAcc.education}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -374,7 +375,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="text"
                           name="otherDetails"
                           id="otherDetails"
-                          placeholder="Brown hair"
+                          defaultValue={trustAcc.otherDetails}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -390,7 +391,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="text"
                           name="agentId"
                           id="agentId"
-                          placeholder="5467912"
+                          defaultValue={trustAcc.agentId}
                           className="outline-none border p-1.5 rounded"
                         />
                       </div>
@@ -472,7 +473,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="text"
                           name="amountLost"
                           id="amountLost"
-                          placeholder="5,000,000"
+                          defaultValue={trustAcc.amountLost}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -489,7 +490,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           type="text"
                           name="amountRecovered"
                           id="amountRecovered"
-                          placeholder="3,000,000"
+                          defaultValue={trustAcc.amountRecovered}
                           required
                           className="outline-none border p-1.5 rounded"
                         />
@@ -500,7 +501,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        {loading ? "Saving..." : "Save"}
+                        {loading ? "Updating..." : "Update"}
                       </button>
                     </div>
                   </form>

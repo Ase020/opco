@@ -25,6 +25,7 @@ export { default as EditPSPScheduleOfSeniorMgtModal } from "./modals/edit/PSP/Ed
 export { default as EditPSPScheduleOfDirectorsModal } from "./modals/edit/PSP/EditPSPScheduleOfDirectorsModal";
 export { default as EditPSPScheduleOfShareholdersModal } from "./modals/edit/PSP/EditPSPScheduleOfShareholdersModal";
 export { default as EditPSPScheduleOfTrusteesModal } from "./modals/edit/PSP/EditPSPScheduleOfTrusteesModal";
+export { default as EditPSPScheduleOfCustomerComplaintsModal } from "./modals/edit/PSP/EditPSPScheduleOfCustomerComplaintsModal";
 
 export { default as EditDirectorMgtModal } from "./modals/edit/BSD/EditDirectorMgtModal";
 export { default as EditOutletInfoModal } from "./modals/edit/BSD/EditOutletInfoModal";

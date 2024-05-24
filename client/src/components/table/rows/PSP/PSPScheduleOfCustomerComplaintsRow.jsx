@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteModal from "../../../modals/delete/DeleteModal";
-import EditPSPScheduleOfDirectorsModal from "../../../modals/edit/PSP/EditPSPScheduleOfDirectorsModal";
+import EditPSPScheduleOfCustomerComplaintsModal from "../../../modals/edit/PSP/EditPSPScheduleOfCustomerComplaintsModal";
 
 /* eslint-disable react/prop-types */
 const PSPScheduleOfCustomerComplaintsRow = ({ trustAcc, onRecordAdded }) => {
@@ -55,7 +55,7 @@ const PSPScheduleOfCustomerComplaintsRow = ({ trustAcc, onRecordAdded }) => {
         >
           Delete
         </button>
-        <EditPSPScheduleOfDirectorsModal
+        <EditPSPScheduleOfCustomerComplaintsModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           trustAcc={trustAcc}
