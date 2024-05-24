@@ -131,3 +131,14 @@ export const outletInfoLoader = async () => {
     outletInfoLoaderResponse: outletInfoLoaderPromise,
   });
 };
+
+export const scheduleOfCustomerComplaintsLoader = async () => {
+  const scheduleOfCustomerComplaintsLoaderPromise = apiRequest(
+    "/psp-schedule-of-customer-compliants-&-remedial-actions"
+  );
+
+  return defer({
+    scheduleOfCustomerComplaintsLoaderResponse:
+      scheduleOfCustomerComplaintsLoaderPromise,
+  });
+};

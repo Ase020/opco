@@ -10,7 +10,7 @@ export const getOutletInfos = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "imt" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const outletInfos = await prisma.outletInfo.findMany();
@@ -32,7 +32,7 @@ export const getOutletInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "imt" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const outletInfo = await prisma.outletInfo.findUnique({
@@ -71,7 +71,7 @@ export const createOutletInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "imt" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const newOutletInfo = await prisma.outletInfo.create({
@@ -127,7 +127,7 @@ export const updateOutletInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "imt" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     const updatedOutletInfo = await prisma.outletInfo.update({
@@ -168,7 +168,7 @@ export const deleteOutletInfo = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
-    if (userTokenUserType !== "trust" && userTokenUserType !== "superAdmin")
+    if (userTokenUserType !== "imt" && userTokenUserType !== "superAdmin")
       return res.status(500).json({ message: "Not Authorized!" });
 
     await prisma.outletInfo.delete({

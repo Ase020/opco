@@ -7,6 +7,7 @@ export { default as AddScheduleOfSeniorMgtModal } from "./modals/create/PSP/AddS
 export { default as AddScheduleOfShareholdersModal } from "./modals/create/PSP/AddScheduleOfShareholdersModal";
 export { default as AddScheduleOfTrusteesModal } from "./modals/create/PSP/AddScheduleOfTrusteesModal";
 export { default as AddTrustAccPlacementModal } from "./modals/create/PSP/AddTrustAccPlacementModal";
+export { default as AddScheduleOfCustomerComplaintsModal } from "./modals/create/PSP/AddScheduleOfCustomerComplaintsModal";
 
 export { default as AddDirectorMgtModal } from "./modals/create/BSD/AddDirectorMgtModal";
 export { default as AddExchangeRatesModal } from "./modals/create/BSD/AddExchangeRatesModal";
@@ -48,6 +49,7 @@ export { default as PSPScheduleOfDirectorsHeader } from "./table/headers/PSP/PSP
 export { default as PSPScheduleOfSeniorMgtHeader } from "./table/headers/PSP/PSPScheduleOfSeniorMgtHeader";
 export { default as PSPScheduleOfShareholdersHeader } from "./table/headers/PSP/PSPScheduleOfShareholdersHeader";
 export { default as PSPScheduleOfTrusteesHeader } from "./table/headers/PSP/PSPScheduleOfTrusteesHeader";
+export { default as PSPScheduleOfCustomerComplaintsHeader } from "./table/headers/PSP/PSPScheduleOfCustomerComplaintsHeader";
 
 export { default as DirectorMgtHeader } from "./table/headers/BSD/DirectorMgtHeader";
 export { default as ExchangeRatesHeader } from "./table/headers/BSD/ExchangeRatesHeader";
@@ -65,6 +67,7 @@ export { default as PSPScheduleOfSeniorMgtRow } from "./table/rows/PSP/PSPSchedu
 export { default as PSPScheduleOfShareholdersRow } from "./table/rows/PSP/PSPScheduleOfShareholdersRow";
 export { default as PSPScheduleOfTrusteesRow } from "./table/rows/PSP/PSPScheduleOfTrusteesRow";
 export { default as PSPCybersecurityRow } from "./table/rows/PSP/PSPCybersecurityRow";
+export { default as PSPScheduleOfCustomerComplaintsRow } from "./table/rows/PSP/PSPScheduleOfCustomerComplaintsRow";
 
 export { default as DirectorMgtRow } from "./table/rows/BSD/DirectorMgtRow";
 export { default as ExchangeRatesRow } from "./table/rows/BSD/ExchangeRatesRow";

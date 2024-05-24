@@ -92,12 +92,14 @@ const Signup = () => {
             className="border p-2 outline-none rounded-lg"
             required
           >
-            <option value="trust">Trust</option>
-            <option value="security">Security</option>
-            <option value="cyber">Cybersecurity</option>
-            <option value="legal">Legal</option>
             <option value="am">Airtel Money</option>
+            <option value="cx">Customer Experience</option>
+            <option value="cyber">Cybersecurity</option>
+            <option value="imt">International Money Remmitance</option>
+            <option value="legal">Legal</option>
+            <option value="security">Security</option>
             <option value="superAdmin">Super Admin</option>
+            <option value="trust">Trust</option>
           </select>
         </div>
 
