@@ -9,6 +9,8 @@ const Home = () => {
 
   if (!currentUser) return <Navigate to="/login" />;
 
+  console.log("Current User: ", currentUser);
+
   const renderNavLinks =
     currentUser.userType === "superAdmin"
       ? navLinks
@@ -20,35 +22,42 @@ const Home = () => {
         Welcome to Airtel Data Transmission Portal
       </h1>
       <nav className="flex justify-around gap-6">
-        <aside className="flex items-center flex-col gap-6">
-          <h3 className="text-3xl font-semibold">PSP</h3>
-          {renderNavLinks
-            .filter((link) => link.category === "psp")
-            .map(({ id, title, link }) => (
-              <Link
-                key={id}
-                to={link}
-                className="border p-4 w-96 flex-center rounded-xl hover:shadow-md text-center"
-              >
-                {title}
-              </Link>
-            ))}
-        </aside>
-        <aside className="flex items-center flex-col gap-6">
-          <h3 className="text-3xl font-semibold">BSD</h3>
+        {renderNavLinks.filter((link) => link.category === "psp").length >
+          0 && (
+          <aside className="flex items-center flex-col gap-6">
+            <h3 className="text-3xl font-semibold">PSP</h3>
+            {renderNavLinks
+              .filter((link) => link.category === "psp")
+              .map(({ id, title, link }) => (
+                <Link
+                  key={id}
+                  to={link}
+                  className="border p-4 w-96 flex-center rounded-xl hover:shadow-md text-center"
+                >
+                  {title}
+                </Link>
+              ))}
+          </aside>
+        )}
 
-          {renderNavLinks
-            .filter((link) => link.category === "bsd")
-            .map(({ id, title, link }) => (
-              <Link
-                key={id}
-                to={link}
-                className="border p-4 w-96 flex-center rounded-xl hover:shadow-md text-center"
-              >
-                {title}
-              </Link>
-            ))}
-        </aside>
+        {renderNavLinks.filter((link) => link.category === "bsd").length >
+          0 && (
+          <aside className="flex items-center flex-col gap-6">
+            <h3 className="text-3xl font-semibold">BSD</h3>
+
+            {renderNavLinks
+              .filter((link) => link.category === "bsd")
+              .map(({ id, title, link }) => (
+                <Link
+                  key={id}
+                  to={link}
+                  className="border p-4 w-96 flex-center rounded-xl hover:shadow-md text-center"
+                >
+                  {title}
+                </Link>
+              ))}
+          </aside>
+        )}
       </nav>
     </main>
   );
