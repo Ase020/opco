@@ -9,8 +9,6 @@ const Home = () => {
 
   if (!currentUser) return <Navigate to="/login" />;
 
-  console.log("Current User: ", currentUser);
-
   const renderNavLinks =
     currentUser.userType === "superAdmin"
       ? navLinks
