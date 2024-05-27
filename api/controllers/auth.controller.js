@@ -45,7 +45,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid Email/Password!" });
     }
 
-    const tokenAge = 1000 * 60 * 60 * 24; // 1 day
+    const tokenAge = 1000 * 60 * 60; // 1 hour
 
     const token = jwt.sign(
       { id: user.id, userType: user.userType, verified: user.verified },
