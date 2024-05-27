@@ -469,7 +469,7 @@ export default function AddScheduleOfCustomerComplaintsModal({
                           AMOUNT LOST
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           name="amountLost"
                           id="amountLost"
                           placeholder="5,000,000"

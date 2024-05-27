@@ -1,35 +1,24 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import apiRequest from "../lib/apiRequest";
-import { AuthContext } from "./AuthContext";
 
 export const UsersContext = createContext();
 
 export const UsersContextProvider = ({ children }) => {
-  const { currentUser } = useContext(AuthContext);
-
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  });
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     try {
-      if (currentUser.userType !== "superAdmin") return;
-
       const usersData = await apiRequest.get("/users");
       setUsers(usersData.data);
     } catch (error) {
       console.error(error);
     }
-  }, [currentUser.userType]);
+  };
 
   const verifyUser = async (userId) => {
     try {
