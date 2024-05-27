@@ -1,12 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "../components";
-import { UsersContext } from "../context/UsersContext";
 import apiRequest from "../lib/apiRequest";
 
 function UserApprovals() {
   const [users, setUsers] = useState([]);
-
-  const { usersAse } = useContext(UsersContext);
 
   useEffect(() => {
     fetchData();
@@ -23,8 +20,6 @@ function UserApprovals() {
 
   const verifiedUsers = users.filter((user) => user.verified);
   const unverifiedUsers = users.filter((user) => !user.verified);
-
-  console.log("Users: ", usersAse);
 
   return (
     <section className="max-w-[1440px] mx-auto flex justify-between gap-8 p-3">

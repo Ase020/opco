@@ -18,7 +18,7 @@ export const UsersContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   const fetchData = useCallback(async () => {
     try {
@@ -29,7 +29,7 @@ export const UsersContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [currentUser.userType]);
 
   const verifyUser = async (userId) => {
     try {
