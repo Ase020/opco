@@ -184,9 +184,19 @@ export const deleteCounterfeitCurrencyFraud = async (req, res) => {
   }
 };
 
+const deleteFile = (filePath) => {
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error("Failed to delete the file:", err);
+    }
+  });
+};
+
 export const createCounterfeitCurrencyFraudFromCSV = async (req, res) => {
-  const filePath = req.file.path;
+  const filePath = path.resolve(req.file.path);
   const token = req.cookies?.token;
+
+  console.log(`File path: ${filePath}`); // Debugging line to log file path
 
   try {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
@@ -246,13 +256,18 @@ export const createCounterfeitCurrencyFraudFromCSV = async (req, res) => {
         }
 
         res.status(201).json({ message: "CSV file processed successfully" });
+      })
+      .on("error", (error) => {
+        console.error("Error reading CSV file:", error);
+        res.status(500).json({ message: "Error reading CSV file", error });
       });
   } catch (error) {
+    console.error("Failed to process the CSV file:", error); // Enhanced error logging
     res.status(500).json({
       message: "Failed to process the CSV file!",
       error,
     });
   } finally {
-    fs.unlinkSync(filePath); // Remove the file after processing
+    deleteFile(filePath); // Remove the file after processing
   }
 };

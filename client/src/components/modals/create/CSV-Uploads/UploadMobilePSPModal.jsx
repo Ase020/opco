@@ -2,7 +2,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-// import apiRequest from "../../../../lib/apiRequest";
+import apiRequest from "../../../../lib/apiRequest";
 
 export default function UploadMobilePSPModal({
   isOpen,
@@ -29,13 +29,31 @@ export default function UploadMobilePSPModal({
 
     if (!file) {
       alert("Please select a file first!");
+      setLoading(false);
       return;
     }
 
     const formData = new FormData();
     formData.append("file", file);
 
-    console.log("CSV File: ", formData);
+    try {
+      const response = await apiRequest.post(
+        "/mobile-psp-counterfeit-currency-frauds/upload-csv",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("CSV file uploaded successfully!", response.data);
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Error uploading file: ", error);
+      alert("Error uploading file");
+      setLoading(false);
+    }
   };
 
   return (

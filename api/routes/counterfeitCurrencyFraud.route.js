@@ -1,5 +1,8 @@
 import express from "express";
 import multer from "multer";
+import { dirname, join } from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
 import { verifyToken } from "../middleware/verifyToken.js";
 import {
@@ -11,8 +14,17 @@ import {
   createCounterfeitCurrencyFraudFromCSV,
 } from "../controllers/counterfeitCurrencyFraud.controller.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const counterfeitCurrencyFraudRouter = express.Router();
-const upload = multer({ dest: "uploads/" });
+
+const uploadDirectory = join(__dirname, "../uploads/");
+if (!fs.existsSync(uploadDirectory)) {
+  fs.mkdirSync(uploadDirectory, { recursive: true });
+}
+
+const upload = multer({ dest: uploadDirectory });
 
 counterfeitCurrencyFraudRouter.post(
   "/upload-csv",
