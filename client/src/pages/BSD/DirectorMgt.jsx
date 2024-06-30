@@ -53,13 +53,23 @@ const DirectorMgt = () => {
           </table>
         </div>
 
-        <button
-          onClick={openModal}
-          type="button"
-          className="border px-5 py-1 w-fit ml-8 rounded-md transition-all hover:bg-gray-400 hover:text-white duration-300"
-        >
-          Add
-        </button>
+        <div className="">
+          <button
+            onClick={openModal}
+            type="button"
+            className="border px-5 py-1 w-fit ml-8 rounded-md transition-all hover:bg-gray-400 hover:text-white duration-300"
+          >
+            Add
+          </button>
+
+          <button
+            onClick={() => {}}
+            type="button"
+            className="border px-5 py-1 w-fit ml-8 rounded-md transition-all hover:bg-gray-400 hover:text-white duration-300"
+          >
+            Bulk Add
+          </button>
+        </div>
       </div>
 
       <AddDirectorMgtModal
