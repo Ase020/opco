@@ -1,4 +1,7 @@
 import jwt from "jsonwebtoken";
+import fs from "fs";
+import path from "path";
+import csv from "csv-parser";
 
 import prisma from "../lib/prisma.js";
 
@@ -148,12 +151,10 @@ export const updateCounterfeitCurrencyFraud = async (req, res) => {
 
     res.status(202).json(updatedcounterfeitCurrencyFraud);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Failed to update a Counterfeit Currency Fraud!",
-        error,
-      });
+    res.status(500).json({
+      message: "Failed to update a Counterfeit Currency Fraud!",
+      error,
+    });
   }
 };
 
@@ -180,5 +181,78 @@ export const deleteCounterfeitCurrencyFraud = async (req, res) => {
     res
       .status(500)
       .json({ message: "Failed to delete Counterfeit Currency Fraud!", error });
+  }
+};
+
+export const createCounterfeitCurrencyFraudFromCSV = async (req, res) => {
+  const filePath = req.file.path;
+  const token = req.cookies?.token;
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const userTokenUserType = decodedToken.userType;
+
+    if (userTokenUserType !== "security" && userTokenUserType !== "superAdmin")
+      return res.status(500).json({ message: "Not Authorized!" });
+
+    const rows = [];
+    fs.createReadStream(filePath)
+      .pipe(csv())
+      .on("data", (row) => {
+        rows.push(row);
+      })
+      .on("end", async () => {
+        for (const row of rows) {
+          const {
+            pspId,
+            reportingDate,
+            subCountyCode,
+            agentId,
+            denominationCode,
+            serialNumber,
+            depositorsName,
+            tellersName,
+            dateConfiscated,
+            dateSubmittedToCBK,
+            remarks,
+            numberOfPieces,
+          } = row;
+
+          try {
+            await prisma.counterfeitCurrencyFraud.create({
+              data: {
+                pspId,
+                reportingDate,
+                subCountyCode,
+                agentId,
+                denominationCode,
+                serialNumber,
+                depositorsName,
+                tellersName,
+                dateConfiscated,
+                dateSubmittedToCBK,
+                remarks,
+                numberOfPieces: parseInt(numberOfPieces),
+              },
+            });
+          } catch (error) {
+            console.error(
+              `Failed to create a Counterfeit Currency Fraud entry for row: ${JSON.stringify(
+                row
+              )}`,
+              error
+            );
+          }
+        }
+
+        res.status(201).json({ message: "CSV file processed successfully" });
+      });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to process the CSV file!",
+      error,
+    });
+  } finally {
+    fs.unlinkSync(filePath); // Remove the file after processing
   }
 };

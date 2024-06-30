@@ -5,14 +5,16 @@ import {
   MobilePSPRow,
 } from "../../components";
 import apiRequest from "../../lib/apiRequest";
+import UploadMobilePSPModal from "../../components/modals/create/CSV-Uploads/UploadMobilePSPModal";
 
 const MobilePSP = () => {
   const [mobilePSPs, setMobilePSPs] = useState([]);
 
   let [isOpen, setIsOpen] = useState(false);
+  const [csvOpen, setCsvOpen] = useState(false);
 
-  function openModal() {
-    setIsOpen(true);
+  function openModal(type) {
+    type === "add" ? setIsOpen(true) : setCsvOpen(true);
   }
 
   useEffect(() => {
@@ -56,7 +58,7 @@ const MobilePSP = () => {
 
         <div className="">
           <button
-            onClick={openModal}
+            onClick={() => openModal("add")}
             type="button"
             className="border px-5 py-1 w-fit ml-8 rounded-md transition-all hover:bg-gray-400 hover:text-white duration-300"
           >
@@ -64,7 +66,7 @@ const MobilePSP = () => {
           </button>
 
           <button
-            onClick={() => {}}
+            onClick={() => openModal("csv")}
             type="button"
             className="border px-5 py-1 w-fit ml-8 rounded-md transition-all hover:bg-gray-400 hover:text-white duration-300"
           >
@@ -78,6 +80,8 @@ const MobilePSP = () => {
         setIsOpen={setIsOpen}
         onRecordAdded={fetchTrustAccountsData}
       />
+
+      <UploadMobilePSPModal isOpen={csvOpen} setIsOpen={setCsvOpen} />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 
 import { verifyToken } from "../middleware/verifyToken.js";
 import {
@@ -7,9 +8,17 @@ import {
   createCounterfeitCurrencyFraud,
   updateCounterfeitCurrencyFraud,
   deleteCounterfeitCurrencyFraud,
+  createCounterfeitCurrencyFraudFromCSV,
 } from "../controllers/counterfeitCurrencyFraud.controller.js";
 
 const counterfeitCurrencyFraudRouter = express.Router();
+const upload = multer({ dest: "uploads/" });
+
+counterfeitCurrencyFraudRouter.post(
+  "/upload-csv",
+  upload.single("file"),
+  createCounterfeitCurrencyFraudFromCSV
+);
 
 counterfeitCurrencyFraudRouter.get(
   "/",
