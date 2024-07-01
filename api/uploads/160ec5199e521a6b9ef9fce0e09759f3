@@ -1,0 +1,4 @@
+"pspId,reportingDate,subCountyCode,agentId,denominationCode,serialNumber,depositor'sName,teller'sName,dateConfiscated,dateSubmittedToCBK,remarks,numberOfPieces"
+"PSP123,2023-06-01,SC001,AGT001,1000,SN12345678,John Doe,Jane Smith,2023-06-01,2023-06-02,Suspicious bill,5"
+"PSP124,2023-06-02,SC002,AGT002,500,SN87654321,Mary Johnson,Tom Brown,2023-06-02,2023-06-03,Counterfeit note,10"
+"PSP125,2023-06-03,SC003,AGT003,200,SN56789012,Chris Lee,Emily Davis,2023-06-03,2023-06-04,Fake bill,8"

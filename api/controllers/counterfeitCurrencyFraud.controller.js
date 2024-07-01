@@ -199,6 +199,10 @@ export const createCounterfeitCurrencyFraudFromCSV = async (req, res) => {
   console.log(`File path: ${filePath}`); // Debugging line to log file path
 
   try {
+    if (!fs.existsSync(filePath)) {
+      console.error(`File not found: ${filePath}`);
+      return res.status(400).json({ message: "File not found!" });
+    }
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const userTokenUserType = decodedToken.userType;
 
@@ -214,7 +218,6 @@ export const createCounterfeitCurrencyFraudFromCSV = async (req, res) => {
       .on("end", async () => {
         for (const row of rows) {
           const newSplit = Object.values(row)[0].split(",");
-          console.log("Row: ", newSplit);
 
           try {
             await prisma.counterfeitCurrencyFraud.create({
@@ -256,7 +259,7 @@ export const createCounterfeitCurrencyFraudFromCSV = async (req, res) => {
       error,
     });
   }
-  //  finally {
+  // finally {
   //   deleteFile(filePath); // Remove the file after processing
   // }
 };
