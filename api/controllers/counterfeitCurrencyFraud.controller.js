@@ -207,42 +207,30 @@ export const createCounterfeitCurrencyFraudFromCSV = async (req, res) => {
 
     const rows = [];
     fs.createReadStream(filePath)
-      .pipe(csv())
+      .pipe(csv({ separator: "\n" }))
       .on("data", (row) => {
         rows.push(row);
       })
       .on("end", async () => {
         for (const row of rows) {
-          const {
-            pspId,
-            reportingDate,
-            subCountyCode,
-            agentId,
-            denominationCode,
-            serialNumber,
-            depositorsName,
-            tellersName,
-            dateConfiscated,
-            dateSubmittedToCBK,
-            remarks,
-            numberOfPieces,
-          } = row;
+          const newSplit = Object.values(row)[0].split(",");
+          console.log("Row: ", newSplit);
 
           try {
             await prisma.counterfeitCurrencyFraud.create({
               data: {
-                pspId,
-                reportingDate,
-                subCountyCode,
-                agentId,
-                denominationCode,
-                serialNumber,
-                depositorsName,
-                tellersName,
-                dateConfiscated,
-                dateSubmittedToCBK,
-                remarks,
-                numberOfPieces: parseInt(numberOfPieces),
+                pspId: newSplit[0],
+                reportingDate: newSplit[1],
+                subCountyCode: newSplit[2],
+                agentId: newSplit[3],
+                denominationCode: newSplit[4],
+                serialNumber: newSplit[5],
+                depositorsName: newSplit[6],
+                tellersName: newSplit[7],
+                dateConfiscated: newSplit[8],
+                dateSubmittedToCBK: newSplit[9],
+                remarks: newSplit[10],
+                numberOfPieces: parseInt(newSplit[11]),
               },
             });
           } catch (error) {
@@ -267,7 +255,8 @@ export const createCounterfeitCurrencyFraudFromCSV = async (req, res) => {
       message: "Failed to process the CSV file!",
       error,
     });
-  } finally {
-    deleteFile(filePath); // Remove the file after processing
   }
+  //  finally {
+  //   deleteFile(filePath); // Remove the file after processing
+  // }
 };

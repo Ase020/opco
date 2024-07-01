@@ -7,7 +7,7 @@ import apiRequest from "../../../../lib/apiRequest";
 export default function UploadMobilePSPModal({
   isOpen,
   setIsOpen,
-  //   onRecordAdded,
+  onRecordAdded,
 }) {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -49,6 +49,7 @@ export default function UploadMobilePSPModal({
       console.log("CSV file uploaded successfully!", response.data);
       setLoading(false);
       setIsOpen(false);
+      onRecordAdded();
     } catch (error) {
       console.error("Error uploading file: ", error);
       alert("Error uploading file");

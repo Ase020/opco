@@ -81,7 +81,11 @@ const MobilePSP = () => {
         onRecordAdded={fetchTrustAccountsData}
       />
 
-      <UploadMobilePSPModal isOpen={csvOpen} setIsOpen={setCsvOpen} />
+      <UploadMobilePSPModal
+        isOpen={csvOpen}
+        setIsOpen={setCsvOpen}
+        onRecordAdded={fetchTrustAccountsData}
+      />
     </div>
   );
 };
